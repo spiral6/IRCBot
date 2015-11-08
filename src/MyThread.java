@@ -25,40 +25,48 @@ public class MyThread extends Thread{
 						
 						if(arr.get(0).equalsIgnoreCase("!right")){
 							if(arr.size()>1){
-								long degrees= Long.parseLong(arr.get(1));
-								for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-									robot.mouseMove(802,450);
-									sleep(10);
-								}	
+								float degrees= Float.parseFloat(arr.get(1));
+								if(degrees<=180){
+									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
+										robot.mouseMove(802,450);
+										sleep(10);
+									}
+								}
 							}	
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!left")){
 							if(arr.size()>1){
-								long degrees= Long.parseLong(arr.get(1));
-								for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-									robot.mouseMove(798,450);
-									sleep(10);
-								}	
+								float degrees= Float.parseFloat(arr.get(1));
+								if(degrees<=180){
+									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
+										robot.mouseMove(798,450);
+										sleep(10);
+									}
+								}
 							}	
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!down")){ //up goes down?
 							if(arr.size()>1){
-								long degrees= Long.parseLong(arr.get(1));
-								for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-									robot.mouseMove(800,452);
-									sleep(10);
+								float degrees= Float.parseFloat(arr.get(1));
+								if(degrees<=90){
+									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
+										robot.mouseMove(800,452);
+										sleep(10);
+									}
 								}
 							}	
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!up")){ //down goes up?
 							if(arr.size()>1){
-								long degrees= Long.parseLong(arr.get(1));
-								for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-									robot.mouseMove(800,448);
-									sleep(10);
+								float degrees= Float.parseFloat(arr.get(1));
+								if(degrees<=90){
+									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
+										robot.mouseMove(800,448);
+										sleep(10);
+									}
 								}
 							}
 						}
@@ -66,65 +74,70 @@ public class MyThread extends Thread{
 						else if(arr.get(0).equalsIgnoreCase("!forward")){
 							if(arr.size() > 1){
 								
-								long length = Long.parseLong(arr.get(1));
-								robot.keyPress(java.awt.event.KeyEvent.VK_W);
-								System.out.println("rofl");
-								
-								this.sleep(length*1000);
-								robot.keyRelease(java.awt.event.KeyEvent.VK_W);
-								
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_W);
+									System.out.println("rofl");
+									
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_W);
+								}
 							}
 						}
 
 						else if(arr.get(0).equalsIgnoreCase("!backward")){
 							if(arr.size() > 1){
 								
-								long length = Long.parseLong(arr.get(1));
-								robot.keyPress(java.awt.event.KeyEvent.VK_S);
-								System.out.println("rofl");
-								
-								this.sleep(length*1000);
-								robot.keyRelease(java.awt.event.KeyEvent.VK_S);
-								
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_S);
+									System.out.println("rofl");
+									
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_S);
+								}
 							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!strafeleft")){
 							if(arr.size() > 1){
 								
-								long length = Long.parseLong(arr.get(1));
-								robot.keyPress(java.awt.event.KeyEvent.VK_A);
-								System.out.println("rofl");
-								
-								this.sleep(length*1000);
-								robot.keyRelease(java.awt.event.KeyEvent.VK_A);
-								
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_A);
+									System.out.println("rofl");
+									
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_A);
+								}
 							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!straferight")){
 							if(arr.size() > 1){
 								
-								long length = Long.parseLong(arr.get(1));
-								robot.keyPress(java.awt.event.KeyEvent.VK_D);
-								System.out.println("rofl");
-								
-								this.sleep(length*1000);
-								robot.keyRelease(java.awt.event.KeyEvent.VK_D);
-								
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_D);
+									System.out.println("rofl");
+									
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_D);
+								}
 							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!fire")){
 							if(arr.size() > 1){
 								
-								long length = Long.parseLong(arr.get(1));
-								robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
-								System.out.println("rofl");
-								
-								this.sleep(length*1000);
-								robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
-								
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=5 && length>=0){
+									robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+									System.out.println("rofl");
+									
+									this.sleep((long) (length*1000));
+									robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+								}
 							}
 							else{
 								robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
@@ -135,7 +148,7 @@ public class MyThread extends Thread{
 						
 						else if(arr.get(0).equalsIgnoreCase("!altfire")){
 								robot.mousePress(java.awt.event.InputEvent.BUTTON2_DOWN_MASK);
-								this.sleep(1);
+								this.sleep(100);
 								robot.mouseRelease(java.awt.event.InputEvent.BUTTON2_DOWN_MASK);
 						}
 						
@@ -182,15 +195,27 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!crouch")){
-							robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
-							this.sleep(1000);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
+							if(arr.size() > 1){	
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
+									System.out.println("rofl");
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
+								}
+							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!walk")){
-							robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
-							this.sleep(1000);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_SHIFT);
+							if(arr.size() > 1){	
+								float length = Float.parseFloat(arr.get(1));
+								if(length<=10 && length>=0){
+									robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
+									System.out.println("rofl");
+									this.sleep((long) (length*1000));
+									robot.keyRelease(java.awt.event.KeyEvent.VK_SHIFT);
+								}
+							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!1")){
