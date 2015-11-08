@@ -11,9 +11,19 @@ public class IRCTest extends PircBot{
 	static String oAuth = "";
 	static String user = "";
 	static String channel = "";
+	static String host = "";
 
 	public IRCTest(){
 		this.setName("spiral6");
+	}
+	
+	public IRCTest(String x, String y, String host, String username, String ch, String pass){
+		 xRes = Integer.parseInt(x);
+		 yRes = Integer.parseInt(y);
+		 oAuth = pass;
+		 user = username;
+		 channel = ch;
+		 this.host = host;
 	}
 	
 	public void message(String s){
@@ -32,7 +42,7 @@ public class IRCTest extends PircBot{
 	
     public static void main(String[] args) throws Exception{
     	Scanner kb = new Scanner(System.in);
-    	System.out.println("What is the value of your xResolution?");
+    	/*System.out.println("What is the value of your xResolution?");
     	xRes = kb.nextInt();
     	System.out.println("What is the value of your yResolution?");
     	yRes = kb.nextInt();
@@ -41,7 +51,7 @@ public class IRCTest extends PircBot{
     	System.out.println("What is your username?");
     	user = kb.next();
     	System.out.println("What is your oAuth password?");
-    	oAuth = kb.next();
+    	oAuth = kb.next();*/
     	
     	// Now start our bot up.
         IRCTest bot = new IRCTest();
@@ -54,5 +64,7 @@ public class IRCTest extends PircBot{
 
         // Join the #pircbot channel.
         bot.joinChannel(channel);
+        
+        kb.close();
     }
 }
