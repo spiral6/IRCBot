@@ -18,11 +18,49 @@ public class MyThread extends Thread{
 					
 					try {
 						robot = new Robot();
-						if(arr.get(0).equalsIgnoreCase("!up")){
-							
-							robot.mouseMove(434, 443);
-							System.out.print("fshfhsfs");
-							
+						
+						
+						
+						
+						
+						if(arr.get(0).equalsIgnoreCase("!right")){
+							if(arr.size()>1){
+								long degrees= Long.parseLong(arr.get(1));
+								for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
+									robot.mouseMove(802,450);
+									sleep(10);
+								}	
+							}	
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!left")){
+							if(arr.size()>1){
+								long degrees= Long.parseLong(arr.get(1));
+								for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
+									robot.mouseMove(798,450);
+									sleep(10);
+								}	
+							}	
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!down")){ //up goes down?
+							if(arr.size()>1){
+								long degrees= Long.parseLong(arr.get(1));
+								for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
+									robot.mouseMove(800,452);
+									sleep(10);
+								}
+							}	
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!up")){ //down goes up?
+							if(arr.size()>1){
+								long degrees= Long.parseLong(arr.get(1));
+								for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
+									robot.mouseMove(800,448);
+									sleep(10);
+								}
+							}
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!forward")){
@@ -35,14 +73,6 @@ public class MyThread extends Thread{
 								this.sleep(length*1000);
 								robot.keyRelease(java.awt.event.KeyEvent.VK_W);
 								
-								
-								//MHandler.sendMessage(CHANNEL, "lol it'no t fa");
-							}
-							else{
-								IRCTest.args.clear();
-								robot.keyPress(java.awt.event.KeyEvent.VK_W);
-								this.sleep(0);
-								robot.keyRelease(java.awt.event.KeyEvent.VK_W);
 							}
 						}
 						
@@ -52,6 +82,7 @@ public class MyThread extends Thread{
 					}
 					catch (AWTException | InterruptedException | NumberFormatException e) {
 						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				
