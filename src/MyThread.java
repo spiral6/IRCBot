@@ -5,7 +5,7 @@ import org.jibble.pircbot.PircBot;
 
 public class MyThread extends Thread{
 	
-	String CHANNEL = "#spiral6";
+	//String CHANNEL = "#spiral6";
 	ArrayList<String> arr;
 	
 	public MyThread(ArrayList<String> lol){

@@ -8,12 +8,15 @@ public class IRCTest extends PircBot{
 	//Robot robot = new Robot();
 	static int xRes = 0;
 	static int yRes = 0;
+	static String oAuth = "";
+	static String user = "";
+	static String channel = "";
 
 	public IRCTest(){
 		this.setName("spiral6");
 	}
 	
-	public void message(String channel, String s){
+	public void message(String s){
 		sendMessage(channel, s);
 	}
 	
@@ -33,6 +36,12 @@ public class IRCTest extends PircBot{
     	xRes = kb.nextInt();
     	System.out.println("What is the value of your yResolution?");
     	yRes = kb.nextInt();
+    	System.out.println("What is the channel you're connecting to? (include #)");
+    	channel = kb.next();
+    	System.out.println("What is your username?");
+    	user = kb.next();
+    	System.out.println("What is your oAuth password?");
+    	oAuth = kb.next();
     	
     	// Now start our bot up.
         IRCTest bot = new IRCTest();
@@ -41,9 +50,9 @@ public class IRCTest extends PircBot{
         bot.setVerbose(true);
         
         // Connect to the IRC server.
-        bot.connect("irc.twitch.tv", 6667, "oauth:a5ajv9ufw0ek72qbix3t8zpri64t64");
+        bot.connect("irc.twitch.tv", 6667, oAuth);
 
         // Join the #pircbot channel.
-        bot.joinChannel("#spiral6");
+        bot.joinChannel(channel);
     }
 }
