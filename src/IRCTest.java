@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class IRCTest extends PircBot{
 	public static ArrayList<String> args = new ArrayList<String>();
-	MyThread lookthread = new MyThread(1,"#spiral6");
-    MyThread movethread = new MyThread(2,"#spiral6");
-    MyThread actionthread = new MyThread(3,"#spiral6");
 	//Robot robot = new Robot();
 
 	public IRCTest(){
@@ -18,35 +15,13 @@ public class IRCTest extends PircBot{
 	}
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message){
-		Robot robot;
-		try{
-			robot = new Robot();
 			String[] arr = message.split("\\s+");
 			for(String s: arr){  
 				System.out.println(s);
 				args.add(s);
 			}
-			switch(args.get(0)){
-			case "!forward":movethread.start();break;
-			case "!backward":movethread.start();break;
-			case "!up":lookthread.start();break;
-			
-			
-			
-			
-			
-			}
-			
-			if (args.get(0).equalsIgnoreCase("!time")) {
-	            String time = new java.util.Date().toString();
-	            sendMessage(channel, sender + ": The time is now " + time);
-				robot.mouseMove(1200, 400);
-	        }
-		
-		}
-		catch(AWTException e1){
-			e1.printStackTrace();
-		}
+			new MyThread(args).start();
+			args.clear();
     }
 	
     public static void main(String[] args) throws Exception{
