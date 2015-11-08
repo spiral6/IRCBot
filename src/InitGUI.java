@@ -4,6 +4,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -21,6 +22,7 @@ public class InitGUI {
     final Display display = new Display();
     final Shell shell = new Shell(display);
     final Shell console = new Shell(display);
+    shell.setImage(new Image(display, "CSGOBotIcon.ico"));
     shell.setText("Connection Settings");
 	shell.setLayout(new GridLayout(3, false));
 	
