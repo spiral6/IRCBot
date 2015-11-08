@@ -153,9 +153,9 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!jump")){
-								robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
-								this.sleep(1);
-								robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+							robot.keyPress(java.awt.event.KeyEvent.VK_V);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
 						}
 					
 						else if(arr.get(0).equalsIgnoreCase("!inspect")){
