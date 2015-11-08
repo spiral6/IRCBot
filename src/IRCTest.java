@@ -14,7 +14,7 @@ public class IRCTest extends PircBot{
 	static String host = "";
 
 	public IRCTest(){
-		this.setName("spiral6");
+		this.setName(user);
 	}
 	
 	public IRCTest(String x, String y, String host, String username, String ch, String pass){
