@@ -28,7 +28,7 @@ public class MyThread extends Thread{
 								float degrees= Float.parseFloat(arr.get(1));
 								if(degrees<=180){
 									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-										robot.mouseMove(802,450);
+										robot.mouseMove(IRCTest.xRes/2+2,IRCTest.yRes/2);
 										sleep(10);
 									}
 								}
@@ -40,7 +40,7 @@ public class MyThread extends Thread{
 								float degrees= Float.parseFloat(arr.get(1));
 								if(degrees<=180){
 									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-										robot.mouseMove(798,450);
+										robot.mouseMove(IRCTest.xRes/2-2,IRCTest.yRes/2);
 										sleep(10);
 									}
 								}
@@ -52,7 +52,7 @@ public class MyThread extends Thread{
 								float degrees= Float.parseFloat(arr.get(1));
 								if(degrees<=90){
 									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-										robot.mouseMove(800,452);
+										robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2+2);
 										sleep(10);
 									}
 								}
@@ -64,7 +64,7 @@ public class MyThread extends Thread{
 								float degrees= Float.parseFloat(arr.get(1));
 								if(degrees<=90){
 									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-										robot.mouseMove(800,448);
+										robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2-2);
 										sleep(10);
 									}
 								}
