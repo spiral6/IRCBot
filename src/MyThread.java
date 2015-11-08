@@ -147,74 +147,86 @@ public class MyThread extends Thread{
 					
 						else if(arr.get(0).equalsIgnoreCase("!inspect")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_V);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_V);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!scoreboard")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_TAB);
 							this.sleep(5000);
-							robot.keyPress(java.awt.event.KeyEvent.VK_TAB);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_TAB);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!bomb")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
 							this.sleep(11000);
-							robot.keyPress(java.awt.event.KeyEvent.VK_F);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!door")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_F);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!drop")){
+							robot.keyPress(java.awt.event.KeyEvent.VK_G);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_G);
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!reload")){
+							robot.keyPress(java.awt.event.KeyEvent.VK_R);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_R);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!crouch")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
 							this.sleep(1000);
-							robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!walk")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
 							this.sleep(1000);
-							robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_SHIFT);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!1")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_1);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_1);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_1);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!2")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_2);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_2);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_2);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!3")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_3);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_3);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_3);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!4")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_4);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_4);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_4);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!5")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_5);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_5);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_5);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!6")){
 							robot.keyPress(java.awt.event.KeyEvent.VK_6);
-							this.sleep(1);
-							robot.keyPress(java.awt.event.KeyEvent.VK_6);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_6);
 						}
 						
 					}
