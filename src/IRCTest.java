@@ -60,7 +60,7 @@ public class IRCTest extends PircBot{
         bot.setVerbose(true);
         
         // Connect to the IRC server.
-        bot.connect("irc.twitch.tv", 6667, oAuth);
+        bot.connect(host, 6667, oAuth);
 
         // Join the #pircbot channel.
         bot.joinChannel(channel);
