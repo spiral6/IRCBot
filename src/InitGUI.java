@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import java.util.*;
+import java.io.*;
 
 public class InitGUI {
 
@@ -23,7 +25,8 @@ public class InitGUI {
     final Display display = new Display();
     final Shell shell = new Shell(display);
     final Shell console = new Shell(display);
-    //shell.setImage(new Image(display, "\\CSGOBotIcon.ico"));
+    File icon = new File("CSGOBotIcon.ico");
+    shell.setImage(new Image(display,icon.getAbsolutePath()));
     shell.setText("Connection Settings");
 	shell.setLayout(new GridLayout(3, false));
 	
