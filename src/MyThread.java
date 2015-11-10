@@ -15,46 +15,47 @@ public class MyThread extends Thread{
 					Robot robot;
 					try {
 						robot = new Robot();
-						if(arr.get(0).substring(0,6).equalsIgnoreCase("!look")){ //ALL LOOK METHODS
-							if(arr.get(0).substring(6).equalsIgnoreCase("left")){
+						if(arr.get(0).substring(0,5).equalsIgnoreCase("!look")){ //ALL LOOK METHODS
+						System.out.println("look");
+							if(arr.get(0).substring(5).equalsIgnoreCase("left")){
 								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=180){
-										for(int i=0;i<(degrees*5.6);i++){ 
-											robot.mouseMove(IRCTest.xRes/2-2,IRCTest.yRes/2);
+										for(int i=0;i<(degrees*2.8);i++){ 
+											robot.mouseMove(IRCTest.xRes/2-5,IRCTest.yRes/2);
 											sleep(10);
 										}
 									}
 								}
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("right")){
+							if(arr.get(0).substring(5).equalsIgnoreCase("right")){
 								if(arr.size()>1){
 									float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=180){
-										for(int i=0;i<(degrees*5.6);i++){ 
-											robot.mouseMove(IRCTest.xRes/2+2,IRCTest.yRes/2);
+										for(int i=0;i<(degrees*2.8);i++){ 
+											robot.mouseMove(IRCTest.xRes/2+5,IRCTest.yRes/2);
 											sleep(10);
 										}
 									}
 								}		
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("up")){//Opposite?
+							if(arr.get(0).substring(5).equalsIgnoreCase("up")){//Opposite?
 								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=90){
-										for(int i=0;i<(degrees*5.6);i++){
-											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2-2);
+										for(int i=0;i<(degrees*2.8);i++){
+											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2-5);
 											sleep(10);
 										}
 									}
 								}
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("down")){//Opposite?
+							if(arr.get(0).substring(5).equalsIgnoreCase("down")){//Opposite?
 								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=90){
-										for(int i=0;i<(degrees*5.6);i++){
-											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2+2);
+										for(int i=0;i<(degrees*2.8);i++){
+											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2+5);
 											sleep(10);
 										}
 									}
@@ -62,8 +63,8 @@ public class MyThread extends Thread{
 							}
 						}
 						
-						if(arr.get(0).substring(0,6).equalsIgnoreCase("!move")){//ALL MOVE METHODS
-							if(arr.get(0).substring(6).equalsIgnoreCase("left")){
+						if(arr.get(0).substring(0,5).equalsIgnoreCase("!move")){//ALL MOVE METHODS
+							if(arr.get(0).substring(5).equalsIgnoreCase("left")){
 								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
 									if(length<=10 && length>=0){
@@ -73,7 +74,7 @@ public class MyThread extends Thread{
 									}
 								}
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("right")){
+							if(arr.get(0).substring(5).equalsIgnoreCase("right")){
 								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
 									if(length<=10 && length>=0){
@@ -83,7 +84,7 @@ public class MyThread extends Thread{
 									}
 								}
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("forwards")||(arr.get(0).substring(6).equalsIgnoreCase("forward"))){
+							if(arr.get(0).substring(5).equalsIgnoreCase("forwards")||(arr.get(0).substring(5).equalsIgnoreCase("forward"))){
 								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
 									if(length<=10 && length>=0){
@@ -93,7 +94,7 @@ public class MyThread extends Thread{
 									}
 								}
 							}
-							if(arr.get(0).substring(6).equalsIgnoreCase("backwards")||(arr.get(0).substring(6).equalsIgnoreCase("backward"))){
+							if(arr.get(0).substring(5).equalsIgnoreCase("backwards")||(arr.get(0).substring(5).equalsIgnoreCase("backward"))){
 								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
 									if(length<=10 && length>=0){
