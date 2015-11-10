@@ -77,6 +77,10 @@ public class MyThread extends Thread{
 								float length = Float.parseFloat(arr.get(1));
 								if(length<=10 && length>=0){
 									robot.keyPress(java.awt.event.KeyEvent.VK_W);
+<<<<<<< HEAD
+=======
+									System.out.println("rofl");
+>>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 									
 									this.sleep((long) (length*1000));
 									robot.keyRelease(java.awt.event.KeyEvent.VK_W);
@@ -148,6 +152,7 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!jump")){
+<<<<<<< HEAD
 							robot.keyPress(java.awt.event.KeyEvent.VK_V);
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
@@ -157,6 +162,17 @@ public class MyThread extends Thread{
 							robot.keyPress(java.awt.event.KeyEvent.VK_V);
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
+=======
+							robot.keyPress(java.awt.event.KeyEvent.VK_SPACE);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
+						}
+					
+						else if(arr.get(0).equalsIgnoreCase("!inspect")){
+							robot.keyPress(java.awt.event.KeyEvent.VK_7);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_7);
+>>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!scoreboard")){
@@ -166,6 +182,7 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!bomb")){
+<<<<<<< HEAD
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
 							this.sleep(11000);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
@@ -175,6 +192,17 @@ public class MyThread extends Thread{
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
+=======
+							robot.keyPress(java.awt.event.KeyEvent.VK_E);
+							this.sleep(11000);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_E);
+						}
+						
+						else if(arr.get(0).equalsIgnoreCase("!door")){
+							robot.keyPress(java.awt.event.KeyEvent.VK_E);
+							this.sleep(100);
+							robot.keyRelease(java.awt.event.KeyEvent.VK_E);
+>>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!drop")){
@@ -194,6 +222,10 @@ public class MyThread extends Thread{
 								float length = Float.parseFloat(arr.get(1));
 								if(length<=10 && length>=0){
 									robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
+<<<<<<< HEAD
+=======
+									System.out.println("rofl");
+>>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 									this.sleep((long) (length*1000));
 									robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
 								}
@@ -205,6 +237,10 @@ public class MyThread extends Thread{
 								float length = Float.parseFloat(arr.get(1));
 								if(length<=10 && length>=0){
 									robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
+<<<<<<< HEAD
+=======
+									System.out.println("rofl");
+>>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 									this.sleep((long) (length*1000));
 									robot.keyRelease(java.awt.event.KeyEvent.VK_SHIFT);
 								}
