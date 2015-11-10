@@ -42,17 +42,6 @@ public class IRCTest extends PircBot{
 	
     public static void main(String[] args) throws Exception{
     	Scanner kb = new Scanner(System.in);
-    	/*System.out.println("What is the value of your xResolution?");
-    	xRes = kb.nextInt();
-    	System.out.println("What is the value of your yResolution?");
-    	yRes = kb.nextInt();
-    	System.out.println("What is the channel you're connecting to? (include #)");
-    	channel = kb.next();
-    	System.out.println("What is your username?");
-    	user = kb.next();
-    	System.out.println("What is your oAuth password?");
-    	oAuth = kb.next();*/
-    	
     	// Now start our bot up.
         IRCTest bot = new IRCTest();
         
