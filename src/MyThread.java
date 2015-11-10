@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import org.jibble.pircbot.PircBot;
 
 public class MyThread extends Thread{
-	
-	//String CHANNEL = "#spiral6";
 	ArrayList<String> arr;
 	
 	public MyThread(ArrayList<String> lol){
@@ -15,118 +13,99 @@ public class MyThread extends Thread{
 	
 	public void run(){
 					Robot robot;
-					
 					try {
 						robot = new Robot();
-						
-						
-						
-						
-						
-						if(arr.get(0).equalsIgnoreCase("!right")){
-							if(arr.size()>1){
+						if(arr.get(0).substring(0,6).equalsIgnoreCase("!look")){ //ALL LOOK METHODS
+							if(arr.get(0).substring(6).equalsIgnoreCase("left")){
+								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
-								if(degrees<=180){
-									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-										robot.mouseMove(IRCTest.xRes/2+2,IRCTest.yRes/2);
-										sleep(10);
+									if(degrees<=180){
+										for(int i=0;i<(degrees*5.6);i++){ 
+											robot.mouseMove(IRCTest.xRes/2-2,IRCTest.yRes/2);
+											sleep(10);
+										}
 									}
 								}
-							}	
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!left")){
-							if(arr.size()>1){
+							}
+							if(arr.get(0).substring(6).equalsIgnoreCase("right")){
+								if(arr.size()>1){
+									float degrees= Float.parseFloat(arr.get(1));
+									if(degrees<=180){
+										for(int i=0;i<(degrees*5.6);i++){ 
+											robot.mouseMove(IRCTest.xRes/2+2,IRCTest.yRes/2);
+											sleep(10);
+										}
+									}
+								}		
+							}
+							if(arr.get(0).substring(6).equalsIgnoreCase("up")){//Opposite?
+								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
-								if(degrees<=180){
-									for(int i=0;i<(degrees*5.6);i++){ //5.6 pixels per degree
-										robot.mouseMove(IRCTest.xRes/2-2,IRCTest.yRes/2);
-										sleep(10);
+									if(degrees<=90){
+										for(int i=0;i<(degrees*5.6);i++){
+											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2-2);
+											sleep(10);
+										}
 									}
 								}
-							}	
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!down")){ //up goes down?
-							if(arr.size()>1){
+							}
+							if(arr.get(0).substring(6).equalsIgnoreCase("down")){//Opposite?
+								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
-								if(degrees<=90){
-									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-										robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2+2);
-										sleep(10);
-									}
-								}
-							}	
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!up")){ //down goes up?
-							if(arr.size()>1){
-								float degrees= Float.parseFloat(arr.get(1));
-								if(degrees<=90){
-									for(int i=0;i<(degrees*5.6);i++){ //13 pixels per degree
-										robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2-2);
-										sleep(10);
+									if(degrees<=90){
+										for(int i=0;i<(degrees*5.6);i++){
+											robot.mouseMove(IRCTest.xRes/2,IRCTest.yRes/2+2);
+											sleep(10);
+										}
 									}
 								}
 							}
 						}
 						
-						else if(arr.get(0).equalsIgnoreCase("!forward")){
-							if(arr.size() > 1){
-								
+						if(arr.get(0).substring(0,6).equalsIgnoreCase("!move")){//ALL MOVE METHODS
+							if(arr.get(0).substring(6).equalsIgnoreCase("left")){
+								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
-								if(length<=10 && length>=0){
-									robot.keyPress(java.awt.event.KeyEvent.VK_W);
-<<<<<<< HEAD
-=======
-									System.out.println("rofl");
->>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
-									
-									this.sleep((long) (length*1000));
-									robot.keyRelease(java.awt.event.KeyEvent.VK_W);
+									if(length<=10 && length>=0){
+										robot.keyPress(java.awt.event.KeyEvent.VK_A);
+										this.sleep((long) (length*1000));
+										robot.keyRelease(java.awt.event.KeyEvent.VK_A);
+									}
 								}
 							}
-						}
-
-						else if(arr.get(0).equalsIgnoreCase("!backward")){
-							if(arr.size() > 1){
-								
+							if(arr.get(0).substring(6).equalsIgnoreCase("right")){
+								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
-								if(length<=10 && length>=0){
-									robot.keyPress(java.awt.event.KeyEvent.VK_S);
-									
-									this.sleep((long) (length*1000));
-									robot.keyRelease(java.awt.event.KeyEvent.VK_S);
+									if(length<=10 && length>=0){
+										robot.keyPress(java.awt.event.KeyEvent.VK_D);
+										this.sleep((long) (length*1000));
+										robot.keyRelease(java.awt.event.KeyEvent.VK_D);
+									}
 								}
 							}
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!strafeleft")){
-							if(arr.size() > 1){
-								
+							if(arr.get(0).substring(6).equalsIgnoreCase("forwards")||(arr.get(0).substring(6).equalsIgnoreCase("forward"))){
+								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
-								if(length<=10 && length>=0){
-									robot.keyPress(java.awt.event.KeyEvent.VK_A);
-									
-									this.sleep((long) (length*1000));
-									robot.keyRelease(java.awt.event.KeyEvent.VK_A);
+									if(length<=10 && length>=0){
+										robot.keyPress(java.awt.event.KeyEvent.VK_W);
+										this.sleep((long) (length*1000));
+										robot.keyRelease(java.awt.event.KeyEvent.VK_W);
+									}
 								}
 							}
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!straferight")){
-							if(arr.size() > 1){
-								
+							if(arr.get(0).substring(6).equalsIgnoreCase("backwards")||(arr.get(0).substring(6).equalsIgnoreCase("backward"))){
+								if(arr.size() > 1){
 								float length = Float.parseFloat(arr.get(1));
-								if(length<=10 && length>=0){
-									robot.keyPress(java.awt.event.KeyEvent.VK_D);
-									
-									this.sleep((long) (length*1000));
-									robot.keyRelease(java.awt.event.KeyEvent.VK_D);
+									if(length<=10 && length>=0){
+										robot.keyPress(java.awt.event.KeyEvent.VK_S);
+										this.sleep((long) (length*1000));
+										robot.keyRelease(java.awt.event.KeyEvent.VK_S);
+									}
 								}
 							}
+							
 						}
-						
+					
 						else if(arr.get(0).equalsIgnoreCase("!fire")){
 							if(arr.size() > 1){
 								
@@ -152,27 +131,16 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!jump")){
-<<<<<<< HEAD
-							robot.keyPress(java.awt.event.KeyEvent.VK_V);
-							this.sleep(100);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
-						}
-					
-						else if(arr.get(0).equalsIgnoreCase("!inspect")){
-							robot.keyPress(java.awt.event.KeyEvent.VK_V);
-							this.sleep(100);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
-=======
+
 							robot.keyPress(java.awt.event.KeyEvent.VK_SPACE);
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
 						}
 					
 						else if(arr.get(0).equalsIgnoreCase("!inspect")){
-							robot.keyPress(java.awt.event.KeyEvent.VK_7);
+							robot.keyPress(java.awt.event.KeyEvent.VK_V);
 							this.sleep(100);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_7);
->>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
+							robot.keyRelease(java.awt.event.KeyEvent.VK_V);
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!scoreboard")){
@@ -182,7 +150,7 @@ public class MyThread extends Thread{
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!bomb")){
-<<<<<<< HEAD
+
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
 							this.sleep(11000);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
@@ -192,17 +160,6 @@ public class MyThread extends Thread{
 							robot.keyPress(java.awt.event.KeyEvent.VK_F);
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_F);
-=======
-							robot.keyPress(java.awt.event.KeyEvent.VK_E);
-							this.sleep(11000);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_E);
-						}
-						
-						else if(arr.get(0).equalsIgnoreCase("!door")){
-							robot.keyPress(java.awt.event.KeyEvent.VK_E);
-							this.sleep(100);
-							robot.keyRelease(java.awt.event.KeyEvent.VK_E);
->>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 						}
 						
 						else if(arr.get(0).equalsIgnoreCase("!drop")){
@@ -222,10 +179,6 @@ public class MyThread extends Thread{
 								float length = Float.parseFloat(arr.get(1));
 								if(length<=10 && length>=0){
 									robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
-<<<<<<< HEAD
-=======
-									System.out.println("rofl");
->>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 									this.sleep((long) (length*1000));
 									robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
 								}
@@ -237,10 +190,6 @@ public class MyThread extends Thread{
 								float length = Float.parseFloat(arr.get(1));
 								if(length<=10 && length>=0){
 									robot.keyPress(java.awt.event.KeyEvent.VK_SHIFT);
-<<<<<<< HEAD
-=======
-									System.out.println("rofl");
->>>>>>> f296413f8cb1af142ee31ecff29f86f1ac98f602
 									this.sleep((long) (length*1000));
 									robot.keyRelease(java.awt.event.KeyEvent.VK_SHIFT);
 								}
@@ -285,8 +234,6 @@ public class MyThread extends Thread{
 						
 					}
 					catch (AWTException | InterruptedException | NumberFormatException e) {
-						// TODO Auto-generated catch block
-						
 						e.printStackTrace();
 					}
 				
