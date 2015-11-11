@@ -4,7 +4,11 @@
 	<classpathentry exported="true" kind="lib" path="pircbot.jar"/>
 	<classpathentry kind="lib" path="swt-debug.jar"/>
 	<classpathentry kind="lib" path="swt.jar"/>
-	<classpathentry kind="lib" path="json-20150729.jar"/>
+	<classpathentry kind="lib" path="json-20150729.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/IRCBot/json-20150729-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

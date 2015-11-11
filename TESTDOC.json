@@ -1,4 +1,19 @@
-
 {"Keybinds":[
-    {"id":"counterstrike", "keys":["!jump":"SPACE","!moveforward":"W","!movebackward":"S","!moveleft":"A","!moveright":"D","!reload":"R","!scoreboard":"TAB","!crouch":"CTRL","!walk":"SHIFT","!drop":"G","!bomb":"E","!door":"E","!inspect":"7"]}
-]}
+    {"id":"counterstrike", "keys":[
+    "!jump":"SPACE",
+    "!moveforward":"W",
+    "!movebackward":"S",
+    "!moveleft":"A",
+    "!moveright":"D",
+    "!reload":"R",
+    "!scoreboard":"TAB",
+    "!crouch":"CTRL",
+    "!walk":"SHIFT",
+    "!drop":"G",
+    "!bomb":"E",
+    "!door":"E",
+    "!inspect":"7",
+    ] 
+   	}
+]
+}
