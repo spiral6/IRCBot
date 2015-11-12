@@ -110,13 +110,28 @@ public class InitGUI {
         	st.setLayoutData(gridData);
         }
     });
+    
+	Button buttonJSON = new Button(shell, SWT.NONE);
+	buttonJSON.setText("Config");
+	
+	buttonJSON.addSelectionListener(new SelectionAdapter() {
+        @Override
+        public void widgetSelected(SelectionEvent e) {
+	      	  try {
+	      		JSONTesterino.main(null);
+	      	  } 
+	      	  catch (Exception e1) {
+	      		e1.printStackTrace();
+	      	  } 
+        }
+    });
 	
 	gridData = new GridData();
 	gridData.horizontalSpan = 3;
 	gridData.horizontalAlignment = SWT.CENTER;
 	gridData.grabExcessHorizontalSpace = true;
 	button.setLayoutData(gridData);
-			
+	buttonJSON.setLayoutData(gridData);
 	shell.pack();
     shell.open();
 
@@ -125,6 +140,6 @@ public class InitGUI {
 	    		display.sleep();
 	    	}
 	    }
-   
+
   }
 }
