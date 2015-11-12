@@ -25,7 +25,7 @@ public class InitGUI {
     final Display display = new Display();
     final Shell shell = new Shell(display);
     final Shell console = new Shell(display);
-    File icon = new File("src/CSGOBotIcon.ico");
+    File icon = new File("CSGOBotIcon.ico");
     shell.setImage(new Image(display,icon.getPath()));
     shell.setText("Connection Settings");
 	shell.setLayout(new GridLayout(3, false));
@@ -80,8 +80,42 @@ public class InitGUI {
 	oAuthText.setLayoutData(gridData);
 	oAuthText.setText("oauth:9dnk5o5x9xuw610givlwhiaflwhbxc");
 	
+	Label bind1 = new Label(shell, SWT.NONE);
+	bind1.setText("Resolution:");
+	final Text bind1text = new Text(shell, SWT.BORDER);
+	gridData = new GridData();
+	gridData.horizontalSpan = 2;
+	gridData.horizontalAlignment = SWT.FILL;
+	gridData.grabExcessHorizontalSpace = true;
+	bind1text.setLayoutData(gridData);
+	
+	Label bind2 = new Label(shell, SWT.NONE);
+	bind2.setText("READFROMJSON");
+	final Text bind2text = new Text(shell, SWT.BORDER);
+	gridData = new GridData();
+	gridData.horizontalSpan = 2;
+	gridData.horizontalAlignment = SWT.FILL;
+	gridData.grabExcessHorizontalSpace = true;
+	bind2text.setLayoutData(gridData);
+	
+	Label bind3 = new Label(shell, SWT.NONE);
+	bind3.setText("Resolution:");
+	final Text bind3text = new Text(shell, SWT.BORDER);
+	gridData = new GridData();
+	gridData.horizontalSpan = 2;
+	gridData.horizontalAlignment = SWT.FILL;
+	gridData.grabExcessHorizontalSpace = true;
+	bind3text.setLayoutData(gridData);
+	gridData.horizontalSpan = 2;
+	
 	Button button = new Button(shell, SWT.NONE);
+	gridData.horizontalAlignment = 1;
+	
+	button.setLayoutData(gridData);
 	button.setText("Submit");
+	
+	Button buttonconfig = new Button(shell, SWT.NONE);
+	button.setText("Change Key Bindings");
 	
 	button.addSelectionListener(new SelectionAdapter() {
         @Override
