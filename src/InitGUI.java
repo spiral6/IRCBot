@@ -25,8 +25,14 @@ public class InitGUI {
     final Display display = new Display();
     final Shell shell = new Shell(display);
     final Shell console = new Shell(display);
-    File icon = new File("src/CSGOBotIcon.ico");
+    
+    File icon = null;
+    icon = new File("CSGOBotIcon.ico");
+    if(!icon.exists()){
+        	icon = new File("src/CSGOBotIcon.ico");
+    }
     shell.setImage(new Image(display,icon.getPath()));
+    
     shell.setText("Connection Settings");
 	shell.setLayout(new GridLayout(3, false));
 	
