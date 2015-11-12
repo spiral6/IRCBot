@@ -11,8 +11,12 @@ import org.json.simple.parser.ParseException;
 
 public class JSONTesterino {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		File f = new File("./TESTDOC.json");
+	public static void main(String[] args) throws IOException, ParseException { 
+		File f = null;
+		  f = new File("../TESTDOC.json");
+   		 if(!f.exists()){
+        	f = new File("TESTDOC.json");
+  			  }
 		FileReader fr = new FileReader(f);
 		System.out.println(f.exists());
 		
@@ -33,6 +37,7 @@ public class JSONTesterino {
 			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 			System.out.println(derp);
 		}	
+			
 	}
 
 }
