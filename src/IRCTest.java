@@ -50,7 +50,6 @@ public class IRCTest extends PircBot{
         
         // Connect to the IRC server.
         bot.connect(host, 6667, oAuth);
-
         // Join the #pircbot channel.
         bot.joinChannel(channel);
         

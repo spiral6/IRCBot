@@ -20,11 +20,10 @@ import java.util.*;
 import java.io.*;
 
 public class InitGUI {
-
+ static final Display display  = new Display();
   public static void main(String[] args) {
-    final Display display = new Display();
+    
     final Shell shell = new Shell(display);
-    final Shell console = new Shell(display);
     
     File icon = null;
     icon = new File("CSGOBotIcon.ico");
@@ -101,13 +100,6 @@ public class InitGUI {
 	      		e1.printStackTrace();
 	      	  } 
         	shell.close();
-
-        	StyledText st = new StyledText(console, SWT.NONE);
-        	st.setVisible(true);
-        	GridData gridData = new GridData();
-        	gridData.horizontalAlignment = SWT.FILL;
-        	gridData.grabExcessHorizontalSpace = true;
-        	st.setLayoutData(gridData);
         }
     });
     
@@ -118,7 +110,7 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      		JSONTesterino.main(null);
+	      		new JSONTesterino().main(null);
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
