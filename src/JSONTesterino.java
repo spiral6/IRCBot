@@ -40,7 +40,6 @@ public class JSONTesterino {
         	f = new File("TESTDOC.json");
   			  }
 		FileReader fr = new FileReader(f);
-		System.out.println(f.exists());
 		
 		JSONParser parser = new JSONParser();
 		
@@ -53,23 +52,30 @@ public class JSONTesterino {
 		
 		//System.out.println(commands.get("!jump"));
 		
+   		Shell shellJSON = new Shell(InitGUI.display);
+   		shellJSON.setLayout(new GridLayout(2, false));
+   		
+   		
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		
+		String[] comar = new String[commands.size()];
+		Text[] labels = new Text[commands.size()];
+		Text[] texts = new Text[commands.size()];
+		
 		for(int i = 0; i < commands.size(); i++){
 			String derp = ((JSONObject)commands.get(i)).toString();
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+			labels[i] = new Text(shellJSON, SWT.BORDER);
+			labels[i].setLayoutData(gridData);
+			labels[i].setText(derp.split("\\s+")[0]);
+			texts[i] = new Text(shellJSON, SWT.BORDER);
+			texts[i].setLayoutData(gridData);
+			texts[i].setText(derp.split("\\s+")[1]);
 			System.out.println(derp);
-		}	
-   		Shell shellJSON = new Shell(InitGUI.display);
-   		
-   		Label Bind1 = new Label(shellJSON, SWT.NONE);
-		Bind1.setText((JSONObject)commands.get(i).toString()) ;
-		final Text Bind1Text = new Text(shell, SWT.BORDER);
-		GridData gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		resXText.setLayoutData(gridData);
-		resYText.setLayoutData(gridData);
-		
+		}
   	 	shellJSON.pack();
    		shellJSON.open();
     	    while (!shellJSON.isDisposed()) {
@@ -77,6 +83,14 @@ public class JSONTesterino {
 	    		InitGUI.display.sleep();
 	    	}
 	    }
+	}
+	
+	private static void writejson(Text[] name,Text[] assignment){
+		
+		//name[i].getText()
+		
+		
+		
 	}
 
 }
