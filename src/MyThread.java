@@ -1,7 +1,6 @@
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.util.ArrayList;
-
-import org.jibble.pircbot.PircBot;
 
 public class MyThread extends Thread{
 	ArrayList<String> arr;

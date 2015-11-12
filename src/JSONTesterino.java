@@ -29,8 +29,10 @@ public class JSONTesterino {
 		
 		for(int i = 0; i < commands.size(); i++){
 			String derp = ((JSONObject)commands.get(i)).toString();
+			//System.out.print(derp + "        ");
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+			String[] arr = derp.split(" ");
 			System.out.println(derp);
 		}	
 	}
