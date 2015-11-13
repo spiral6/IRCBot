@@ -1,5 +1,5 @@
 import org.jibble.pircbot.*;
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

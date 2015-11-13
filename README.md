@@ -6,4 +6,6 @@ NOTE: Keybinds can be changed in the MyThread class by changing the If parameter
 
 NOTE: JSON dependency requires the project to be compiled with Java 8.
 
-Created by Shamee, Michael, and kind of Koustubh.
+Creators: Shamee and Michael.
+
+Contributors: Koustubh, Anthony
