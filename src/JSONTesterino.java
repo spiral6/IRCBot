@@ -67,6 +67,18 @@ public class JSONTesterino {
 		Text[] labels = new Text[commands.size()];
 		Text[] texts = new Text[commands.size()];
 		
+		for(int i = 0; i < commands.size(); i++){
+			String derp = ((JSONObject)commands.get(i)).toString();
+			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
+			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+			labels[i] = new Text(shellJSON, SWT.BORDER);
+			labels[i].setLayoutData(gridData);
+			labels[i].setText(derp.split("\\s+")[0]);
+			texts[i] = new Text(shellJSON, SWT.BORDER);
+			texts[i].setLayoutData(gridData);
+			texts[i].setText(derp.split("\\s+")[1]);
+			System.out.println(derp);
+		}
   	 	shellJSON.pack();
    		shellJSON.open();
     	    while (!shellJSON.isDisposed()) {
