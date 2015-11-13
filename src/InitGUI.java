@@ -14,11 +14,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class InitGUI {
-
+ static final Display display  = new Display();
   public static void main(String[] args) {
-    final Display display = new Display();
+    
     final Shell shell = new Shell(display);
-    final Shell console = new Shell(display);
     
     File icon = null;
     icon = new File("CSGOBotIcon.ico");
@@ -80,13 +79,22 @@ public class InitGUI {
 	oAuthText.setLayoutData(gridData);
 	oAuthText.setText("oauth:9dnk5o5x9xuw610givlwhiaflwhbxc");
 	
+	Label gameID = new Label(shell, SWT.NONE);
+	gameID.setText("Game ID: ");
+	final Text gameIDText = new Text(shell, SWT.BORDER);
+	gridData = new GridData();
+	gridData.horizontalSpan = 2;
+	gridData.horizontalAlignment = SWT.FILL;
+	gridData.grabExcessHorizontalSpace = true;
+	gameIDText.setLayoutData(gridData);
+	gameIDText.setText("INSERT DEFAULT FROM JSON");
+	
 	Button button = new Button(shell, SWT.NONE);
 	button.setText("Submit");
 	
 	button.addSelectionListener(new SelectionAdapter() {
         @Override
         public void widgetSelected(SelectionEvent e) {
-        	System.out.println(resXText.getText());
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
 	      		kek.main(null);
@@ -95,24 +103,19 @@ public class InitGUI {
 	      		e1.printStackTrace();
 	      	  } 
         	shell.close();
-
-        	StyledText st = new StyledText(console, SWT.NONE);
-        	st.setVisible(true);
-        	GridData gridData = new GridData();
-        	gridData.horizontalAlignment = SWT.FILL;
-        	gridData.grabExcessHorizontalSpace = true;
-        	st.setLayoutData(gridData);
         }
     });
     
 	Button buttonJSON = new Button(shell, SWT.NONE);
-	buttonJSON.setText("Config");
+	buttonJSON.setText("Game Config");
 	
 	buttonJSON.addSelectionListener(new SelectionAdapter() {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      		JSONTesterino.main(null);
+	      	  	if(gameIDText.getText().length()>0){
+	      		new JSONTesterino().runDefault(gameIDText.getText());
+	      	  	}
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();

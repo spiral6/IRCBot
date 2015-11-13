@@ -9,16 +9,40 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import java.util.*;
+import java.io.*;
+
+
 public class JSONTesterino {
 
 	public static void main(String[] args) throws IOException, ParseException { 
+		
+	}
+	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		File f = null;
 		  f = new File("../TESTDOC.json");
    		 if(!f.exists()){
         	f = new File("TESTDOC.json");
   			  }
 		FileReader fr = new FileReader(f);
-		System.out.println(f.exists());
 		
 		JSONParser parser = new JSONParser();
 		
@@ -31,15 +55,32 @@ public class JSONTesterino {
 		
 		//System.out.println(commands.get("!jump"));
 		
-		for(int i = 0; i < commands.size(); i++){
-			String derp = ((JSONObject)commands.get(i)).toString();
-			//System.out.print(derp + "        ");
-			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
-			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
-			String[] arr = derp.split(" ");
-			System.out.println(derp);
-		}	
-			
+   		Shell shellJSON = new Shell(InitGUI.display);
+   		shellJSON.setLayout(new GridLayout(2, false));
+   		
+   		
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		
+		String[] comar = new String[commands.size()];
+		Text[] labels = new Text[commands.size()];
+		Text[] texts = new Text[commands.size()];
+		
+  	 	shellJSON.pack();
+   		shellJSON.open();
+    	    while (!shellJSON.isDisposed()) {
+	    	if (!InitGUI.display.readAndDispatch()){
+	    		InitGUI.display.sleep();
+	    	}
+	    }
+	}
+	private static void writejson(Text[] name,Text[] assignment){
+		
+		//name[i].getText()
+		
+		
+		
 	}
 
 }
