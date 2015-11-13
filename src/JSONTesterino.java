@@ -34,6 +34,9 @@ import java.io.*;
 public class JSONTesterino {
 
 	public static void main(String[] args) throws IOException, ParseException { 
+		
+	}
+	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		File f = null;
 		  f = new File("../TESTDOC.json");
    		 if(!f.exists()){
@@ -84,7 +87,6 @@ public class JSONTesterino {
 	    	}
 	    }
 	}
-	
 	private static void writejson(Text[] name,Text[] assignment){
 		
 		//name[i].getText()
