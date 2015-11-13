@@ -1,5 +1,5 @@
 {
-	"gameid":{
+	"gameid":[{
 		"counterstrike":
 			[
 			{
@@ -42,5 +42,5 @@
 				"!inspect":"7"
 			}
 		]
-	}
+	}]
 }
