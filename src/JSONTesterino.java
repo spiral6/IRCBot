@@ -48,9 +48,11 @@ public class JSONTesterino {
 		
 		JSONObject jj = (JSONObject) parser.parse(fr);
 		
-		JSONArray keybind =  (JSONArray) jj.get("gameid");
+		JSONArray keybind =  (JSONArray) (jj.get("gameid"));
 		JSONObject rng = (JSONObject) keybind.get(0);
 		JSONArray commands =  (JSONArray) rng.get(JSONGameID);
+		System.out.println(rng);//object
+		System.out.println(commands);//array
 		//commands.remove("!jump");
 		
 		//System.out.println(commands.get("!jump"));
