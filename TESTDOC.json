@@ -1,7 +1,7 @@
 {
-	"Keybinds":{
-		"id":"counterstrike",
-		"commands":[
+	"gameid":{
+		"counterstrike":
+			[
 			{
 				"!jump":"SPACE"
 			},
