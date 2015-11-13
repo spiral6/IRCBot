@@ -103,12 +103,23 @@ public class InitGUI {
         public void widgetSelected(SelectionEvent e) {
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
-	      		kek.main(null);
+	      	  	Thread t = new Thread(new Runnable() {
+         public void run()
+         {
+              try {
+	      	  				
+	      	  		kek.main(null);	
+	      	  			}catch(Exception w){
+	      	  				w.printStackTrace();
+	      	  			}
+         }
+		});
+		t.start();
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
 	      	  } 
-        	shell.close();
+        //	shell.close();
         }
     });
     
