@@ -1,5 +1,4 @@
 import java.io.File;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -12,6 +11,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Combo;
+
+
 
 public class InitGUI {
  static final Display display  = new Display();
@@ -81,13 +83,16 @@ public class InitGUI {
 	
 	Label gameID = new Label(shell, SWT.NONE);
 	gameID.setText("Game ID: ");
-	final Text gameIDText = new Text(shell, SWT.BORDER);
+	//final Text gameIDText = new Text(shell, SWT.BORDER);
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
-	gameIDText.setLayoutData(gridData);
-	gameIDText.setText("INSERT DEFAULT FROM JSON");
+	Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+	comboDropDown.add("counterstrike");
+	comboDropDown.setLayoutData(gridData);
+	//gameIDText.setLayoutData(gridData);
+	//gameIDText.setText("INSERT DEFAULT FROM JSON");
 	
 	Button button = new Button(shell, SWT.NONE);
 	button.setText("Submit");
@@ -97,12 +102,23 @@ public class InitGUI {
         public void widgetSelected(SelectionEvent e) {
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
-	      		kek.main(null);
+	      	  	Thread t = new Thread(new Runnable() {
+         public void run()
+         {
+              try {
+	      	  				
+	      	  		kek.main(null);	
+	      	  			}catch(Exception w){
+	      	  				w.printStackTrace();
+	      	  			}
+         }
+		});
+		t.start();
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
 	      	  } 
-        	shell.close();
+        //	shell.close();
         }
     });
     
@@ -113,8 +129,8 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      	  	if(gameIDText.getText().length()>0){
-	      		new JSONTesterino().runDefault(gameIDText.getText());
+	      	  	if(true){
+	      		new JSONTesterino().runDefault(comboDropDown.getSelection().toString());
 	      	  	}
 	      	  } 
 	      	  catch (Exception e1) {
