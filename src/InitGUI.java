@@ -130,7 +130,7 @@ public class InitGUI {
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
 	      	  	if(true){
-	      		new JSONTesterino().runDefault(comboDropDown.getSelection().toString());
+	      		new JSONTesterino().runDefault(comboDropDown.getText().toString());
 	      	  	}
 	      	  } 
 	      	  catch (Exception e1) {
