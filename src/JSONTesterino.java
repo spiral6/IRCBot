@@ -38,31 +38,16 @@ public class JSONTesterino {
 	}
 	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		File f = null;
-		  f = new File("../simple.json");
+		  f = new File("../TESTDOC.json");
    		 if(!f.exists()){
-        	f = new File("simple.json");
+        	f = new File("TESTDOC.json");
   			  }
 		FileReader fr = new FileReader(f);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
 		
-		JSONObject jsonObject = (JSONObject) obj;
-		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
-		Iterator iterator = gameid.iterator();
-		System.out.println(gameid.toJSONString());
-		while (iterator.hasNext()) {
-			JSONObject game = (JSONObject) iterator.next();
-			JSONArray cs = (JSONArray) game.get("counterstrike");
-			for(int i = 0; i < cs.size(); i++){
-				System.out.println(cs.get(i));
-			}
-			System.out.println(game + " " + cs);
-		}
-		
-
-		
-   		Shell shellJSON = new Shell(InitGUI.display);
+		Shell shellJSON = new Shell(InitGUI.display);
    		shellJSON.setLayout(new GridLayout(2, false));
    		
    		
@@ -70,22 +55,30 @@ public class JSONTesterino {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		
-		/*String[] comar = new String[commands.size()];
-		Text[] labels = new Text[commands.size()];
-		Text[] texts = new Text[commands.size()];
+		JSONObject jsonObject = (JSONObject) obj;
+		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
+		Iterator iterator = gameid.iterator();
+		while (iterator.hasNext()) {
+			JSONObject game = (JSONObject) iterator.next();
+			JSONArray thegame = (JSONArray) game.get(JSONGameID);
+			for(int i = 0; i < thegame.size(); i++){
+				String[] comar = new String[thegame.size()];
+				Text[] labels = new Text[thegame.size()];
+				Text[] texts = new Text[thegame.size()];
+				String derp = ((JSONObject)thegame.get(i)).toString();
+				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
+				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+				labels[i] = new Text(shellJSON, SWT.BORDER);
+				labels[i].setLayoutData(gridData);
+				labels[i].setText(derp.split("\\s+")[0]);
+				texts[i] = new Text(shellJSON, SWT.BORDER);
+				texts[i].setLayoutData(gridData);
+				texts[i].setText(derp.split("\\s+")[1]);
+			}
+		}
 		
-		for(int i = 0; i < commands.size(); i++){
-			String derp = ((JSONObject)commands.get(i)).toString();
-			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
-			derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
-			labels[i] = new Text(shellJSON, SWT.BORDER);
-			labels[i].setLayoutData(gridData);
-			labels[i].setText(derp.split("\\s+")[0]);
-			texts[i] = new Text(shellJSON, SWT.BORDER);
-			texts[i].setLayoutData(gridData);
-			texts[i].setText(derp.split("\\s+")[1]);
-			System.out.println(derp);
-		}*/
+
+	
   	 	shellJSON.pack();
    		shellJSON.open();
     	    while (!shellJSON.isDisposed()) {
