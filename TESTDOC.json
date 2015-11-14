@@ -1,13 +1,6 @@
 {
-	"Keybinds":{
-		"id":"counterstrike",
-		"commands":[
-			{
-				"!jump":"SPACE"
-			},
-			{
-				"!moveforward":"W"
-			},
+	"gameid":[
+		{"counterstrike":[{"!jump":"SPACE"},{"!moveforward":"W"},
 			{
 				"!movebackward":"S"
 			},
@@ -41,6 +34,6 @@
 			{
 				"!inspect":"7"
 			}
-		]
-	}
+		],}
+	]
 }
