@@ -1,0 +1,14 @@
+{
+    "gameid": [
+        {
+            "counterstrike": [
+                {
+                    "!jump": "SPACE"
+                },
+                {
+                    "!moveforward": "W"
+                }
+            ]
+        }
+    ]
+}

@@ -4,11 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyListener;
@@ -27,6 +22,11 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.util.*;
 import java.io.*;
 
@@ -38,22 +38,29 @@ public class JSONTesterino {
 	}
 	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		File f = null;
-		  f = new File("../TESTDOC.json");
+		  f = new File("../simple.json");
    		 if(!f.exists()){
-        	f = new File("TESTDOC.json");
+        	f = new File("simple.json");
   			  }
 		FileReader fr = new FileReader(f);
 		
 		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(fr);
 		
-		JSONObject jj = (JSONObject) parser.parse(fr);
+		JSONObject jsonObject = (JSONObject) obj;
+		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
+		Iterator iterator = gameid.iterator();
+		System.out.println(gameid.toJSONString());
+		while (iterator.hasNext()) {
+			JSONObject game = (JSONObject) iterator.next();
+			JSONArray cs = (JSONArray) game.get("counterstrike");
+			for(int i = 0; i < cs.size(); i++){
+				System.out.println(cs.get(i));
+			}
+			System.out.println(game + " " + cs);
+		}
 		
-		JSONObject keybind = (JSONObject) jj.get("Keybinds");
-		JSONArray commands = (JSONArray) keybind.get("commands");
-		
-		commands.remove("!jump");
-		
-		//System.out.println(commands.get("!jump"));
+
 		
    		Shell shellJSON = new Shell(InitGUI.display);
    		shellJSON.setLayout(new GridLayout(2, false));
@@ -63,7 +70,7 @@ public class JSONTesterino {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		
-		String[] comar = new String[commands.size()];
+		/*String[] comar = new String[commands.size()];
 		Text[] labels = new Text[commands.size()];
 		Text[] texts = new Text[commands.size()];
 		
@@ -78,7 +85,7 @@ public class JSONTesterino {
 			texts[i].setLayoutData(gridData);
 			texts[i].setText(derp.split("\\s+")[1]);
 			System.out.println(derp);
-		}
+		}*/
   	 	shellJSON.pack();
    		shellJSON.open();
     	    while (!shellJSON.isDisposed()) {
