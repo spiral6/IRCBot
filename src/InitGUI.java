@@ -83,7 +83,6 @@ public class InitGUI {
 	
 	Label gameID = new Label(shell, SWT.NONE);
 	gameID.setText("Game ID: ");
-	//final Text gameIDText = new Text(shell, SWT.BORDER);
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
@@ -91,8 +90,6 @@ public class InitGUI {
 	Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
 	comboDropDown.add("counterstrike");
 	comboDropDown.setLayoutData(gridData);
-	//gameIDText.setLayoutData(gridData);
-	//gameIDText.setText("INSERT DEFAULT FROM JSON");
 	
 	Button button = new Button(shell, SWT.NONE);
 	button.setText("Submit");
@@ -100,6 +97,7 @@ public class InitGUI {
 	button.addSelectionListener(new SelectionAdapter() {
         @Override
         public void widgetSelected(SelectionEvent e) {
+        		
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
 	      	  	Thread t = new Thread(new Runnable() {
@@ -129,9 +127,7 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      	  	if(true){
 	      		new JSONTesterino().runDefault(comboDropDown.getText().toString());
-	      	  	}
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
