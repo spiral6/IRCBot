@@ -28,10 +28,10 @@ public class JSONTesterino {
 	}
 	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		
-		f = new File("../TESTDOC.json");
- 		if(!f.exists()){
+		f = new File(JSONGameID);
+ 		/*if(!f.exists()){
  			f = new File("TESTDOC.json");
-		}
+		}*/
 		
  		FileReader fr = new FileReader(f);
 		

@@ -22,15 +22,12 @@ import org.json.simple.parser.ParseException;
 
 public class InitGUI {
  static final Display display  = new Display();
- static File f = null;
+ 
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-  	
-  		
-		  f = new File("../TESTDOC.json");
-   		 if(!f.exists()){
-        	f = new File("TESTDOC.json");
-  			  }
-		FileReader fr = new FileReader(f);
+	  File folder = new File("./config");
+	  System.out.println(folder.exists());
+	  File[] listOfFiles = folder.listFiles();
+	  FileReader fr = new FileReader(listOfFiles[1]);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
@@ -109,7 +106,10 @@ public class InitGUI {
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
-	comboDropDown.add("counterstrike");
+	for(File d: listOfFiles){
+		comboDropDown.add(d.toString());	
+	}
+	
 	comboDropDown.setLayoutData(gridData);
 	
 	Button button = new Button(shell, SWT.NONE);
