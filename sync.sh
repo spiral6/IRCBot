@@ -1,5 +1,4 @@
-COMMIT_TIMESTAMP=`date +'%Y-%m-%d %H:%M:%S %Z'`
-
-git add .
-git commit -m "Automated commit on ${COMMIT_TIMESTAMP}"
-git push origin master
+read -p "Commit description: " desc  
+git add . -A
+git commit -m "$desc"
+git push
