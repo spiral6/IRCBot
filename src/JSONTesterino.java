@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -73,9 +74,15 @@ public class JSONTesterino {
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
 	      	  	for(int i=0;i<labels.length;i++){
-	      	  		jsonObject(labels[i].getText(),texts[i].getText());
+	      	  		String kappa = ((JSONObject)thegame.get(i)).toString();
+					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
+					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
+	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
+	      	  		System.out.println(kappa);
+	      	  		//thegame.set(i,new JSONObject();
+	      	  		}
 	      	  	}
-	      		System.out.println(jsonObject.toString());
+	      		System.out.println(thegame.toString());
 	      		
 	      	/*	FileWriter jsonwriter = new FileWriter("../TESTDOC.json");
  				jsonwriter.write(jsonObject.toJSONString());
