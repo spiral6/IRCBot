@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
@@ -115,12 +116,14 @@ public class InitGUI {
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+	final ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
 	for(File d: listOfFiles){
 		if(d.equals(gui)){
 			
 		}
 		else{
-		comboDropDown.add(d.toString());	
+		comboDropDown.add(d.getName());	
+		fileSelect.add(d);
 		}
 	}
 	
@@ -162,7 +165,13 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      		new JSONTesterino().runDefault(comboDropDown.getText().toString());
+	      		  File json = null;
+	      		  for(File temp: fileSelect){
+	      			if(temp.getName().equals(comboDropDown.getText().toString())){
+	      				json = temp;
+	      			}
+	      		  }
+	      		new JSONTesterino().runDefault(json.getPath());
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
