@@ -38,6 +38,7 @@ public class JSONTesterino {
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
+		System.out.println(obj.toString());
 		
 		Shell shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
@@ -47,17 +48,13 @@ public class JSONTesterino {
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
-		
-		JSONArray thisarray = (JSONArray) obj;
+		JSONArray thearray = (JSONArray)obj;
 		@SuppressWarnings("rawtypes")
-		Iterator iterator = gameid.iterator();
-			JSONObject game = (JSONObject) iterator.next();
-			int gametemppos = f.getName().indexOf(".");
-			final JSONArray thegame = (JSONArray) game.get(f.getName().substring(0, gametemppos));
-			 final Text[] labels = new Text[thegame.size()];
-			 final Text[] texts = new Text[thegame.size()];
-			for(int i = 0; i < thegame.size(); i++){
-				String derp = ((JSONObject)thegame.get(i)).toString();
+		Iterator iterator = thearray.iterator();
+			 final Text[] labels = new Text[thearray.size()];
+			 final Text[] texts = new Text[thearray.size()];
+			for(int i = 0; i < thearray.size(); i++){
+				String derp = ((JSONObject)thearray.get(i)).toString();
 				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 				
@@ -79,7 +76,7 @@ public class JSONTesterino {
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
 	      	  	for(int i=0;i<labels.length;i++){
-	      	  		String kappa = ((JSONObject)thegame.get(i)).toString();
+	      	  		String kappa = ((JSONObject)thearray.get(i)).toString();
 					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
@@ -88,15 +85,16 @@ public class JSONTesterino {
 						Map wellds = new TreeMap();
 	      	  			wellds.put(labels[i].getText(), texts[i].getText());
 	      	  			JSONObject blah = new JSONObject(wellds);
-	      	  			thegame.set(i, blah);
+	      	  			thearray.set(i, blah);
 	      	  		}
 	      	  	}
-	      		System.out.println(thegame.toString());
+	      		System.out.println(thearray.toString());
 	      		
-	      		FileWriter jsonwriter = new FileWriter("../config/csgo.json");
- 				jsonwriter.write(thegame.toJSONString());
+	      		FileWriter jsonwriter = new FileWriter(JSONGameID);
+ 				jsonwriter.write(thearray.toJSONString());
  				jsonwriter.flush();
  				jsonwriter.close();
+ 				shellJSON.close();
 	      		
 	      		
 	      	  } 
