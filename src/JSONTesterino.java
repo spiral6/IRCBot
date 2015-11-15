@@ -1,25 +1,23 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Button;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 
 
 
@@ -85,7 +83,8 @@ public class JSONTesterino {
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
 	      	  			System.out.println(kappa);
-	      	  			Map wellds = new TreeMap();
+	      	  			@SuppressWarnings("rawtypes")
+						Map wellds = new TreeMap();
 	      	  			wellds.put(labels[i].getText(), texts[i].getText());
 	      	  			JSONObject blah = new JSONObject(wellds);
 	      	  			thegame.set(i, blah);
