@@ -84,22 +84,20 @@ public class JSONTesterino {
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
 	      	  			System.out.println(kappa);
-	      	  			FileWriter jsonwriter = new FileWriter(f);
 	      	  			Map wellds = new TreeMap();
 	      	  			wellds.put(labels[i].getText(), texts[i].getText());
-	      	  			JSONObject blah = (JSONObject) wellds;
+	      	  			JSONObject blah = new JSONObject(wellds);
 	      	  			thegame.set(i, blah);
-	      	  			//thegame.set(i,new JSONObject();
 	      	  		}
 	      	  	}
 	      		System.out.println(thegame.toString());
 	      		
-	      	/*	FileWriter jsonwriter = new FileWriter("../TESTDOC.json");
- 				jsonwriter.write(jsonObject.toJSONString());
+	      		FileWriter jsonwriter = new FileWriter("../TESTDOC.json");
+ 				jsonwriter.write(thegame.toJSONString());
  				jsonwriter.flush();
  				jsonwriter.close();
 	      		
-	      		*/ 
+	      		
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
