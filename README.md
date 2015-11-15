@@ -1,4 +1,7 @@
-Include PIRCbot, json, swt and swtdebug in your classpath.
+Dependencies: 
+ - PIRCbot (http://www.jibble.org/pircbot.php)
+ - JSONSimple Library (https://code.google.com/p/json-simple/)
+ - Eclipse SWT Library (https://www.eclipse.org/swt/)
 
 Your OAUTH code may be found using this website: http://www.twitchapps.com/tmi/.
  
