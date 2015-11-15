@@ -41,6 +41,7 @@ public class JSONTesterino {
 		Object obj = parser.parse(fr);
 		
 		Shell shellJSON = new Shell(InitGUI.display);
+		shellJSON.setMinimumSize(320, 400);
    		shellJSON.setLayout(new GridLayout(2, false));
    		
    		
@@ -54,8 +55,8 @@ public class JSONTesterino {
 		Iterator iterator = gameid.iterator();
 			JSONObject game = (JSONObject) iterator.next();
 			final JSONArray thegame = (JSONArray) game.get(JSONGameID);
-			final Text[] labels = new Text[thegame.size()];
-			final Text[] texts = new Text[thegame.size()];
+			 final Text[] labels = new Text[thegame.size()];
+			 final Text[] texts = new Text[thegame.size()];
 			for(int i = 0; i < thegame.size(); i++){
 				String derp = ((JSONObject)thegame.get(i)).toString();
 				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
@@ -84,11 +85,12 @@ public class JSONTesterino {
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
 	      	  			System.out.println(kappa);
-	      	  			FileWriter jsonwriter = new FileWriter(f);
+	      	  			//FileWriter jsonwriter = new FileWriter(f);
 	      	  			Map wellds = new TreeMap();
 	      	  			wellds.put(labels[i].getText(), texts[i].getText());
-	      	  			JSONObject blah = (JSONObject) wellds;
-	      	  			thegame.set(i, blah);
+	      	  			 
+	      	  			//JSONObject blah = (JSONObject) JSONObject.toJSONString(wellds);
+	      	  			//thegame.set(i, blah);
 	      	  			//thegame.set(i,new JSONObject();
 	      	  		}
 	      	  	}
