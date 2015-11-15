@@ -45,5 +45,8 @@
 	}],
 	"resolutionX":"1920",
 	"resolutionY":"1080",
-	"Authkey":"FINDTHISATTHELINKPROVIDED"
+	"Authkey":"FINDTHISATTHELINKPROVIDED",
+	"Channel":"#Thisworks"
+	"User":"Thisworks"
+	"Host":"irc.twitch.tv"
 }
