@@ -48,8 +48,7 @@ public class JSONTesterino {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		
-		JSONObject jsonObject = (JSONObject) obj;
-		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
+		JSONArray thisarray = (JSONArray) obj;
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = gameid.iterator();
 			JSONObject game = (JSONObject) iterator.next();
@@ -94,7 +93,7 @@ public class JSONTesterino {
 	      	  	}
 	      		System.out.println(thegame.toString());
 	      		
-	      		FileWriter jsonwriter = new FileWriter("../TESTDOC.json");
+	      		FileWriter jsonwriter = new FileWriter("../config/csgo.json");
  				jsonwriter.write(thegame.toJSONString());
  				jsonwriter.flush();
  				jsonwriter.close();
