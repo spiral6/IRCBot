@@ -26,9 +26,9 @@ public class JSONTesterino {
 	public static void main(String[] args) throws IOException, ParseException { 
 		
 	}
-	public static void runDefault(String JSONGameID) throws IOException, ParseException{
+	public static void runDefault(File JSONGameID) throws IOException, ParseException{
 		
-		f = new File(JSONGameID);
+		f = JSONGameID;
 		System.out.println(f.exists());
  		/*if(!f.exists()){
  			f = new File("TESTDOC.json");
@@ -53,7 +53,8 @@ public class JSONTesterino {
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = gameid.iterator();
 			JSONObject game = (JSONObject) iterator.next();
-			final JSONArray thegame = (JSONArray) game.get(JSONGameID);
+			int gametemppos = f.getName().indexOf(".");
+			final JSONArray thegame = (JSONArray) game.get(f.getName().substring(0, gametemppos));
 			 final Text[] labels = new Text[thegame.size()];
 			 final Text[] texts = new Text[thegame.size()];
 			for(int i = 0; i < thegame.size(); i++){

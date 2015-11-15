@@ -172,7 +172,7 @@ public class InitGUI {
 	      				json = temp;
 	      			}
 	      		  }
-	      		new JSONTesterino().runDefault(json.getPath());
+	      		new JSONTesterino().runDefault(json);
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
