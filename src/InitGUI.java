@@ -2,12 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-<<<<<<< HEAD
-import java.util.*;
-=======
 import java.util.ArrayList;
 import java.util.Arrays;
->>>>>>> a41d30e06cff836e65c6aec2183bfae8b278576f
+
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -33,14 +30,6 @@ public class InitGUI {
 	  File folder = new File("../config");
 	  System.out.println(folder.exists());
 	  File[] listOfFiles = folder.listFiles();
-<<<<<<< HEAD
-	  FileReader fr = new FileReader(listOfFiles[Arrays.asList(listOfFiles).indexOf(File("GUI.json"))]);
-		
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(fr);
-		
-		JSONObject jsonObject = (JSONObject) obj;
-=======
 	  FileReader fr = null;
 	  File gui = null;
 	  for(File b: listOfFiles){
@@ -55,7 +44,6 @@ public class InitGUI {
 	  JSONParser parser = new JSONParser();
 	  Object obj = parser.parse(fr);
 	  JSONObject jsonObject = (JSONObject) obj;
->>>>>>> a41d30e06cff836e65c6aec2183bfae8b278576f
     
     final Shell shell = new Shell(display);
     
