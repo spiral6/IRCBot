@@ -2,7 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.*;
+=======
+import java.util.ArrayList;
+import java.util.Arrays;
+>>>>>>> a41d30e06cff836e65c6aec2183bfae8b278576f
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -28,12 +33,29 @@ public class InitGUI {
 	  File folder = new File("../config");
 	  System.out.println(folder.exists());
 	  File[] listOfFiles = folder.listFiles();
+<<<<<<< HEAD
 	  FileReader fr = new FileReader(listOfFiles[Arrays.asList(listOfFiles).indexOf(File("GUI.json"))]);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
 		
 		JSONObject jsonObject = (JSONObject) obj;
+=======
+	  FileReader fr = null;
+	  File gui = null;
+	  for(File b: listOfFiles){
+		  System.out.println(b.getName());
+		  if(b.getName().equals("GUI.json")){
+			  fr = new FileReader(b);
+			  gui = b;
+		  }
+	  }
+	  
+	  
+	  JSONParser parser = new JSONParser();
+	  Object obj = parser.parse(fr);
+	  JSONObject jsonObject = (JSONObject) obj;
+>>>>>>> a41d30e06cff836e65c6aec2183bfae8b278576f
     
     final Shell shell = new Shell(display);
     
@@ -107,8 +129,15 @@ public class InitGUI {
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+	final ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
 	for(File d: listOfFiles){
-		comboDropDown.add(d.toString());	
+		if(d.equals(gui)){
+			
+		}
+		else{
+		comboDropDown.add(d.getName());	
+		fileSelect.add(d);
+		}
 	}
 	
 	comboDropDown.setLayoutData(gridData);
@@ -149,7 +178,13 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      		new JSONTesterino().runDefault(comboDropDown.getText().toString());
+	      		  File json = null;
+	      		  for(File temp: fileSelect){
+	      			if(temp.getName().equals(comboDropDown.getText().toString())){
+	      				json = temp;
+	      			}
+	      		  }
+	      		new JSONTesterino().runDefault(json.getPath());
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();

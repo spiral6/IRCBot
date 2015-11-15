@@ -29,6 +29,7 @@ public class JSONTesterino {
 	public static void runDefault(String JSONGameID) throws IOException, ParseException{
 		
 		f = new File(JSONGameID);
+		System.out.println(f.exists());
  		/*if(!f.exists()){
  			f = new File("TESTDOC.json");
 		}*/

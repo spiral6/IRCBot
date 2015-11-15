@@ -1,8 +1,8 @@
 {
-    "resolutionY": "1080",
-    "resolutionX": "1920",
-    "User": "Thisworks",
-    "Channel": "#lolletstrythis",
-    "Host": "irc.twitch.tv",
-    "Authkey": "FINDTHISATTHELINKPROVIDED"
+	"resolutionY":"1080",
+	"resolutionX":"1920",
+	"User":"Thisworks",
+	"Channel":"#lolletstrythis",
+	"Host":"irc.twitch.tv",
+	"Authkey":"FINDTHISATTHELINKPROVIDED"
 }

@@ -1,1 +1,48 @@
-{"gameid":[{"counterstrike":[{"!jump":"SPACE"},{"!moveforward":"W"},{"!movebackward":"S"},{"!moveleft":"A"},{"!moveright":"D"},{"!reload":"R"},{"!scoreboard":"TAB"},{"!crouch":"CTRL"},{"!walk":"SHIFT"},{"!drop":"G"},{"!bomb":"E"},{"!door":"E"},{"!inspect":"7"}]}],"resolutionY":"1080","resolutionX":"1920","User":"Thisworks","Channel":"#lolletstrythis","Host":"irc.twitch.tv","Authkey":"FINDTHISATTHELINKPROVIDED"}
+{
+	"gameid":[
+		{
+			"csgo":[
+				{
+					"!jump":"SPACE"
+				},
+				{
+					"!moveforward":"W"
+				},
+				{
+					"!movebackward":"S"
+				},
+				{
+					"!moveleft":"A"
+				},
+				{
+					"!moveright":"D"
+				},
+				{
+					"!reload":"R"
+				},
+				{
+					"!scoreboard":"TAB"
+				},
+				{
+					"!crouch":"CTRL"
+				},
+				{
+					"!walk":"SHIFT"
+				},
+				{
+					"!drop":"G"
+				},
+				{
+					"!bomb":"E"
+				},
+				{
+					"!door":"E"
+				},
+				{
+					"!inspect":"7"
+				}
+			]
+		}
+	]
+
+}
