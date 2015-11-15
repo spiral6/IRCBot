@@ -119,7 +119,7 @@ public class InitGUI {
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
-	Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
 	comboDropDown.add("counterstrike");
 	comboDropDown.setLayoutData(gridData);
 	
@@ -133,7 +133,7 @@ public class InitGUI {
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
 	      	  	Thread t = new Thread(new Runnable() {
-         public void run()
+		public void run()
          {
               try {
 	      	  				
