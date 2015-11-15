@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -23,16 +24,18 @@ import org.eclipse.swt.events.SelectionListener;
 
 
 public class JSONTesterino {
+	static File f = null;
 	public static void main(String[] args) throws IOException, ParseException { 
 		
 	}
 	public static void runDefault(String JSONGameID) throws IOException, ParseException{
-		File f = null;
-		  f = new File("../TESTDOC.json");
-   		 if(!f.exists()){
-        	f = new File("TESTDOC.json");
-  			  }
-		FileReader fr = new FileReader(f);
+		
+		f = new File("../TESTDOC.json");
+ 		if(!f.exists()){
+ 			f = new File("TESTDOC.json");
+		}
+		
+ 		FileReader fr = new FileReader(f);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
@@ -50,16 +53,18 @@ public class JSONTesterino {
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = gameid.iterator();
 			JSONObject game = (JSONObject) iterator.next();
-			JSONArray thegame = (JSONArray) game.get(JSONGameID);
-			Text[] labels = new Text[thegame.size()];
-			Text[] texts = new Text[thegame.size()];
+			final JSONArray thegame = (JSONArray) game.get(JSONGameID);
+			final Text[] labels = new Text[thegame.size()];
+			final Text[] texts = new Text[thegame.size()];
 			for(int i = 0; i < thegame.size(); i++){
 				String derp = ((JSONObject)thegame.get(i)).toString();
 				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+				
 				labels[i] = new Text(shellJSON, SWT.BORDER);
 				labels[i].setLayoutData(gridData);
 				labels[i].setText(derp.split("\\s+")[0]);
+				
 				texts[i] = new Text(shellJSON, SWT.BORDER);
 				texts[i].setLayoutData(gridData);
 				texts[i].setText(derp.split("\\s+")[1]);
@@ -78,8 +83,13 @@ public class JSONTesterino {
 					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
-	      	  		System.out.println(kappa);
-	      	  		//thegame.set(i,new JSONObject();
+	      	  			System.out.println(kappa);
+	      	  			FileWriter jsonwriter = new FileWriter(f);
+	      	  			Map wellds = new TreeMap();
+	      	  			wellds.put(labels[i].getText(), texts[i].getText());
+	      	  			JSONObject blah = (JSONObject) wellds;
+	      	  			thegame.set(i, blah);
+	      	  			//thegame.set(i,new JSONObject();
 	      	  		}
 	      	  	}
 	      		System.out.println(thegame.toString());
