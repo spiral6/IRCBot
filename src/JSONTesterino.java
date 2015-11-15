@@ -1,34 +1,17 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import java.util.*;
-import java.io.*;
 
 
 public class JSONTesterino {
@@ -57,12 +40,12 @@ public class JSONTesterino {
 		
 		JSONObject jsonObject = (JSONObject) obj;
 		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
+		@SuppressWarnings("rawtypes")
 		Iterator iterator = gameid.iterator();
 		while (iterator.hasNext()) {
 			JSONObject game = (JSONObject) iterator.next();
 			JSONArray thegame = (JSONArray) game.get(JSONGameID);
 			for(int i = 0; i < thegame.size(); i++){
-				String[] comar = new String[thegame.size()];
 				Text[] labels = new Text[thegame.size()];
 				Text[] texts = new Text[thegame.size()];
 				String derp = ((JSONObject)thegame.get(i)).toString();

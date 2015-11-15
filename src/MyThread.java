@@ -10,6 +10,7 @@ public class MyThread extends Thread{
 		arr.addAll(lol);
 	}
 	
+	@SuppressWarnings("static-access")
 	public void run(){
 					Robot robot;
 					try {

@@ -17,6 +17,7 @@ public class IRCTest extends PircBot{
 		this.setName(user);
 	}
 	
+	@SuppressWarnings("static-access")
 	public IRCTest(String x, String y, String host, String username, String ch, String pass){
 		 xRes = Integer.parseInt(x);
 		 yRes = Integer.parseInt(y);
