@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.*;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -24,10 +25,10 @@ public class InitGUI {
  static final Display display  = new Display();
  
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-	  File folder = new File("./config");
+	  File folder = new File("../config");
 	  System.out.println(folder.exists());
 	  File[] listOfFiles = folder.listFiles();
-	  FileReader fr = new FileReader(listOfFiles[1]);
+	  FileReader fr = new FileReader(listOfFiles[Arrays.asList(listOfFiles).indexOf(File("GUI.json"))]);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
