@@ -1,4 +1,4 @@
 read -p "Commit description: " desc  
-git add . -A
+git add .
 git commit -m "$desc"
-git push
+git push origin master
