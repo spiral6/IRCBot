@@ -1,23 +1,51 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.util.*;
+import java.io.*;
 
 
 public class InitGUI {
  static final Display display  = new Display();
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
+  	
+  		File f = null;
+		  f = new File("../TESTDOC.json");
+   		 if(!f.exists()){
+        	f = new File("TESTDOC.json");
+  			  }
+		FileReader fr = new FileReader(f);
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(fr);
+		
+		JSONObject jsonObject = (JSONObject) obj;
     
     final Shell shell = new Shell(display);
     
@@ -34,7 +62,9 @@ public class InitGUI {
 	Label resLabel = new Label(shell, SWT.NONE);
 	resLabel.setText("Resolution:");
 	final Text resXText = new Text(shell, SWT.BORDER);
+	resXText.setText(jsonObject.get("resolutionX").toString());
 	final Text resYText = new Text(shell, SWT.BORDER);
+	resYText.setText(jsonObject.get("resolutionY").toString());
 	GridData gridData = new GridData();
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
@@ -44,42 +74,43 @@ public class InitGUI {
 	Label hostLabel = new Label(shell, SWT.NONE);
 	hostLabel.setText("Host:");
 	final Text hostText = new Text(shell, SWT.BORDER);
+	hostText.setText(jsonObject.get("Host").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	hostText.setLayoutData(gridData);
-	hostText.setText("irc.twitch.tv");
 	
 	Label userLabel = new Label(shell, SWT.LEFT | SWT.BOTTOM);
 	userLabel.setText("User:");
 	final Text userText = new Text(shell, SWT.BORDER);
+	userText.setText(jsonObject.get("User").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	userText.setLayoutData(gridData);
-	userText.setText("spiral6");
+
 	
 	Label channelLabel = new Label(shell, SWT.RIGHT);
 	channelLabel.setText("Channel:");
 	final Text channelText = new Text(shell, SWT.BORDER);
+	channelText.setText(jsonObject.get("Channel").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	channelText.setLayoutData(gridData);
-	channelText.setText("#spiral6");
 	
 	Label oAuthLabel = new Label(shell, SWT.NONE);
 	oAuthLabel.setText("oAuth Password:");
 	final Text oAuthText = new Text(shell, SWT.BORDER);
+	oAuthText.setText(jsonObject.get("Authkey").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
 	oAuthText.setLayoutData(gridData);
-	oAuthText.setText("oauth:9dnk5o5x9xuw610givlwhiaflwhbxc");
 	
 	Label gameID = new Label(shell, SWT.NONE);
 	gameID.setText("Game ID: ");

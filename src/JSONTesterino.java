@@ -1,21 +1,28 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Button;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+
 
 
 public class JSONTesterino {
-
 	public static void main(String[] args) throws IOException, ParseException { 
 		
 	}
@@ -42,12 +49,11 @@ public class JSONTesterino {
 		JSONArray gameid = (JSONArray) jsonObject.get("gameid");
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = gameid.iterator();
-		while (iterator.hasNext()) {
 			JSONObject game = (JSONObject) iterator.next();
 			JSONArray thegame = (JSONArray) game.get(JSONGameID);
+			Text[] labels = new Text[thegame.size()];
+			Text[] texts = new Text[thegame.size()];
 			for(int i = 0; i < thegame.size(); i++){
-				Text[] labels = new Text[thegame.size()];
-				Text[] texts = new Text[thegame.size()];
 				String derp = ((JSONObject)thegame.get(i)).toString();
 				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
@@ -57,9 +63,39 @@ public class JSONTesterino {
 				texts[i] = new Text(shellJSON, SWT.BORDER);
 				texts[i].setLayoutData(gridData);
 				texts[i].setText(derp.split("\\s+")[1]);
+				
 			}
-		}
 		
+		Button bindsButton = new Button(shellJSON, SWT.NONE);
+		bindsButton.setText("Submit");
+		
+		bindsButton.addSelectionListener(new SelectionAdapter() {
+        @Override @SuppressWarnings("unchecked") 
+        public void widgetSelected(SelectionEvent e) {
+	      	  try {
+	      	  	for(int i=0;i<labels.length;i++){
+	      	  		String kappa = ((JSONObject)thegame.get(i)).toString();
+					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
+					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
+	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
+	      	  		System.out.println(kappa);
+	      	  		//thegame.set(i,new JSONObject();
+	      	  		}
+	      	  	}
+	      		System.out.println(thegame.toString());
+	      		
+	      	/*	FileWriter jsonwriter = new FileWriter("../TESTDOC.json");
+ 				jsonwriter.write(jsonObject.toJSONString());
+ 				jsonwriter.flush();
+ 				jsonwriter.close();
+	      		
+	      		*/ 
+	      	  } 
+	      	  catch (Exception e1) {
+	      		e1.printStackTrace();
+	      	  } 
+        }
+   		});
 
 	
   	 	shellJSON.pack();
