@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -27,12 +28,20 @@ public class InitGUI {
 	  File folder = new File("./config");
 	  System.out.println(folder.exists());
 	  File[] listOfFiles = folder.listFiles();
-	  FileReader fr = new FileReader(listOfFiles[1]);
-		
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(fr);
-		
-		JSONObject jsonObject = (JSONObject) obj;
+	  FileReader fr = null;
+	  File gui = null;
+	  for(File b: listOfFiles){
+		  System.out.println(b.getName());
+		  if(b.getName().equals("GUI.json")){
+			  fr = new FileReader(b);
+			  gui = b;
+		  }
+	  }
+	  
+	  
+	  JSONParser parser = new JSONParser();
+	  Object obj = parser.parse(fr);
+	  JSONObject jsonObject = (JSONObject) obj;
     
     final Shell shell = new Shell(display);
     
@@ -107,7 +116,12 @@ public class InitGUI {
 	gridData.grabExcessHorizontalSpace = true;
 	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
 	for(File d: listOfFiles){
+		if(d.equals(gui)){
+			
+		}
+		else{
 		comboDropDown.add(d.toString());	
+		}
 	}
 	
 	comboDropDown.setLayoutData(gridData);
