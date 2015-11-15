@@ -101,7 +101,7 @@ public class InitGUI {
         	IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
 	      	  	Thread t = new Thread(new Runnable() {
-         public void run()
+		public void run()
          {
               try {
 	      	  				
