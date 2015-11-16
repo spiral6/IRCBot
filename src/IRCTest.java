@@ -27,9 +27,9 @@ public class IRCTest extends PircBot{
 		 this.host = host;
 	}
 	
-	public void message(String s){
+	/*public static void message(String s){
 		sendMessage(channel, s);
-	}
+	}*/
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message){
 			String[] arr = message.split("\\s+");
@@ -54,6 +54,8 @@ public class IRCTest extends PircBot{
         // Join the #pircbot channel.
         bot.joinChannel(channel);
         
-        kb.close();
+        while(true){
+        	bot.sendMessage(channel, kb.nextLine());
+        }
     }
 }
