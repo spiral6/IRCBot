@@ -48,8 +48,6 @@ public class InitJSON extends SelectionAdapter{
 		gridData.grabExcessHorizontalSpace = true;
 
 		thearray = (JSONArray)obj;
-		@SuppressWarnings("rawtypes")
-		Iterator iterator = thearray.iterator();
 			 labels = new ArrayList<Text>();
 			 texts = new ArrayList<Text>();
 			 
@@ -88,10 +86,8 @@ public class InitJSON extends SelectionAdapter{
 	    	}
 	    }
 	}
-	
-        @SuppressWarnings("unchecked") @Override
-        public void widgetSelected(SelectionEvent e) 
-        	{
+    @SuppressWarnings("unchecked") @Override
+    public void widgetSelected(SelectionEvent e){
         		if(e.getSource() == bindsButton){
         		try {
 	      	  	for(int i=0;i<labels.size();i++){
@@ -120,7 +116,7 @@ public class InitJSON extends SelectionAdapter{
 	      	  } 	
         		}
         	else if(e.getSource() == add_one){
-        	
+        		//do add stuff line
         		
         	}
 	      	  

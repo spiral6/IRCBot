@@ -24,7 +24,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class InitGUI {
- static final Display display  = new Display();
+ static  Display display  = new Display();
  
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
   	  File folder = null;
@@ -42,14 +42,14 @@ public class InitGUI {
 			  gui = b;
 		  }
 	  }
-	  final File GUIFILE = gui;
+	   File GUIFILE = gui;
 	  
 	  
 	  JSONParser parser = new JSONParser();
 	  Object obj = parser.parse(fr);
-	  final JSONObject jsonObject = (JSONObject) obj;
+	  JSONObject jsonObject = (JSONObject) obj;
     
-    final Shell shell = new Shell(display);
+     Shell shell = new Shell(display);
     
     File icon = null;
     icon = new File("CSGOBotIcon.ico");
@@ -63,9 +63,9 @@ public class InitGUI {
 	
 	Label resLabel = new Label(shell, SWT.NONE);
 	resLabel.setText("Resolution:");
-	final Text resXText = new Text(shell, SWT.BORDER);
+	 Text resXText = new Text(shell, SWT.BORDER);
 	resXText.setText(jsonObject.get("resolutionX").toString());
-	final Text resYText = new Text(shell, SWT.BORDER);
+	 Text resYText = new Text(shell, SWT.BORDER);
 	resYText.setText(jsonObject.get("resolutionY").toString());
 	GridData gridData = new GridData();
 	gridData.horizontalAlignment = SWT.FILL;
@@ -76,7 +76,7 @@ public class InitGUI {
 	
 	Label hostLabel = new Label(shell, SWT.NONE);
 	hostLabel.setText("Host:");
-	final Text hostText = new Text(shell, SWT.BORDER);
+	Text hostText = new Text(shell, SWT.BORDER);
 	hostText.setText(jsonObject.get("Host").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
@@ -86,7 +86,7 @@ public class InitGUI {
 	
 	Label userLabel = new Label(shell, SWT.LEFT | SWT.BOTTOM);
 	userLabel.setText("User:");
-	final Text userText = new Text(shell, SWT.BORDER);
+	 Text userText = new Text(shell, SWT.BORDER);
 	userText.setText(jsonObject.get("User").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
@@ -97,7 +97,7 @@ public class InitGUI {
 	
 	Label channelLabel = new Label(shell, SWT.RIGHT);
 	channelLabel.setText("Channel:");
-	final Text channelText = new Text(shell, SWT.BORDER);
+	 Text channelText = new Text(shell, SWT.BORDER);
 	channelText.setText(jsonObject.get("Channel").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
@@ -107,7 +107,7 @@ public class InitGUI {
 	
 	Label oAuthLabel = new Label(shell, SWT.NONE);
 	oAuthLabel.setText("oAuth Password:");
-	final Text oAuthText = new Text(shell, SWT.BORDER);
+	 Text oAuthText = new Text(shell, SWT.BORDER);
 	oAuthText.setText(jsonObject.get("Authkey").toString());
 	gridData = new GridData();
 	gridData.horizontalSpan = 2;
@@ -134,8 +134,7 @@ public class InitGUI {
 	
 	Button button = new Button(shell, SWT.NONE);
 	button.setText("Submit");
-	
-	button.addSelectionListener(new SelectionAdapter() {
+	SelectionAdapter yo = new SelectionAdapter() {
         @Override @SuppressWarnings("unchecked")
         public void widgetSelected(SelectionEvent e) {
         		jsonObject.put("resolutionX",resXText.getText());
@@ -149,7 +148,7 @@ public class InitGUI {
  				GUIwriter.write(jsonObject.toJSONString());
  				GUIwriter.flush();
  				GUIwriter.close();
-              	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
+              	 ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  	kek.main(null);	
 	      	  			}
 	      	  catch(IOException w){
@@ -161,7 +160,9 @@ public class InitGUI {
 	      	  }
         	shell.close();
         }
-    });
+    }
+	button.addSelectionListener();
+	
     
 	Button buttonJSON = new Button(shell, SWT.NONE);
 	buttonJSON.setText("Game Config");
