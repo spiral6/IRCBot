@@ -26,8 +26,11 @@ public class InitGUI {
  static final Display display  = new Display();
  
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-	  File folder = new File("./config");
-	  System.out.println(folder.exists());
+  	  File folder = null;
+	  folder = new File("../config");
+	  if(!folder.exists()){
+	  folder = new File("./config");
+	  }
 	  File[] listOfFiles = folder.listFiles();
 	  FileReader fr = null;
 	  File gui = null;

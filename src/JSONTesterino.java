@@ -29,16 +29,10 @@ public class JSONTesterino {
 	public static void runDefault(final File JSONGameID) throws IOException, ParseException{
 		
 		f = JSONGameID;
-		System.out.println(f.exists());
- 		/*if(!f.exists()){
- 			f = new File("TESTDOC.json");
-		}*/
-		
  		FileReader fr = new FileReader(f);
 		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
-		System.out.println(obj.toString());
 		
 		final Shell shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
@@ -80,7 +74,6 @@ public class JSONTesterino {
 					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
 	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
-	      	  			System.out.println(kappa);
 	      	  			@SuppressWarnings("rawtypes")
 						Map wellds = new TreeMap();
 	      	  			wellds.put(labels[i].getText(), texts[i].getText());
@@ -88,7 +81,6 @@ public class JSONTesterino {
 	      	  			thearray.set(i, blah);
 	      	  		}
 	      	  	}
-	      		System.out.println(thearray.toString());
 	      		
 	      		FileWriter jsonwriter = new FileWriter(JSONGameID);
  				jsonwriter.write(thearray.toJSONString());
@@ -113,12 +105,6 @@ public class JSONTesterino {
 	    	}
 	    }
 	}
-	private static void writejson(Text[] name,Text[] assignment){
-		
-		//name[i].getText()
-		
-		
-		
-	}
+
 
 }
