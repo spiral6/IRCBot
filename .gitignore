@@ -9,6 +9,7 @@
 *.sh
 config
 *.json
+config
 # Logs and databases #
 ######################
 *.log

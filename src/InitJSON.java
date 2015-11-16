@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
 
 
 
-public class JSONTesterino {
+public class InitJSON {
 	static File f = null;
 	public static void main(String[] args) throws IOException, ParseException { 
 		

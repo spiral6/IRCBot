@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,11 +42,12 @@ public class InitGUI {
 			  gui = b;
 		  }
 	  }
+	  final File GUIFILE = gui;
 	  
 	  
 	  JSONParser parser = new JSONParser();
 	  Object obj = parser.parse(fr);
-	  JSONObject jsonObject = (JSONObject) obj;
+	  final JSONObject jsonObject = (JSONObject) obj;
     
     final Shell shell = new Shell(display);
     
@@ -70,6 +72,7 @@ public class InitGUI {
 	gridData.grabExcessHorizontalSpace = true;
 	resXText.setLayoutData(gridData);
 	resYText.setLayoutData(gridData);
+	
 	
 	Label hostLabel = new Label(shell, SWT.NONE);
 	hostLabel.setText("Host:");
@@ -121,12 +124,9 @@ public class InitGUI {
 	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
 	final ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
 	for(File d: listOfFiles){
-		if(d.equals(gui)){
-			
-		}
-		else{
+		if(!(d.equals(gui))){
 		comboDropDown.add(d.getName());	
-		fileSelect.add(d);
+		fileSelect.add(d);	
 		}
 	}
 	
@@ -136,28 +136,30 @@ public class InitGUI {
 	button.setText("Submit");
 	
 	button.addSelectionListener(new SelectionAdapter() {
-        @Override
+        @Override @SuppressWarnings("unchecked")
         public void widgetSelected(SelectionEvent e) {
-        		
-        	final IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
-	      	  try {
-	      	  	Thread t = new Thread(new Runnable() {
-		public void run()
-         {
+        		jsonObject.put("resolutionX",resXText.getText());
+        		jsonObject.put("resolutionY",resYText.getText());
+        		jsonObject.put("Host",hostText.getText());
+        		jsonObject.put("User",userText.getText());
+        		jsonObject.put("Channel",channelText.getText());
+        		jsonObject.put("Authkey",oAuthText.getText());
               try {
-	      	  				
-	      	  		kek.main(null);	
-	      	  			}catch(Exception w){
-	      	  				w.printStackTrace();
+              	FileWriter GUIwriter = new FileWriter(GUIFILE);
+ 				GUIwriter.write(jsonObject.toJSONString());
+ 				GUIwriter.flush();
+ 				GUIwriter.close();
+              	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
+	      	  	kek.main(null);	
 	      	  			}
-         }
-		});
-		t.start();
-	      	  } 
-	      	  catch (Exception e1) {
-	      		e1.printStackTrace();
-	      	  } 
-        //	shell.close();
+	      	  catch(IOException w){
+	      	  	w.printStackTrace();
+	      	  }
+	      	  catch(Exception w)
+	      	  {
+	      	  	w.printStackTrace();
+	      	  }
+        	shell.close();
         }
     });
     
@@ -174,7 +176,7 @@ public class InitGUI {
 	      				json = temp;
 	      			}
 	      		  }
-	      		new JSONTesterino().runDefault(json);
+	      		new InitJSON().runDefault(json);
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
