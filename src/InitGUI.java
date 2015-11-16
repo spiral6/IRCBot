@@ -121,11 +121,11 @@ public class InitGUI {
 	gridData.horizontalSpan = 2;
 	gridData.horizontalAlignment = SWT.FILL;
 	gridData.grabExcessHorizontalSpace = true;
-	final Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
-	final ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
+	Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+	ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
 	for(File d: listOfFiles){
 		if(!(d.equals(gui))){
-		comboDropDown.add(d.getName());	
+		comboDropDown.add(d.getName().split("\\.")[0]);	
 		fileSelect.add(d);	
 		}
 	}

@@ -18,15 +18,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.util.ArrayList;
 
 
-
-public class InitJSON {
+public class InitJSON extends SelectionAdapter{
 	static File f = null;
+	static Button bindsButton;
+	static Button add_one;
+	ArrayList<Text> labels,texts;
+	JSONArray thearray;
+	Shell shellJSON;
 	public static void main(String[] args) throws IOException, ParseException { 
 		
 	}
-	public static void runDefault(final File JSONGameID) throws IOException, ParseException{
+	public void runDefault( File JSONGameID) throws IOException, ParseException{
 		
 		f = JSONGameID;
  		FileReader fr = new FileReader(f);
@@ -34,7 +39,7 @@ public class InitJSON {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
 		
-		final Shell shellJSON = new Shell(InitGUI.display);
+		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
    		shellJSON.setLayout(new GridLayout(2, false));
    		
@@ -42,47 +47,67 @@ public class InitJSON {
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
-		final JSONArray thearray = (JSONArray)obj;
+		thearray = (JSONArray)obj;
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = thearray.iterator();
-			 final Text[] labels = new Text[thearray.size()];
-			 final Text[] texts = new Text[thearray.size()];
+			 labels = new ArrayList<Text>();
+			 texts = new ArrayList<Text>();
+			 
 			for(int i = 0; i < thearray.size(); i++){
 				String derp = ((JSONObject)thearray.get(i)).toString();
 				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
+				Text tmp = new Text(shellJSON, SWT.BORDER);
 				
-				labels[i] = new Text(shellJSON, SWT.BORDER);
-				labels[i].setLayoutData(gridData);
-				labels[i].setText(derp.split("\\s+")[0]);
+				tmp.setLayoutData(gridData);
+				tmp.setText(derp.split("\\s+")[0]);
+				labels.add(tmp);
 				
-				texts[i] = new Text(shellJSON, SWT.BORDER);
-				texts[i].setLayoutData(gridData);
-				texts[i].setText(derp.split("\\s+")[1]);
+				Text tmp1 = new Text(shellJSON, SWT.BORDER);
+				
+				tmp1.setLayoutData(gridData);
+				tmp1.setText(derp.split("\\s+")[1]);
+				texts.add(tmp1);
 				
 			}
 		
-		Button bindsButton = new Button(shellJSON, SWT.NONE);
+		bindsButton = new Button(shellJSON, SWT.NONE);
 		bindsButton.setText("Submit");
 		
-		bindsButton.addSelectionListener(new SelectionAdapter() {
-        @Override @SuppressWarnings("unchecked") 
-        public void widgetSelected(SelectionEvent e) {
-	      	  try {
-	      	  	for(int i=0;i<labels.length;i++){
+		bindsButton.addSelectionListener(this);
+	
+		add_one = new Button( shellJSON, SWT.NONE );
+		add_one.setText("+");
+		add_one.addSelectionListener(this);
+		
+  	 	shellJSON.pack();
+   		shellJSON.open();
+    	    while (!shellJSON.isDisposed()) {
+	    	if (!InitGUI.display.readAndDispatch()){
+	    		InitGUI.display.sleep();
+	    	}
+	    }
+	}
+	
+        @SuppressWarnings("unchecked") @Override
+        public void widgetSelected(SelectionEvent e) 
+        	{
+        		if(e.getSource() == bindsButton){
+        		try {
+	      	  	for(int i=0;i<labels.size();i++){
 	      	  		String kappa = ((JSONObject)thearray.get(i)).toString();
 					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
 					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
-	      	  		if(!(labels[i].getText().equals(kappa.split("\\s+")[0]))||!(texts[i].getText().equals(kappa.split("\\s+")[1]))){
+	      	  		if(!(labels.get(i).getText().equals(kappa.split("\\s+")[0]))||!(texts.get(i).getText().equals(kappa.split("\\s+")[1]))){
 	      	  			@SuppressWarnings("rawtypes")
 						Map wellds = new TreeMap();
-	      	  			wellds.put(labels[i].getText(), texts[i].getText());
+	      	  			wellds.put(labels.get(i).getText(), texts.get(i).getText());
 	      	  			JSONObject blah = new JSONObject(wellds);
 	      	  			thearray.set(i, blah);
 	      	  		}
 	      	  	}
 	      		
-	      		FileWriter jsonwriter = new FileWriter(JSONGameID);
+	      		FileWriter jsonwriter = new FileWriter(f);
  				jsonwriter.write(thearray.toJSONString());
  				jsonwriter.flush();
  				jsonwriter.close();
@@ -92,19 +117,15 @@ public class InitJSON {
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();
-	      	  } 
+	      	  } 	
+        		}
+        	else if(e.getSource() == add_one){
+        	
+        		
+        	}
+	      	  
         }
-   		});
-
-	
-  	 	shellJSON.pack();
-   		shellJSON.open();
-    	    while (!shellJSON.isDisposed()) {
-	    	if (!InitGUI.display.readAndDispatch()){
-	    		InitGUI.display.sleep();
-	    	}
-	    }
-	}
+   	
 
 
 }
