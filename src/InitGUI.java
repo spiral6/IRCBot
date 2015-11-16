@@ -144,16 +144,19 @@ public class InitGUI {
         		jsonObject.put("User",userText.getText());
         		jsonObject.put("Channel",channelText.getText());
         		jsonObject.put("Authkey",oAuthText.getText());
-        		
-        	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
               try {
-	      	  		kek.main(null);	
-	      	  	FileWriter GUIwriter = new FileWriter(GUIFILE);
+              	FileWriter GUIwriter = new FileWriter(GUIFILE);
  				GUIwriter.write(jsonObject.toJSONString());
  				GUIwriter.flush();
- 				GUIwriter.close();	
+ 				GUIwriter.close();
+              	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
+	      	  	kek.main(null);	
 	      	  			}
-	      	  catch(Exception w){
+	      	  catch(IOException w){
+	      	  	w.printStackTrace();
+	      	  }
+	      	  catch(Exception w)
+	      	  {
 	      	  	w.printStackTrace();
 	      	  }
         	shell.close();
