@@ -7,6 +7,7 @@
 *.o
 *.so
 *.sh
+*.json
 # Logs and databases #
 ######################
 *.log
