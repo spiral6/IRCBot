@@ -10,6 +10,7 @@
 config
 *.json
 config
+bin
 # Logs and databases #
 ######################
 *.log
