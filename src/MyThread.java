@@ -1,13 +1,16 @@
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.util.ArrayList;
+import java.io.File;
 
 public class MyThread extends Thread{
 	ArrayList<String> arr;
+	File gameconfigs;
 	
-	public MyThread(ArrayList<String> lol){
+	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
+		gameconfigs = rekt;
 	}
 	
 	@SuppressWarnings("static-access")

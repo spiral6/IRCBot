@@ -24,11 +24,12 @@ public class InitJSON extends SelectionAdapter{
 	static File f = null;
 	static Button bindsButton;
 	static Button add_one;
-	ArrayList<Text> labels,texts;
+	ArrayList<Text> labels, texts;
 	JSONArray thearray;
 	Shell shellJSON;
-	public static void main(String[] args) throws IOException, ParseException { 
-		
+
+	public static void main(String[] args) throws IOException, ParseException {
+
 	}
 	public void runDefault( File JSONGameID) throws IOException, ParseException{
 		
@@ -87,41 +88,40 @@ public class InitJSON extends SelectionAdapter{
 	    }
 	}
     @SuppressWarnings("unchecked") @Override
-    public void widgetSelected(SelectionEvent e){
-        		if(e.getSource() == bindsButton){
-        		try {
-	      	  	for(int i=0;i<labels.size();i++){
-	      	  		String kappa = ((JSONObject)thearray.get(i)).toString();
+	public void widgetSelected(SelectionEvent e) {
+		if (e.getSource() == bindsButton) {
+			try {
+				for (int i = 0; i < labels.size(); i++) {
+					String kappa = ((JSONObject) thearray.get(i)).toString();
 					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
-					kappa = kappa.replaceAll("\"", "");kappa = kappa.replaceAll(":", " ");
-	      	  		if(!(labels.get(i).getText().equals(kappa.split("\\s+")[0]))||!(texts.get(i).getText().equals(kappa.split("\\s+")[1]))){
-	      	  			@SuppressWarnings("rawtypes")
+					kappa = kappa.replaceAll("\"", "");
+					kappa = kappa.replaceAll(":", " ");
+					if (!(labels.get(i).getText().equals(kappa.split("\\s+")[0]))
+							|| !(texts.get(i).getText().equals(kappa.split("\\s+")[1]))) {
+						@SuppressWarnings("rawtypes")
 						Map wellds = new TreeMap();
-	      	  			wellds.put(labels.get(i).getText(), texts.get(i).getText());
-	      	  			JSONObject blah = new JSONObject(wellds);
-	      	  			thearray.set(i, blah);
-	      	  		}
-	      	  	}
-	      		
-	      		FileWriter jsonwriter = new FileWriter(f);
- 				jsonwriter.write(thearray.toJSONString());
- 				jsonwriter.flush();
- 				jsonwriter.close();
- 				shellJSON.close();
-	      		
-	      		
-	      	  } 
-	      	  catch (Exception e1) {
-	      		e1.printStackTrace();
-	      	  } 	
-        		}
-        	else if(e.getSource() == add_one){
-        		//do add stuff line
-        		
-        	}
-	      	  
-        }
-   	
+						wellds.put(labels.get(i).getText(), texts.get(i).getText());
+						JSONObject blah = new JSONObject(wellds);
+						thearray.set(i, blah);
+					}
+				}
+
+				FileWriter jsonwriter = new FileWriter(f);
+				jsonwriter.write(thearray.toJSONString());
+				jsonwriter.flush();
+				jsonwriter.close();
+				shellJSON.close();
+
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		} 
+		else if (e.getSource() == add_one) {
+			// do add stuff line
+		}
+
+	}
 
 
 }

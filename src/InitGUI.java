@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -22,183 +21,189 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+public class InitGUI extends SelectionAdapter {
 
-public class InitGUI {
- static  Display display  = new Display();
- 
-  public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
-  	  File folder = null;
-	  folder = new File("../config");
-	  if(!folder.exists()){
-	  folder = new File("./config");
-	  }
-	  File[] listOfFiles = folder.listFiles();
-	  FileReader fr = null;
-	  File gui = null;
-	  for(File b: listOfFiles){
-		  System.out.println(b.getName());
-		  if(b.getName().equals("GUI.json")){
-			  fr = new FileReader(b);
-			  gui = b;
-		  }
-	  }
-	   File GUIFILE = gui;
-	  
-	  
-	  JSONParser parser = new JSONParser();
-	  Object obj = parser.parse(fr);
-	  JSONObject jsonObject = (JSONObject) obj;
-    
-     Shell shell = new Shell(display);
-    
-    File icon = null;
-    icon = new File("CSGOBotIcon.ico");
-    if(!icon.exists()){
-        	icon = new File("src/CSGOBotIcon.ico");
-    }
-    shell.setImage(new Image(display,icon.getPath()));
-    
-    shell.setText("Connection Settings");
-	shell.setLayout(new GridLayout(3, false));
-	
-	Label resLabel = new Label(shell, SWT.NONE);
-	resLabel.setText("Resolution:");
-	 Text resXText = new Text(shell, SWT.BORDER);
-	resXText.setText(jsonObject.get("resolutionX").toString());
-	 Text resYText = new Text(shell, SWT.BORDER);
-	resYText.setText(jsonObject.get("resolutionY").toString());
-	GridData gridData = new GridData();
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	resXText.setLayoutData(gridData);
-	resYText.setLayoutData(gridData);
-	
-	
-	Label hostLabel = new Label(shell, SWT.NONE);
-	hostLabel.setText("Host:");
-	Text hostText = new Text(shell, SWT.BORDER);
-	hostText.setText(jsonObject.get("Host").toString());
-	gridData = new GridData();
-	gridData.horizontalSpan = 2;
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	hostText.setLayoutData(gridData);
-	
-	Label userLabel = new Label(shell, SWT.LEFT | SWT.BOTTOM);
-	userLabel.setText("User:");
-	 Text userText = new Text(shell, SWT.BORDER);
-	userText.setText(jsonObject.get("User").toString());
-	gridData = new GridData();
-	gridData.horizontalSpan = 2;
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	userText.setLayoutData(gridData);
+	static final Display display = new Display();
+	static File json, gui;
+	static Text resXText, resYText, hostText, userText, channelText, oAuthText;
+	static Shell shell;
+	static JSONObject jsonObject;
+	static ArrayList<File> fileSelect;
+	static Combo gameDropDown;
 
-	
-	Label channelLabel = new Label(shell, SWT.RIGHT);
-	channelLabel.setText("Channel:");
-	 Text channelText = new Text(shell, SWT.BORDER);
-	channelText.setText(jsonObject.get("Channel").toString());
-	gridData = new GridData();
-	gridData.horizontalSpan = 2;
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	channelText.setLayoutData(gridData);
-	
-	Label oAuthLabel = new Label(shell, SWT.NONE);
-	oAuthLabel.setText("oAuth Password:");
-	 Text oAuthText = new Text(shell, SWT.BORDER);
-	oAuthText.setText(jsonObject.get("Authkey").toString());
-	gridData = new GridData();
-	gridData.horizontalSpan = 2;
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	oAuthText.setLayoutData(gridData);
-	
-	Label gameID = new Label(shell, SWT.NONE);
-	gameID.setText("Game ID: ");
-	gridData = new GridData();
-	gridData.horizontalSpan = 2;
-	gridData.horizontalAlignment = SWT.FILL;
-	gridData.grabExcessHorizontalSpace = true;
-	Combo comboDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
-	ArrayList<File> fileSelect = new ArrayList<File>(listOfFiles.length-1);
-	for(File d: listOfFiles){
-		if(!(d.equals(gui))){
-		comboDropDown.add(d.getName().split("\\.")[0]);	
-		fileSelect.add(d);	
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+		File folder = null;
+		folder = new File("../config");
+		if (!folder.exists()) {
+			folder = new File("./config");
 		}
+		File[] listOfFiles = folder.listFiles();
+		FileReader fr = null;
+		gui = null;
+		for (File b : listOfFiles) {
+			System.out.println(b.getName());
+			if (b.getName().equals("GUI.json")) {
+				fr = new FileReader(b);
+				gui = b;
+			}
+		}
+
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(fr);
+		jsonObject = (JSONObject) obj;
+
+		shell = new Shell(display);
+
+		File icon = null;
+		icon = new File("CSGOBotIcon.ico");
+		if (!icon.exists()) {
+			icon = new File("src/CSGOBotIcon.ico");
+		}
+		shell.setImage(new Image(display, icon.getPath()));
+
+		shell.setText("Connection Settings");
+		shell.setLayout(new GridLayout(3, false));
+
+		Label resLabel = new Label(shell, SWT.NONE);
+		resLabel.setText("Resolution:");
+		resXText = new Text(shell, SWT.BORDER);
+		resXText.setText(jsonObject.get("resolutionX").toString());
+		resYText = new Text(shell, SWT.BORDER);
+		resYText.setText(jsonObject.get("resolutionY").toString());
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		resXText.setLayoutData(gridData);
+		resYText.setLayoutData(gridData);
+
+		Label hostLabel = new Label(shell, SWT.NONE);
+		hostLabel.setText("Host:");
+		hostText = new Text(shell, SWT.BORDER);
+		hostText.setText(jsonObject.get("Host").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		hostText.setLayoutData(gridData);
+
+		Label userLabel = new Label(shell, SWT.LEFT | SWT.BOTTOM);
+		userLabel.setText("User:");
+		userText = new Text(shell, SWT.BORDER);
+		userText.setText(jsonObject.get("User").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		userText.setLayoutData(gridData);
+
+		Label channelLabel = new Label(shell, SWT.RIGHT);
+		channelLabel.setText("Channel:");
+		channelText = new Text(shell, SWT.BORDER);
+		channelText.setText(jsonObject.get("Channel").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		channelText.setLayoutData(gridData);
+
+		Label oAuthLabel = new Label(shell, SWT.NONE);
+		oAuthLabel.setText("oAuth Password:");
+		oAuthText = new Text(shell, SWT.BORDER);
+		oAuthText.setText(jsonObject.get("Authkey").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		oAuthText.setLayoutData(gridData);
+
+		Label gameID = new Label(shell, SWT.NONE);
+		gameID.setText("Game ID: ");
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+
+		gameDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+		fileSelect = new ArrayList<File>(listOfFiles.length - 1);
+		for (File d : listOfFiles) {
+			if (!(d.equals(gui))) {
+				gameDropDown.add(d.getName().split("\\.")[0]);
+				fileSelect.add(d);
+			}
+		}
+		gameDropDown.setLayoutData(gridData);
+
+		Button button = new Button(shell, SWT.NONE);
+		button.setText("Submit");
+		button.addSelectionListener(new InitGUI());
+
+		Button buttonJSON = new Button(shell, SWT.NONE);
+		buttonJSON.setText("Game Config");
+		
+		buttonJSON.addSelectionListener(new SelectionAdapter() {
+	        @Override
+	        public void widgetSelected(SelectionEvent e) {
+		      	  try {
+		      		  	for(File temp: fileSelect){
+			if(((String)temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())){
+		      		json = temp;
+		      			}
+		      		  }
+		      		  
+		      		new InitJSON().runDefault(json);
+		      	  } 
+		      	  catch (Exception e1) {
+		      		e1.printStackTrace();
+		      	  } 
+	        }
+	    });
+
+		gridData = new GridData();
+		gridData.horizontalSpan = 3;
+		gridData.horizontalAlignment = SWT.CENTER;
+		gridData.grabExcessHorizontalSpace = true;
+		button.setLayoutData(gridData);
+		buttonJSON.setLayoutData(gridData);
+		shell.pack();
+		shell.open();
+
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+
 	}
-	
-	comboDropDown.setLayoutData(gridData);
-	
-	Button button = new Button(shell, SWT.NONE);
-	button.setText("Submit");
-	SelectionAdapter yo = new SelectionAdapter() {
-        @Override @SuppressWarnings("unchecked")
-        public void widgetSelected(SelectionEvent e) {
-        		jsonObject.put("resolutionX",resXText.getText());
-        		jsonObject.put("resolutionY",resYText.getText());
-        		jsonObject.put("Host",hostText.getText());
-        		jsonObject.put("User",userText.getText());
-        		jsonObject.put("Channel",channelText.getText());
-        		jsonObject.put("Authkey",oAuthText.getText());
-              try {
-              	FileWriter GUIwriter = new FileWriter(GUIFILE);
- 				GUIwriter.write(jsonObject.toJSONString());
- 				GUIwriter.flush();
- 				GUIwriter.close();
-              	 ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
-	      	  	kek.main(null);	
-	      	  			}
-	      	  catch(IOException w){
-	      	  	w.printStackTrace();
-	      	  }
-	      	  catch(Exception w)
-	      	  {
-	      	  	w.printStackTrace();
-	      	  }
-        	shell.close();
-        }
-    }
-	button.addSelectionListener();
-	
-    
-	Button buttonJSON = new Button(shell, SWT.NONE);
-	buttonJSON.setText("Game Config");
-	
-	buttonJSON.addSelectionListener(new SelectionAdapter() {
-        @Override
-        public void widgetSelected(SelectionEvent e) {
-	      	  try {
-	      		  File json = null;
-	      		  for(File temp: fileSelect){
-	      			if(temp.getName().equals(comboDropDown.getText().toString())){
-	      				json = temp;
-	      			}
-	      		  }
-	      		new InitJSON().runDefault(json);
-	      	  } 
-	      	  catch (Exception e1) {
-	      		e1.printStackTrace();
-	      	  } 
-        }
-    });
-	
-	gridData = new GridData();
-	gridData.horizontalSpan = 3;
-	gridData.horizontalAlignment = SWT.CENTER;
-	gridData.grabExcessHorizontalSpace = true;
-	button.setLayoutData(gridData);
-	buttonJSON.setLayoutData(gridData);
-	shell.pack();
-    shell.open();
 
-	    while (!shell.isDisposed()) {
-	    	if (!display.readAndDispatch()){
-	    		display.sleep();
-	    	}
-	    }
+	@SuppressWarnings({ "unchecked", "static-access" })
+	public void widgetSelected(SelectionEvent e) {
+		jsonObject.put("resolutionX", resXText.getText());
+		jsonObject.put("resolutionY", resYText.getText());
+		jsonObject.put("Host", hostText.getText());
+		jsonObject.put("User", userText.getText());
+		jsonObject.put("Channel", channelText.getText());
+		jsonObject.put("Authkey", oAuthText.getText());
+		try {
+			for (File temp : fileSelect) {
+				if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
+					json = temp;
+				}
+			}
+			FileWriter GUIwriter = new FileWriter(gui);
+			GUIwriter.write(jsonObject.toJSONString());
+			GUIwriter.flush();
+			GUIwriter.close();
 
-  }
+			final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
+					userText.getText(), channelText.getText(), oAuthText.getText(), json);
+
+			kek.main(null);
+		} catch (IOException w) {
+			w.printStackTrace();
+		} catch (Exception w) {
+			w.printStackTrace();
+		}
+		shell.close();
+	}
+
 }
