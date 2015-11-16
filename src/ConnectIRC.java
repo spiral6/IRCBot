@@ -2,6 +2,7 @@ import org.jibble.pircbot.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class ConnectIRC extends PircBot{
 	public static ArrayList<String> args = new ArrayList<String>();
@@ -12,19 +13,21 @@ public class ConnectIRC extends PircBot{
 	static String user = "";
 	static String channel = "";
 	static String host = "";
+	static File gameconfigs;
 
 	public ConnectIRC(){
 		this.setName(user);
 	}
 	
 	@SuppressWarnings("static-access")
-	public ConnectIRC(String x, String y, String host, String username, String ch, String pass){
+	public ConnectIRC(String x, String y, String host, String username, String ch, String pass, File Thisfile){
 		 xRes = Integer.parseInt(x);
 		 yRes = Integer.parseInt(y);
 		 oAuth = pass;
 		 user = username;
 		 channel = ch;
 		 this.host = host;
+		 gameconfigs= Thisfile;
 	}
 	
 	public void message(String s){
@@ -37,7 +40,7 @@ public class ConnectIRC extends PircBot{
 				System.out.println(s);
 				args.add(s);
 			}
-			new MyThread(args).start();
+			new MyThread(args,gameconfigs).start();
 			args.clear();
     }
 	

@@ -25,6 +25,7 @@ import org.json.simple.parser.ParseException;
 
 public class InitGUI {
  static final Display display  = new Display();
+ static File json;
  
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
   	  File folder = null;
@@ -145,11 +146,16 @@ public class InitGUI {
         		jsonObject.put("Channel",channelText.getText());
         		jsonObject.put("Authkey",oAuthText.getText());
               try {
+              for(File temp: fileSelect){
+				if(((String)temp.getName().split("\\.")[0]).equals(comboDropDown.getText().toString())){
+	      		json = temp;
+	      			}
+	      		  }
               	FileWriter GUIwriter = new FileWriter(GUIFILE);
  				GUIwriter.write(jsonObject.toJSONString());
  				GUIwriter.flush();
  				GUIwriter.close();
-              	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
+              	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(),json);
 	      	  	kek.main(null);	
 	      	  			}
 	      	  catch(IOException w){
@@ -170,12 +176,12 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
 	      	  try {
-	      		  File json = null;
-	      		  for(File temp: fileSelect){
-	      			if(temp.getName().equals(comboDropDown.getText().toString())){
-	      				json = temp;
+	      		  	for(File temp: fileSelect){
+		if(((String)temp.getName().split("\\.")[0]).equals(comboDropDown.getText().toString())){
+	      		json = temp;
 	      			}
 	      		  }
+	      		  
 	      		new InitJSON().runDefault(json);
 	      	  } 
 	      	  catch (Exception e1) {
