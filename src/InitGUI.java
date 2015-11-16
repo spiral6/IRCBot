@@ -139,7 +139,7 @@ public class InitGUI {
         @Override
         public void widgetSelected(SelectionEvent e) {
         		
-        	final IRCTest kek = new IRCTest(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
+        	final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText());
 	      	  try {
 	      	  	Thread t = new Thread(new Runnable() {
 		public void run()
@@ -174,7 +174,7 @@ public class InitGUI {
 	      				json = temp;
 	      			}
 	      		  }
-	      		new JSONTesterino().runDefault(json);
+	      		new InitJSON().runDefault(json);
 	      	  } 
 	      	  catch (Exception e1) {
 	      		e1.printStackTrace();

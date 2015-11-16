@@ -3,7 +3,7 @@ import org.jibble.pircbot.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class IRCTest extends PircBot{
+public class ConnectIRC extends PircBot{
 	public static ArrayList<String> args = new ArrayList<String>();
 	//Robot robot = new Robot();
 	static int xRes = 0;
@@ -13,12 +13,12 @@ public class IRCTest extends PircBot{
 	static String channel = "";
 	static String host = "";
 
-	public IRCTest(){
+	public ConnectIRC(){
 		this.setName(user);
 	}
 	
 	@SuppressWarnings("static-access")
-	public IRCTest(String x, String y, String host, String username, String ch, String pass){
+	public ConnectIRC(String x, String y, String host, String username, String ch, String pass){
 		 xRes = Integer.parseInt(x);
 		 yRes = Integer.parseInt(y);
 		 oAuth = pass;
@@ -44,7 +44,7 @@ public class IRCTest extends PircBot{
     public static void main(String[] args) throws Exception{
     	Scanner kb = new Scanner(System.in);
     	// Now start our bot up.
-        IRCTest bot = new IRCTest();
+        ConnectIRC bot = new ConnectIRC();
         
         // Enable debugging output.
         bot.setVerbose(true);
