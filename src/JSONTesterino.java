@@ -26,7 +26,7 @@ public class JSONTesterino {
 	public static void main(String[] args) throws IOException, ParseException { 
 		
 	}
-	public static void runDefault(File JSONGameID) throws IOException, ParseException{
+	public static void runDefault(final File JSONGameID) throws IOException, ParseException{
 		
 		f = JSONGameID;
 		System.out.println(f.exists());
@@ -40,7 +40,7 @@ public class JSONTesterino {
 		Object obj = parser.parse(fr);
 		System.out.println(obj.toString());
 		
-		Shell shellJSON = new Shell(InitGUI.display);
+		final Shell shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
    		shellJSON.setLayout(new GridLayout(2, false));
    		
@@ -48,7 +48,7 @@ public class JSONTesterino {
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
-		JSONArray thearray = (JSONArray)obj;
+		final JSONArray thearray = (JSONArray)obj;
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = thearray.iterator();
 			 final Text[] labels = new Text[thearray.size()];
