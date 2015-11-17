@@ -27,7 +27,6 @@ public class InitJSON extends SelectionAdapter{
 	ArrayList<Text> labels, texts;
 	JSONArray thearray;
 	Shell shellJSON;
-
 	public static void main(String[] args) throws IOException, ParseException {
 
 	}
