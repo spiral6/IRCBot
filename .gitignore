@@ -8,8 +8,8 @@
 *.so
 *.sh
 *.json
-config
-bin
+/config
+/bin
 # Logs and databases #
 ######################
 *.log
