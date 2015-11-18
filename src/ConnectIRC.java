@@ -13,7 +13,7 @@ public class ConnectIRC extends PircBot{
 	static String user = "";
 	static String channel = "";
 	static String host = "";
-	static File gameconfigs;
+	File gameconfigs;
 
 	public ConnectIRC(){
 		this.setName(user);
