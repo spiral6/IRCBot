@@ -19,8 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
 
-
-public class InitJSON extends SelectionAdapter{
+public class InitJSON extends SelectionAdapter {
 	static File f = null;
 	static Button bindsButton;
 	static Button add_one;
@@ -31,63 +30,66 @@ public class InitJSON extends SelectionAdapter{
 	public static void main(String[] args) throws IOException, ParseException {
 
 	}
-	public void runDefault( File JSONGameID) throws IOException, ParseException{
-		
+
+	public void runDefault(File JSONGameID) throws IOException, ParseException {
+
 		f = JSONGameID;
- 		FileReader fr = new FileReader(f);
-		
+		FileReader fr = new FileReader(f);
+
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
-		
+
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
-   		shellJSON.setLayout(new GridLayout(2, false));
-   		
-   		
+		shellJSON.setLayout(new GridLayout(2, false));
+
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 
-		thearray = (JSONArray)obj;
-			 labels = new ArrayList<Text>();
-			 texts = new ArrayList<Text>();
-			 
-			for(int i = 0; i < thearray.size(); i++){
-				String derp = ((JSONObject)thearray.get(i)).toString();
-				derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
-				derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
-				Text tmp = new Text(shellJSON, SWT.BORDER);
-				
-				tmp.setLayoutData(gridData);
-				tmp.setText(derp.split("\\s+")[0]);
-				labels.add(tmp);
-				
-				Text tmp1 = new Text(shellJSON, SWT.BORDER);
-				
-				tmp1.setLayoutData(gridData);
-				tmp1.setText(derp.split("\\s+")[1]);
-				texts.add(tmp1);
-				
-			}
-		
+		thearray = (JSONArray) obj;
+		labels = new ArrayList<Text>();
+		texts = new ArrayList<Text>();
+
+		for (int i = 0; i < thearray.size(); i++) {
+			String derp = ((JSONObject) thearray.get(i)).toString();
+			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
+			derp = derp.replaceAll("\"", "");
+			derp = derp.replaceAll(":", " ");
+			Text tmp = new Text(shellJSON, SWT.BORDER);
+
+			tmp.setLayoutData(gridData);
+			tmp.setText(derp.split("\\s+")[0]);
+			labels.add(tmp);
+
+			Text tmp1 = new Text(shellJSON, SWT.BORDER);
+
+			tmp1.setLayoutData(gridData);
+			tmp1.setText(derp.split("\\s+")[1]);
+			texts.add(tmp1);
+
+		}
+
 		bindsButton = new Button(shellJSON, SWT.NONE);
 		bindsButton.setText("Submit");
-		
+
 		bindsButton.addSelectionListener(this);
-	
-		add_one = new Button( shellJSON, SWT.NONE );
+
+		add_one = new Button(shellJSON, SWT.NONE);
 		add_one.setText("+");
 		add_one.addSelectionListener(this);
-		
-  	 	shellJSON.pack();
-   		shellJSON.open();
-    	    while (!shellJSON.isDisposed()) {
-	    	if (!InitGUI.display.readAndDispatch()){
-	    		InitGUI.display.sleep();
-	    	}
-	    }
+
+		shellJSON.pack();
+		shellJSON.open();
+		while (!shellJSON.isDisposed()) {
+			if (!InitGUI.display.readAndDispatch()) {
+				InitGUI.display.sleep();
+			}
+		}
 	}
-    @SuppressWarnings("unchecked") @Override
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == bindsButton) {
 			try {
@@ -112,16 +114,13 @@ public class InitJSON extends SelectionAdapter{
 				jsonwriter.close();
 				shellJSON.close();
 
-			}
-			catch (Exception e1) {
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-		} 
-		else if (e.getSource() == add_one) {
+		} else if (e.getSource() == add_one) {
 			// do add stuff line
 		}
 
 	}
-
 
 }
