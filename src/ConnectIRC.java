@@ -27,7 +27,7 @@ public class ConnectIRC extends PircBot{
 		 user = username;
 		 channel = ch;
 		 this.host = host;
-		 gameconfigs= Thisfile;
+		 gameconfigs = Thisfile;
 	}
 	
 	/*public static void message(String s){
@@ -40,6 +40,7 @@ public class ConnectIRC extends PircBot{
 				System.out.println(s);
 				args.add(s);
 			}
+			System.out.println(gameconfigs + " circ");
 			new MyThread(args,gameconfigs).start();
 			args.clear();
     }
