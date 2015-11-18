@@ -2,6 +2,8 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileReader;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,6 +15,7 @@ public class MyThread extends Thread{
 	int Keepo = 0;
 	JSONArray thearray;
 	String Kappa;
+	Robot robot;
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
@@ -31,7 +34,7 @@ public class MyThread extends Thread{
 		derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 		if(derp.split("\\s+")[0].equalsIgnoreCase(arr.get(0))){
 		Kappa=derp.split("\\s+")[1];   //gets the actual key its bound to
-				Robot robot;
+				
 					switch(Kappa){
 						case "A":
 							Keepo=java.awt.event.KeyEvent.VK_A;
@@ -41,7 +44,7 @@ public class MyThread extends Thread{
 							break;
 						case "C":
 							Keepo=java.awt.event.KeyEvent.VK_C;
-							break
+							break;
 						case "D":
 							Keepo=java.awt.event.KeyEvent.VK_D;
 							break;
@@ -127,7 +130,7 @@ public class MyThread extends Thread{
 							Keepo=java.awt.event.KeyEvent.VK_DEAD_TILDE;
 							break;
 						case "CTRL":
-							Keepo=java.awt.event.KeyEvent.VK_CTRL;
+							Keepo=java.awt.event.KeyEvent.VK_CONTROL;
 							break;
 						case "ALT":
 							Keepo=java.awt.event.KeyEvent.VK_ALT;
@@ -232,7 +235,7 @@ public class MyThread extends Thread{
 							else{
 								robot.keyPress(Keepo);
 								this.sleep(5);
-								robot.keyRelease
+								robot.keyRelease(Keepo);
 							}
 							}
 							/*if(arr.get(0).equalsIgnoreCase("!lookleft")){
@@ -459,4 +462,3 @@ public class MyThread extends Thread{
 				
 	}
 	
-}
