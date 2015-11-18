@@ -12,7 +12,7 @@ public class MyThread extends Thread{
 	File gameconfigs;
 	int Keepo = 0;
 	JSONArray thearray;
-	
+	String Kappa;
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
@@ -30,187 +30,212 @@ public class MyThread extends Thread{
 		derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 		derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 		if(derp.split("\\s+")[0].equalsIgnoreCase(arr.get(0))){
-		String Kappa=derp.split("\\s+")[1];   //gets the actual key its bound to
+		Kappa=derp.split("\\s+")[1];   //gets the actual key its bound to
 				Robot robot;
 					switch(Kappa){
 						case "A":
-							Keepo=VK_A;
+							Keepo=java.awt.event.KeyEvent.VK_A;
 							break;
 						case "B":
-							Keepo=VK_B;
+							Keepo=java.awt.event.KeyEvent.VK_B;
 							break;
 						case "C":
-							Keepo=VK_C;
+							Keepo=java.awt.event.KeyEvent.VK_C;
 							break
 						case "D":
-							Keepo=VK_D;
+							Keepo=java.awt.event.KeyEvent.VK_D;
 							break;
 						case "E":
-							Keepo=VK_E;
+							Keepo=java.awt.event.KeyEvent.VK_E;
 							break;
 						case "F":
-							Keepo=VK_F;
+							Keepo=java.awt.event.KeyEvent.VK_F;
 							break;
 						case "G":
-							Keepo=VK_G;
+							Keepo=java.awt.event.KeyEvent.VK_G;
 							break;
 						case "H":
-							Keepo=VK_H;
+							Keepo=java.awt.event.KeyEvent.VK_H;
 							break;
 						case "I":
-							Keepo=VK_I;
+							Keepo=java.awt.event.KeyEvent.VK_I;
 							break;
 						case "J":
-							Keepo=VK_J;
+							Keepo=java.awt.event.KeyEvent.VK_J;
 							break;
 						case "K":
-							Keepo=VK_K;
+							Keepo=java.awt.event.KeyEvent.VK_K;
 							break;
 						case "L":
-							Keepo=VK_L;
+							Keepo=java.awt.event.KeyEvent.VK_L;
 							break;
 						case "M":
-							Keepo=VK_M;
+							Keepo=java.awt.event.KeyEvent.VK_M;
 							break;
 						case "N":
-							Keepo=VK_N;
+							Keepo=java.awt.event.KeyEvent.VK_N;
 							break;
 						case "O":
-							Keepo=VK_O;
+							Keepo=java.awt.event.KeyEvent.VK_O;
 							break;
 						case "P":
-							Keepo=VK_P;
+							Keepo=java.awt.event.KeyEvent.VK_P;
 							break;
 						case "Q":
-							Keepo=VK_Q;
+							Keepo=java.awt.event.KeyEvent.VK_Q;
 							break;
 						case "R":
-							Keepo=VK_R;
+							Keepo=java.awt.event.KeyEvent.VK_R;
 							break;
 						case "S":
-							Keepo=VK_S;
+							Keepo=java.awt.event.KeyEvent.VK_S;
 							break;
 						case "T":
-							Keepo=VK_T;
+							Keepo=java.awt.event.KeyEvent.VK_T;
 							break;
 						case "U":
-							Keepo=VK_U;
+							Keepo=java.awt.event.KeyEvent.VK_U;
 							break;
 						case "V":
-							Keepo=VK_V;
+							Keepo=java.awt.event.KeyEvent.VK_V;
 							break;
 						case "W":
-							Keepo=VK_W;
+							Keepo=java.awt.event.KeyEvent.VK_W;
 							break;
 						case "X":
-							Keepo=VK_X;
+							Keepo=java.awt.event.KeyEvent.VK_X;
 							break;
 						case "Y":
-							Keepo=VK_Y;
+							Keepo=java.awt.event.KeyEvent.VK_Y;
 							break;
 						case "Z":
-							Keepo=VK_Z;
+							Keepo=java.awt.event.KeyEvent.VK_Z;
 							break;
 						case "SHIFT":
-							Keepo=VK_SHIFT;
+							Keepo=java.awt.event.KeyEvent.VK_SHIFT;
 							break;
 						case "TAB":
-							Keepo=VK_TAB;
+							Keepo=java.awt.event.KeyEvent.VK_TAB;
 							break;
 						case "CAPS_LOCK":
-							Keepo=VK_CAPS_LOCK;
+							Keepo=java.awt.event.KeyEvent.VK_CAPS_LOCK;
 							break;
 						case "ESCAPE":
-							Keepo=VK_ESCAPE;
+							Keepo=java.awt.event.KeyEvent.VK_ESCAPE;
 							break;
 						case "TILDE":
-							Keepo=VK_DEAD_TILDE;
+							Keepo=java.awt.event.KeyEvent.VK_DEAD_TILDE;
 							break;
 						case "CTRL":
-							Keepo=VK_CTRL;
+							Keepo=java.awt.event.KeyEvent.VK_CTRL;
 							break;
 						case "ALT":
-							Keepo=VK_ALT;
+							Keepo=java.awt.event.KeyEvent.VK_ALT;
 							break;
 						case "1":
-							Keepo=VK_1;
+							Keepo=java.awt.event.KeyEvent.VK_1;
 							break;
 						case "2":
-							Keepo=VK_2;
+							Keepo=java.awt.event.KeyEvent.VK_2;
 							break;
 						case "3":
-							Keepo=VK_3;
+							Keepo=java.awt.event.KeyEvent.VK_3;
 							break;
 						case "4":
-							Keepo=VK_4;
+							Keepo=java.awt.event.KeyEvent.VK_4;
 							break;
 						case "5":
-							Keepo=VK_5;
+							Keepo=java.awt.event.KeyEvent.VK_5;
 							break;
 						case "6":
-							Keepo=VK_6;
+							Keepo=java.awt.event.KeyEvent.VK_6;
 							break;
 						case "7":
-							Keepo=VK_7;
+							Keepo=java.awt.event.KeyEvent.VK_7;
 							break;
 						case "8":
-							Keepo=VK_8;
+							Keepo=java.awt.event.KeyEvent.VK_8;
 							break;
 						case "9":
-							Keepo=VK_9;
+							Keepo=java.awt.event.KeyEvent.VK_9;
 							break;
 						case "0":
-							Keepo=VK_0;
+							Keepo=java.awt.event.KeyEvent.VK_0;
 							break;
 						case "-":
-							Keepo=VK_MINUS;
+							Keepo=java.awt.event.KeyEvent.VK_MINUS;
 							break;
 						case "=":
-							Keepo=VK_EQUALS;
+							Keepo=java.awt.event.KeyEvent.VK_EQUALS;
 							break;
 						case "BACK_SPACE":
-							Keepo=VK_BACK_SPACE;
+							Keepo=java.awt.event.KeyEvent.VK_BACK_SPACE;
 							break;
 						case "BACK_SLASH":
-							Keepo=VK_BACK_SLASH;
+							Keepo=java.awt.event.KeyEvent.VK_BACK_SLASH;
 							break;
 						case "SLASH":
-							Keepo=VK_SLASH;
+							Keepo=java.awt.event.KeyEvent.VK_SLASH;
 							break;
 						case "ENTER":
-							Keepo=VK_ENTER;
+							Keepo=java.awt.event.KeyEvent.VK_ENTER;
 							break;
 						case "RIGHT":
-							Keepo=VK_RIGHT;
+							Keepo=java.awt.event.KeyEvent.VK_RIGHT;
 							break;
 						case "UP":
-							Keepo=VK_UP;
+							Keepo=java.awt.event.KeyEvent.VK_UP;
 							break;
 						case "LEFT":
-							Keepo=VK_LEFT;
+							Keepo=java.awt.event.KeyEvent.VK_LEFT;
 							break;
 						case "DOWN":
-							Keepo=VK_DOWN;
+							Keepo=java.awt.event.KeyEvent.VK_DOWN;
 							break;
 						case "SPACE":
-							Keepo=VK_SPACE;
+							Keepo=java.awt.event.KeyEvent.VK_SPACE;
 							break;
 						case "RIGHT_CLICK":
-							Keepo=VK_;       //ENDED HERE
+							Keepo=java.awt.event.InputEvent.BUTTON3_DOWN_MASK;
 							break;
 						case "LEFT_CLICK":
-							Keepo=VK_B;
+							Keepo=java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 							break;
 						case "MIDDLE_CLICK":
-							Keepo=VK_B;
+							Keepo=java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 							break;
 					}
 		}
 		}
-					}
 					try {
 						robot = new Robot();
-							if(arr.get(0).equalsIgnoreCase("!lookleft")){
+						if(Kappa.substring(0,7).equals("BUTTON")){
+							if(arr.size()>1){
+							float length = Float.parseFloat(arr.get(1));
+							robot.mousePress(Keepo);
+							this.sleep((long) (length*1000));
+							robot.mouseRelease(Keepo);
+							}
+							else{
+								robot.mousePress(Keepo);
+								this.sleep(5);
+								robot.mouseRelease(Keepo);
+							}
+						}
+						else{
+							if(arr.size()>1){
+								float length = Float.parseFloat(arr.get(1));
+								robot.keyPress(Keepo);
+								this.sleep((long) (length*1000));
+								robot.keyRelease(Keepo);
+							}
+							else{
+								robot.keyPress(Keepo);
+								this.sleep(5);
+								robot.keyRelease
+							}
+							}
+							/*if(arr.get(0).equalsIgnoreCase("!lookleft")){
 								if(arr.size()>1){
 								float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=180){
@@ -424,11 +449,13 @@ public class MyThread extends Thread{
 							this.sleep(100);
 							robot.keyRelease(java.awt.event.KeyEvent.VK_6);
 						}
-						
+						*/
 					}
+					
 					catch (AWTException | InterruptedException | NumberFormatException e) {
 						e.printStackTrace();
 					}
+	}
 				
 	}
 	
