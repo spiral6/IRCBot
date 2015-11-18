@@ -30,7 +30,7 @@ public class InitGUI extends SelectionAdapter {
 	static JSONObject jsonObject;
 	static ArrayList<File> fileSelect;
 	static Combo gameDropDown;
-
+	@SuppressWarnings({ "unchecked", "static-access" })
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		File folder = null;
 		folder = new File("../config");
@@ -47,7 +47,24 @@ public class InitGUI extends SelectionAdapter {
 				gui = b;
 			}
 		}
-
+		if(gui==null){
+			File newgui = new File("../config/GUI.json");
+			newgui.createNewFile();
+			JSONObject newjsonObject = new JSONObject();
+			newjsonObject.putIfAbsent("resolutionX","1920");
+			newjsonObject.putIfAbsent("resolutionY","1080");
+			newjsonObject.putIfAbsent("Host","irc.twitch.tv");
+			newjsonObject.putIfAbsent("User","Username");
+			newjsonObject.putIfAbsent("Channel","#Username");
+			newjsonObject.putIfAbsent("Authkey","Found in README");
+			FileWriter newGUIwriter = new FileWriter(newgui);
+			newGUIwriter.write(newjsonObject.toJSONString());
+			newGUIwriter.flush();
+			newGUIwriter.close();
+			gui=newgui;
+			fr=new FileReader(gui);
+		}
+		
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
 		jsonObject = (JSONObject) obj;
