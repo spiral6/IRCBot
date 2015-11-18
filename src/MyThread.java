@@ -2,21 +2,24 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class MyThread extends Thread{
-	ArrayList<String> arr;
-	File gameconfigs;
+	static ArrayList<String> arr;
+	static File gameconfigs;
 	int Keepo = 0;
 	JSONArray thearray;
 	String Kappa;
 	Robot robot;
-	Object obj;
-	
+	static FileReader fr = null;
+	static Object obj = null;
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
@@ -25,16 +28,26 @@ public class MyThread extends Thread{
 	
 	@SuppressWarnings("static-access")
 	public void run() {
-		FileReader fr = new FileReader(gameconfigs);
+		try {
+			fr = new FileReader(gameconfigs);
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		}
 		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(fr);
+		
+		try {
+			obj = parser.parse(fr);
+		} catch (IOException | ParseException e1) {
+			e1.printStackTrace();
+		}
 		thearray = (JSONArray)obj;
 		for(int i=0;i<thearray.size();i++){
 		String derp = ((JSONObject)thearray.get(i)).toString();
 		derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 		derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 		if(derp.split("\\s+")[0].equalsIgnoreCase(arr.get(0))){
-		Kappa=derp.split("\\s+")[1];   //gets the actual key its bound to
+		Kappa=derp.split("\\s+")[1]; //gets the actual key its bound to
+		
 					switch(Kappa){
 						case "A":
 							Keepo=java.awt.event.KeyEvent.VK_A;
@@ -210,6 +223,7 @@ public class MyThread extends Thread{
 					}
 		}
 		}
+			if(Keepo!=0){
 					try {
 						robot = new Robot();
 						if(Kappa.contains("CLICK")){
@@ -237,15 +251,13 @@ public class MyThread extends Thread{
 								this.sleep(5);
 								robot.keyRelease(Keepo);
 							}
-							}
-							
+						}
 					}
-					
 					catch (AWTException | InterruptedException | NumberFormatException e) {
 						e.printStackTrace();
 					}
+			}
 	}
 				
 	}
 
-	

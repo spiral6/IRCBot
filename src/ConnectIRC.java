@@ -13,7 +13,7 @@ public class ConnectIRC extends PircBot{
 	static String user = "";
 	static String channel = "";
 	static String host = "";
-	File gameconfigs;
+	static File gameconfigs;
 
 	public ConnectIRC(){
 		this.setName(user);
@@ -27,7 +27,7 @@ public class ConnectIRC extends PircBot{
 		 user = username;
 		 channel = ch;
 		 this.host = host;
-		 gameconfigs= Thisfile;
+		 gameconfigs = Thisfile;
 	}
 	
 	/*public static void message(String s){
@@ -40,8 +40,7 @@ public class ConnectIRC extends PircBot{
 				System.out.println(s);
 				args.add(s);
 			}
-			MyThread a = new MyThread(args,gameconfigs);
-			a.start();
+			new MyThread(args,gameconfigs).start();
 			args.clear();
     }
 	
