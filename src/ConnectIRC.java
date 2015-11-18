@@ -40,7 +40,8 @@ public class ConnectIRC extends PircBot{
 				System.out.println(s);
 				args.add(s);
 			}
-			new MyThread(args,gameconfigs).start();
+			MyThread a = new MyThread(args,gameconfigs);
+			a.start();
 			args.clear();
     }
 	

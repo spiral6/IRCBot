@@ -15,6 +15,7 @@ public class MyThread extends Thread{
 	JSONArray thearray;
 	String Kappa;
 	Robot robot;
+	Object obj;
 	
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
@@ -23,7 +24,7 @@ public class MyThread extends Thread{
 	}
 	
 	@SuppressWarnings("static-access")
-	public void run() throws IOException, FileNotFoundException {
+	public void run() {
 		FileReader fr = new FileReader(gameconfigs);
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
@@ -246,4 +247,5 @@ public class MyThread extends Thread{
 	}
 				
 	}
+
 	
