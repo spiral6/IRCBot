@@ -20,6 +20,7 @@ public class MyThread extends Thread{
 	Robot robot;
 	static FileReader fr = null;
 	static Object obj = null;
+	
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
@@ -46,7 +47,7 @@ public class MyThread extends Thread{
 		derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 		derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 		if(derp.split("\\s+")[0].equalsIgnoreCase(arr.get(0))){
-		Kappa=derp.split("\\s+")[1]; //gets the actual key its bound to
+		Kappa=derp.split("\\s+")[1];
 		
 					switch(Kappa){
 						case "A":

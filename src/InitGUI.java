@@ -210,9 +210,9 @@ public class InitGUI extends SelectionAdapter {
 			for (File temp : fileSelect) {
 				if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
 					json = temp;
-					System.out.println(json + "dasdsads");
 				}
 			}
+			
 			FileWriter GUIwriter = new FileWriter(gui);
 			GUIwriter.write(jsonObject.toJSONString());
 			GUIwriter.flush();

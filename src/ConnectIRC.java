@@ -6,7 +6,6 @@ import java.io.File;
 
 public class ConnectIRC extends PircBot{
 	public static ArrayList<String> args = new ArrayList<String>();
-	//Robot robot = new Robot();
 	static int xRes = 0;
 	static int yRes = 0;
 	static String oAuth = "";
