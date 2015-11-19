@@ -23,6 +23,7 @@ public class InitJSON extends SelectionAdapter {
 	static File f = null;
 	static Button bindsButton;
 	static Button add_one;
+	static Button refresh;
 	ArrayList<Text> labels, texts;
 	JSONArray thearray;
 	Shell shellJSON;
@@ -41,7 +42,7 @@ public class InitJSON extends SelectionAdapter {
 
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
-		shellJSON.setLayout(new GridLayout(2, false));
+		shellJSON.setLayout(new GridLayout(3, false));
 
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -50,7 +51,7 @@ public class InitJSON extends SelectionAdapter {
 		thearray = (JSONArray) obj;
 		labels = new ArrayList<Text>();
 		texts = new ArrayList<Text>();
-
+		
 		for (int i = 0; i < thearray.size(); i++) {
 			derp = ((JSONObject) thearray.get(i)).toString();
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
@@ -67,6 +68,10 @@ public class InitJSON extends SelectionAdapter {
 			tmp1.setLayoutData(gridData);
 			tmp1.setText(derp.split("\\s+")[1]);
 			texts.add(tmp1);
+			
+			Text blank = new Text(shellJSON, SWT.BORDER);
+			blank.setLayoutData(gridData);
+			blank.setText("");
 
 		}
 
@@ -78,6 +83,10 @@ public class InitJSON extends SelectionAdapter {
 		add_one = new Button(shellJSON, SWT.NONE);
 		add_one.setText("+");
 		add_one.addSelectionListener(this);
+		
+		refresh = new Button(shellJSON, SWT.NONE);
+		refresh.setText("refresh");
+		refresh.addSelectionListener(this);
 
 		shellJSON.pack();
 		shellJSON.open();
@@ -132,6 +141,10 @@ public class InitJSON extends SelectionAdapter {
 			JSONObject blah = new JSONObject(wellds);
 			thearray.add(blah);
 			shellJSON.pack();
+		}
+		else if(e.getSource() == refresh){
+			shellJSON.pack();
+			//do all prior code to add and then, refresh
 		}
 
 	}
