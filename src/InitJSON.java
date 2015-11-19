@@ -26,6 +26,7 @@ public class InitJSON extends SelectionAdapter {
 	ArrayList<Text> labels, texts;
 	JSONArray thearray;
 	Shell shellJSON;
+	String derp;
 	public static void main(String[] args) throws IOException, ParseException {
 
 	}
@@ -51,7 +52,7 @@ public class InitJSON extends SelectionAdapter {
 		texts = new ArrayList<Text>();
 
 		for (int i = 0; i < thearray.size(); i++) {
-			String derp = ((JSONObject) thearray.get(i)).toString();
+			derp = ((JSONObject) thearray.get(i)).toString();
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 			derp = derp.replaceAll("\"", "");
 			derp = derp.replaceAll(":", " ");
@@ -93,20 +94,22 @@ public class InitJSON extends SelectionAdapter {
 		if (e.getSource() == bindsButton) {
 			try {
 				for (int i = 0; i < labels.size(); i++) {
-					String kappa = ((JSONObject) thearray.get(i)).toString();
-					kappa = kappa.replaceAll("(\\{)(.{1,})(\\})", "$2");
-					kappa = kappa.replaceAll("\"", "");
-					kappa = kappa.replaceAll(":", " ");
-					if (!(labels.get(i).getText().equals(kappa.split("\\s+")[0]))
-							|| !(texts.get(i).getText().equals(kappa.split("\\s+")[1]))) {
+					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")){
+						labels.remove(i);
+						texts.remove(i);
+						thearray.remove(i);
+						i--;
+						}
+					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))
+							|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))) {
 						@SuppressWarnings("rawtypes")
 						Map wellds = new TreeMap();
 						wellds.put(labels.get(i).getText(), texts.get(i).getText());
 						JSONObject blah = new JSONObject(wellds);
 						thearray.set(i, blah);
-					}
+					}	
 				}
-
+				
 				FileWriter jsonwriter = new FileWriter(f);
 				jsonwriter.write(thearray.toJSONString());
 				jsonwriter.flush();
@@ -117,7 +120,18 @@ public class InitJSON extends SelectionAdapter {
 				e1.printStackTrace();
 			}
 		} else if (e.getSource() == add_one) {
-			// do add stuff line
+			Text newlabel = new Text(shellJSON,SWT.BORDER);
+			newlabel.setText("DEFAULT");
+			labels.add(newlabel);
+			Text newtext = new Text(shellJSON,SWT.BORDER);
+			newtext.setText("DEFAULT");
+			texts.add(newtext);
+			@SuppressWarnings("rawtypes")
+			Map wellds = new TreeMap();
+			wellds.put(newlabel.getText(), newtext.getText());
+			JSONObject blah = new JSONObject(wellds);
+			thearray.add(blah);
+			shellJSON.pack();
 		}
 
 	}
