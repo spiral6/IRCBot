@@ -42,7 +42,7 @@ public class InitJSON extends SelectionAdapter {
 
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
-		shellJSON.setLayout(new GridLayout(3, false));
+		shellJSON.setLayout(new GridLayout(2, false));
 
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -69,9 +69,6 @@ public class InitJSON extends SelectionAdapter {
 			tmp1.setText(derp.split("\\s+")[1]);
 			texts.add(tmp1);
 			
-			Text blank = new Text(shellJSON, SWT.BORDER);
-			blank.setLayoutData(gridData);
-			blank.setText("");
 
 		}
 
@@ -102,33 +99,20 @@ public class InitJSON extends SelectionAdapter {
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == bindsButton) {
 			try {
-				for (int i = 0; i < labels.size(); i++) {
-					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")){
-						labels.remove(i);
-						texts.remove(i);
-						thearray.remove(i);
-						i--;
-						}
-					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))
-							|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))) {
-						@SuppressWarnings("rawtypes")
-						Map wellds = new TreeMap();
-						wellds.put(labels.get(i).getText(), texts.get(i).getText());
-						JSONObject blah = new JSONObject(wellds);
-						thearray.set(i, blah);
-					}	
-				}
-				
+				submitLogic();
 				FileWriter jsonwriter = new FileWriter(f);
 				jsonwriter.write(thearray.toJSONString());
 				jsonwriter.flush();
 				jsonwriter.close();
 				shellJSON.close();
-
-			} catch (Exception e1) {
+				}
+				catch (Exception e1) {
 				e1.printStackTrace();
-			}
-		} else if (e.getSource() == add_one) {
+				}
+				
+				
+			} 
+		else if (e.getSource() == add_one) {
 			Text newlabel = new Text(shellJSON,SWT.BORDER);
 			newlabel.setText("DEFAULT");
 			labels.add(newlabel);
@@ -143,10 +127,37 @@ public class InitJSON extends SelectionAdapter {
 			shellJSON.pack();
 		}
 		else if(e.getSource() == refresh){
-			shellJSON.pack();
-			//do all prior code to add and then, refresh
+			try{
+				submitLogic();
+				FileWriter jsonwriter = new FileWriter(f);
+				jsonwriter.write(thearray.toJSONString());
+				jsonwriter.flush();
+				jsonwriter.close();
+				shellJSON.pack();
+				shellJSON.close();
+				this.runDefault(f);
+			}
+			catch(Exception k){
+				k.printStackTrace();
+			}
 		}
 
 	}
-
+	public void submitLogic(){
+			for (int i = 0; i < labels.size(); i++) {
+					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")){
+						labels.remove(i);
+						texts.remove(i);
+						thearray.remove(i);
+						i--;
+					}
+					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))) {
+						@SuppressWarnings("rawtypes")
+						Map wellds = new TreeMap();
+						wellds.put(labels.get(i).getText(), texts.get(i).getText());
+						JSONObject blah = new JSONObject(wellds);
+						thearray.set(i, blah);
+					}
+			}
+	}
 }
