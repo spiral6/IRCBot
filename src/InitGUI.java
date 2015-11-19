@@ -37,15 +37,21 @@ public class InitGUI extends SelectionAdapter {
 		if (!folder.exists()) {
 			folder = new File("./config");
 		}
+		if(!folder.exists()){
+			(new File("../config")).mkdir();
+			folder = new File("../config");
+		}
 		File[] listOfFiles = folder.listFiles();
 		FileReader fr = null;
 		gui = null;
+		if(listOfFiles!=null){
 		for (File b : listOfFiles) {
 			System.out.println(b.getName());
 			if (b.getName().equals("GUI.json")) {
 				fr = new FileReader(b);
 				gui = b;
 			}
+		}
 		}
 		if(gui==null){
 			File newgui = new File("../config/GUI.json");
@@ -64,7 +70,7 @@ public class InitGUI extends SelectionAdapter {
 			gui=newgui;
 			fr=new FileReader(gui);
 		}
-		
+		listOfFiles = folder.listFiles();
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(fr);
 		jsonObject = (JSONObject) obj;
