@@ -30,7 +30,7 @@ public class InitGUI extends SelectionAdapter {
 	static JSONObject jsonObject;
 	static ArrayList<File> fileSelect;
 	static Combo gameDropDown;
-	@SuppressWarnings({ "unchecked", "static-access" })
+	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		File folder = null;
 		folder = new File("../config");
