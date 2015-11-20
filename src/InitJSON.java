@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class InitJSON extends SelectionAdapter {
 	static File f = null;
@@ -25,7 +26,7 @@ public class InitJSON extends SelectionAdapter {
 	static Button add_one;
 	static Button refresh;
 	static Button cancel;
-	ArrayList<Text> labels, texts;
+	ArrayList<Text> labels, texts, argumentMAX;
 	JSONArray thearray;
 	Shell shellJSON;
 	String derp;
@@ -43,7 +44,7 @@ public class InitJSON extends SelectionAdapter {
 
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
-		shellJSON.setLayout(new GridLayout(2, false));
+		shellJSON.setLayout(new GridLayout(3, false));
 
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -52,24 +53,33 @@ public class InitJSON extends SelectionAdapter {
 		thearray = (JSONArray) obj;
 		labels = new ArrayList<Text>();
 		texts = new ArrayList<Text>();
-		
+		argumentMAX = new ArrayList<Text>();
 		for (int i = 0; i < thearray.size(); i++) {
 			derp = ((JSONObject) thearray.get(i)).toString();
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 			derp = derp.replaceAll("\"", "");
+			derp = derp.replaceAll(" ", ":");
 			derp = derp.replaceAll(":", " ");
 			Text tmp = new Text(shellJSON, SWT.BORDER);
-
+			String[] tempderp= new String[3];
+			tempderp=derp.split("\\s+");
+	  		System.out.println(Arrays.toString(tempderp));
 			tmp.setLayoutData(gridData);
-			tmp.setText(derp.split("\\s+")[0]);
+			tmp.setText(tempderp[0]);
 			labels.add(tmp);
 
 			Text tmp1 = new Text(shellJSON, SWT.BORDER);
 
 			tmp1.setLayoutData(gridData);
-			tmp1.setText(derp.split("\\s+")[1]);
+			tmp1.setText(tempderp[1]);
 			texts.add(tmp1);
 			
+			Text tmp2 = new Text(shellJSON, SWT.BORDER);
+			tmp2.setLayoutData(gridData);
+			tmp2.setText(tempderp[2]);
+			System.out.println(tempderp[2]+"");
+			System.out.println(tmp2.getText());
+			argumentMAX.add(tmp2);
 
 		}
 
@@ -153,16 +163,17 @@ public class InitJSON extends SelectionAdapter {
 	}
 	public void submitLogic(){
 			for (int i = 0; i < labels.size(); i++) {
-					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")){
+					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")&&argumentMAX.get(i).getText().equals("")){
 						labels.remove(i);
 						texts.remove(i);
+						argumentMAX.remove(i);
 						thearray.remove(i);
 						i--;
 					}
-					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))) {
+					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))||!(argumentMAX.get(i).getText().equals(derp.split("\\s+")[2]))) {
 						@SuppressWarnings("rawtypes")
 						Map wellds = new TreeMap();
-						wellds.put(labels.get(i).getText(), texts.get(i).getText());
+						wellds.put(labels.get(i).getText(), texts.get(i).getText()+" "+argumentMAX.get(i).getText());
 						JSONObject blah = new JSONObject(wellds);
 						thearray.set(i, blah);
 					}
