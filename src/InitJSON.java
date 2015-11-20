@@ -63,7 +63,6 @@ public class InitJSON extends SelectionAdapter {
 			Text tmp = new Text(shellJSON, SWT.BORDER);
 			String[] tempderp= new String[3];
 			tempderp=derp.split("\\s+");
-	  		System.out.println(Arrays.toString(tempderp));
 			tmp.setLayoutData(gridData);
 			tmp.setText(tempderp[0]);
 			labels.add(tmp);
@@ -77,8 +76,6 @@ public class InitJSON extends SelectionAdapter {
 			Text tmp2 = new Text(shellJSON, SWT.BORDER);
 			tmp2.setLayoutData(gridData);
 			tmp2.setText(tempderp[2]);
-			System.out.println(tempderp[2]+"");
-			System.out.println(tmp2.getText());
 			argumentMAX.add(tmp2);
 
 		}
@@ -95,11 +92,6 @@ public class InitJSON extends SelectionAdapter {
 		refresh = new Button(shellJSON, SWT.NONE);
 		refresh.setText("Refresh");
 		refresh.addSelectionListener(this);
-
-		cancel = new Button(shellJSON, SWT.NONE);
-		cancel.setText("Cancel.");
-		cancel.addSelectionListener(this);
-
 
 		shellJSON.pack();
 		shellJSON.open();
@@ -135,9 +127,12 @@ public class InitJSON extends SelectionAdapter {
 			Text newtext = new Text(shellJSON,SWT.BORDER);
 			newtext.setText("DEFAULT");
 			texts.add(newtext);
+			Text newarg = new Text(shellJSON,SWT.BORDER);
+			newarg.setText("DEFAULTNUMBER");
+			argumentMAX.add(newarg);
 			@SuppressWarnings("rawtypes")
 			Map wellds = new TreeMap();
-			wellds.put(newlabel.getText(), newtext.getText());
+			wellds.put(newlabel.getText(), newtext.getText()+" "+newarg.getText());
 			JSONObject blah = new JSONObject(wellds);
 			thearray.add(blah);
 			shellJSON.pack();
@@ -156,9 +151,6 @@ public class InitJSON extends SelectionAdapter {
 			catch(Exception k){
 				k.printStackTrace();
 			}
-		}
-		else if(e.getSource() == cancel){
-			shellJSON.close();
 		}
 	}
 	public void submitLogic(){
