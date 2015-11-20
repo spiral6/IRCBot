@@ -27,6 +27,7 @@ public class InitJSON extends SelectionAdapter {
 	static Button refresh;
 	static Button cancel;
 	ArrayList<Text> labels, texts, argumentMAX;
+	ArrayList<Button> minuses = new ArrayList<Button>();
 	JSONArray thearray;
 	Shell shellJSON;
 	String derp;
@@ -44,7 +45,7 @@ public class InitJSON extends SelectionAdapter {
 
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setMinimumSize(320, 400);
-		shellJSON.setLayout(new GridLayout(3, false));
+		shellJSON.setLayout(new GridLayout(4, false));
 
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -80,7 +81,9 @@ public class InitJSON extends SelectionAdapter {
 			System.out.println(tempderp[2]+"");
 			System.out.println(tmp2.getText());
 			argumentMAX.add(tmp2);
-
+			Button badass = new Button(shellJSON, SWT.NONE);
+			badass.setText("-");
+			badass.addSelectionListener(this);
 		}
 
 		bindsButton = new Button(shellJSON, SWT.NONE);
@@ -93,7 +96,7 @@ public class InitJSON extends SelectionAdapter {
 		add_one.addSelectionListener(this);
 		
 		refresh = new Button(shellJSON, SWT.NONE);
-		refresh.setText("Refresh");
+		refresh.setText("Reset");
 		refresh.addSelectionListener(this);
 
 		cancel = new Button(shellJSON, SWT.NONE);
@@ -159,6 +162,10 @@ public class InitJSON extends SelectionAdapter {
 		}
 		else if(e.getSource() == cancel){
 			shellJSON.close();
+		}else if(minuses.contains(e.getSource()))
+		{
+			removeRow(minuses.indexOf(e.getSource()));
+			
 		}
 	}
 	public void submitLogic(){
@@ -178,5 +185,16 @@ public class InitJSON extends SelectionAdapter {
 						thearray.set(i, blah);
 					}
 			}
+	}
+	public void removeRow(int i){
+		labels.get(i).dispose();
+		labels.remove(i);
+		texts.get(i).dispose();
+		texts.remove(i);
+		argumentMAX.get(i).dispose();
+		argumentMAX.remove(i);
+		minuses.get(i).dispose();
+		minuses.remove(i);
+	
 	}
 }
