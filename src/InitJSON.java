@@ -24,6 +24,7 @@ public class InitJSON extends SelectionAdapter {
 	static Button bindsButton;
 	static Button add_one;
 	static Button refresh;
+	static Button cancel;
 	ArrayList<Text> labels, texts;
 	JSONArray thearray;
 	Shell shellJSON;
@@ -82,8 +83,13 @@ public class InitJSON extends SelectionAdapter {
 		add_one.addSelectionListener(this);
 		
 		refresh = new Button(shellJSON, SWT.NONE);
-		refresh.setText("refresh");
+		refresh.setText("Refresh");
 		refresh.addSelectionListener(this);
+
+		cancel = new Button(shellJSON, SWT.NONE);
+		cancel.setText("Cancel.");
+		cancel.addSelectionListener(this);
+
 
 		shellJSON.pack();
 		shellJSON.open();
@@ -141,7 +147,9 @@ public class InitJSON extends SelectionAdapter {
 				k.printStackTrace();
 			}
 		}
-
+		else if(e.getSource() == cancel){
+			shellJSON.close();
+		}
 	}
 	public void submitLogic(){
 			for (int i = 0; i < labels.size(); i++) {
