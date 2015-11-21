@@ -57,8 +57,17 @@ public class InitNEWGAME extends SelectionAdapter {
 	        @Override
 	        public void widgetSelected(SelectionEvent e) {
 		      	  try {
+		      	  		JSONArray newarray = new JSONArray();
+		      	  		Map wellds = new TreeMap();
+						wellds.put("Default","Default"+" "+"DefaultNumber");
+						JSONObject blah = new JSONObject(wellds);
+						newarray.add(blah);
 		    			File newgame = new File("../config/"+newText.getText()+".json"); 
 						newgame.createNewFile(); //returns a boolean, if its false the file was not created TOOLTIP NEEDED FOR DUPLICATES
+						FileWriter jsonwriter = new FileWriter(newgame);
+						jsonwriter.write(newarray.toJSONString());
+						jsonwriter.flush();
+						jsonwriter.close();
 						shellNEW.close();
 		      		  } 
 		      	  catch (Exception e1) {
