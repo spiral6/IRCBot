@@ -262,7 +262,7 @@ public class MyThread extends Thread{
 						
 					}
 							if(arr.get(0).equalsIgnoreCase("!lookleft")){
-								if(arr.size()>1){
+								if(arr.size()>1){	
 								float degrees= Float.parseFloat(arr.get(1));
 									if(degrees<=180){
 										for(int i=0;i<(degrees*2.8);i++){ 

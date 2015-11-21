@@ -154,6 +154,7 @@ public class InitGUI extends SelectionAdapter {
 				fileSelect.add(d);
 			}
 		}
+		gameDropDown.add("+");
 		gameDropDown.setLayoutData(gridData);
 
 		Button button = new Button(shell, SWT.NONE);
@@ -200,6 +201,11 @@ public class InitGUI extends SelectionAdapter {
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void widgetSelected(SelectionEvent e) {
+		if(gameDropDown.getText().toString().equals("+")){
+			new InitNEWGAME().runDefault();
+			
+		}
+		else{
 		jsonObject.put("resolutionX", resXText.getText());
 		jsonObject.put("resolutionY", resYText.getText());
 		jsonObject.put("Host", hostText.getText());
@@ -228,6 +234,7 @@ public class InitGUI extends SelectionAdapter {
 			w.printStackTrace();
 		}
 		shell.close();
+		}
 	}
 
 }
