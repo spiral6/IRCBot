@@ -6,8 +6,8 @@ import java.io.File;
 
 public class ConnectIRC extends PircBot{
 	public static ArrayList<String> args = new ArrayList<String>();
-	static int xRes = 0;
-	static int yRes = 0;
+	public static int xRes = 0;
+	public static int yRes = 0;
 	static String oAuth = "";
 	static String user = "";
 	static String channel = "";
@@ -36,10 +36,10 @@ public class ConnectIRC extends PircBot{
 	public void onMessage(String channel, String sender, String login, String hostname, String message){
 			String[] arr = message.split("\\s+");
 			for(String s: arr){  
-				System.out.println(s);
 				args.add(s);
 			}
-			new MyThread(args,gameconfigs).start();
+			System.out.println(args.get(0));
+			new MyThread(args,gameconfigs,xRes,yRes).start();
 			args.clear();
     }
 	

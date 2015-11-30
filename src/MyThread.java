@@ -21,29 +21,30 @@ public class MyThread extends Thread{
 	Robot robot;
 	static FileReader fr = null;
 	static Object obj = null;
-	int PogChamp;
+	int PogChamp,x,y;
 	
-	public MyThread(ArrayList<String> lol,File rekt){
+	public MyThread(ArrayList<String> lol,File rekt,int xc,int yc){
 		arr = new ArrayList<String>();
 		arr.addAll(lol);
 		gameconfigs = rekt;
-	}
-	
-	@SuppressWarnings("static-access")
-	public void run() {
+		x=xc;
+		y=yc;
 		try {
 			fr = new FileReader(gameconfigs);
 		} catch (FileNotFoundException e2) {
 			e2.printStackTrace();
 		}
 		JSONParser parser = new JSONParser();
-		
 		try {
 			obj = parser.parse(fr);
 		} catch (IOException | ParseException e1) {
 			e1.printStackTrace();
 		}
 		thearray = (JSONArray)obj;
+	}
+	
+	@SuppressWarnings("static-access")
+	public void run() {
 		for(int i=0;i<thearray.size();i++){
 		derp = ((JSONObject)thearray.get(i)).toString();
 		derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
@@ -226,12 +227,11 @@ public class MyThread extends Thread{
 					}
 		}
 		}
-			if(Keepo!=0){
-					try {
-						robot = new Robot();
-						PogChamp=Integer.parseInt(newderp.split("\\s+")[2]);
-						
+				try{
+					robot = new Robot();
+					if(Keepo!=0){
 						if(Kappa.contains("CLICK")){
+							PogChamp=Integer.parseInt(newderp.split("\\s+")[2]);
 							if(arr.size()>1&&Integer.parseInt(arr.get(1))<=PogChamp&&PogChamp!=0){
 							float length = Float.parseFloat(arr.get(1));
 							robot.mousePress(Keepo);
@@ -246,6 +246,7 @@ public class MyThread extends Thread{
 						}
 						
 						else{
+							PogChamp=Integer.parseInt(newderp.split("\\s+")[2]);
 							if(arr.size()>1&&Integer.parseInt(arr.get(1))<=PogChamp&&PogChamp!=0){
 								float length = Float.parseFloat(arr.get(1));
 								robot.keyPress(Keepo);
@@ -258,12 +259,56 @@ public class MyThread extends Thread{
 								robot.keyRelease(Keepo);
 							}
 						}
+						
 					}
-					catch (AWTException | InterruptedException | NumberFormatException e) {
+							if(arr.get(0).equalsIgnoreCase("!lookleft")){
+								if(arr.size()>1){	
+								float degrees= Float.parseFloat(arr.get(1));
+									if(degrees<=180){
+										for(int i=0;i<(degrees*2.8);i++){ 
+											robot.mouseMove(x/2-5,y/2);
+											sleep(10);
+										}
+									}
+								}
+							}
+							if(arr.get(0).equalsIgnoreCase("!lookright")){
+								if(arr.size()>1){
+									float degrees= Float.parseFloat(arr.get(1));
+									if(degrees<=180){
+										for(int i=0;i<(degrees*2.8);i++){ 
+											robot.mouseMove(x/2+5,y/2);
+											sleep(10);
+										}
+									}
+								}		
+							}
+							if(arr.get(0).equalsIgnoreCase("!lookup")){//Opposite?
+								if(arr.size()>1){
+								float degrees= Float.parseFloat(arr.get(1));
+									if(degrees<=90){
+										for(int i=0;i<(degrees*2.8);i++){
+											robot.mouseMove(x/2,y/2-5);
+											sleep(10);
+										}
+									}
+								}
+							}
+							if(arr.get(0).equalsIgnoreCase("!lookdown")){//Opposite?
+								if(arr.size()>1){
+								float degrees= Float.parseFloat(arr.get(1));
+									if(degrees<=90){
+										for(int i=0;i<(degrees*2.8);i++){
+											robot.mouseMove(x/2,y/2+5);
+											sleep(10);
+										}
+									}
+								}
+							}
+			}
+				catch (AWTException | InterruptedException | NumberFormatException e) {
 						e.printStackTrace();
 					}
-			}
 	}
 				
 	}
-
