@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.Integer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,10 +17,11 @@ public class MyThread extends Thread{
 	static File gameconfigs;
 	int Keepo = 0;
 	JSONArray thearray;
-	String Kappa;
+	String Kappa,derp,newderp;
 	Robot robot;
 	static FileReader fr = null;
 	static Object obj = null;
+	int PogChamp;
 	
 	public MyThread(ArrayList<String> lol,File rekt){
 		arr = new ArrayList<String>();
@@ -43,12 +45,12 @@ public class MyThread extends Thread{
 		}
 		thearray = (JSONArray)obj;
 		for(int i=0;i<thearray.size();i++){
-		String derp = ((JSONObject)thearray.get(i)).toString();
+		derp = ((JSONObject)thearray.get(i)).toString();
 		derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 		derp = derp.replaceAll("\"", "");derp = derp.replaceAll(":", " ");
 		if(derp.split("\\s+")[0].equalsIgnoreCase(arr.get(0))){
 		Kappa=derp.split("\\s+")[1];
-		
+		newderp=derp;
 					switch(Kappa){
 						case "A":
 							Keepo=java.awt.event.KeyEvent.VK_A;
@@ -227,8 +229,10 @@ public class MyThread extends Thread{
 			if(Keepo!=0){
 					try {
 						robot = new Robot();
+						PogChamp=Integer.parseInt(newderp.split("\\s+")[2]);
+						
 						if(Kappa.contains("CLICK")){
-							if(arr.size()>1){
+							if(arr.size()>1&&Integer.parseInt(arr.get(1))<=PogChamp&&PogChamp!=0){
 							float length = Float.parseFloat(arr.get(1));
 							robot.mousePress(Keepo);
 							this.sleep((long) (length*1000));
@@ -240,8 +244,9 @@ public class MyThread extends Thread{
 								robot.mouseRelease(Keepo);
 							}
 						}
+						
 						else{
-							if(arr.size()>1){
+							if(arr.size()>1&&Integer.parseInt(arr.get(1))<=PogChamp&&PogChamp!=0){
 								float length = Float.parseFloat(arr.get(1));
 								robot.keyPress(Keepo);
 								this.sleep((long) (length*1000));
