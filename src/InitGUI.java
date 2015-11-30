@@ -203,7 +203,13 @@ public class InitGUI extends SelectionAdapter {
 	public void widgetSelected(SelectionEvent e) {
 		if(gameDropDown.getText().toString().equals("+")){
 			new InitNEWGAME().runDefault();
-			
+			shell.close();
+			try{
+			new InitGUI().main(null);
+			}
+			catch (Exception ee){
+				ee.printStackTrace();
+			}
 		}
 		else{
 		jsonObject.put("resolutionX", resXText.getText());

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>IRCBot</name>
+	<name>IRCTEST</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,46 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>.classpath</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/.classpath</locationURI>
+		</link>
+		<link>
+			<name>.git</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/.git</locationURI>
+		</link>
+		<link>
+			<name>.gitignore</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/.gitignore</locationURI>
+		</link>
+		<link>
+			<name>.project</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/.project</locationURI>
+		</link>
+		<link>
+			<name>README.md</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/README.md</locationURI>
+		</link>
+		<link>
+			<name>config</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/config</locationURI>
+		</link>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/lib</locationURI>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot-master/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
