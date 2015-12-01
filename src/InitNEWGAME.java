@@ -19,7 +19,6 @@ public class InitNEWGAME extends SelectionAdapter {
 	static Button NEWButton;
 	static Shell shellNEW;
 	static Text newText;
-
 	@SuppressWarnings("static-access")
 	public static void main(String[] args){
 		runDefault();

@@ -229,17 +229,18 @@ public class InitGUI extends SelectionAdapter {
 			GUIwriter.write(jsonObject.toJSONString());
 			GUIwriter.flush();
 			GUIwriter.close();
-
+			if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
 			final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
 					userText.getText(), channelText.getText(), oAuthText.getText(), json);
-
 			kek.main(null);
-		} catch (IOException w) {
-			w.printStackTrace();
+			shell.close();
+			}
+			else{
+				InitTOOLTIP.runDefault();
+			}
 		} catch (Exception w) {
 			w.printStackTrace();
 		}
-		shell.close();
 		}
 	}
 

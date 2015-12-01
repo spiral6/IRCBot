@@ -92,7 +92,7 @@ public class InitJSON extends SelectionAdapter {
 		add_one.addSelectionListener(this);
 		
 		refresh = new Button(shellJSON, SWT.NONE);
-		refresh.setText("Reset");
+		refresh.setText("Refresh");
 		refresh.addSelectionListener(this);
 
 		shellJSON.pack();
@@ -156,11 +156,12 @@ public class InitJSON extends SelectionAdapter {
 		}
 		/*if(e.getSource() == cancel){
 			shellJSON.close();
-		}else if(minuses.contains(e.getSource()))
+		}*/
+		else if(minuses.contains(e.getSource()))
 		{
 			removeRow(minuses.indexOf(e.getSource()));
 			
-		}*/
+		}
 	}
 	public void submitLogic(){
 			for (int i = 0; i < labels.size(); i++) {
