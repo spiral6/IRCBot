@@ -26,7 +26,7 @@ public class InitNEWGAME extends SelectionAdapter {
 	@SuppressWarnings("static-access")
 	public static void runDefault(){
 		shellNEW = new Shell(InitGUI.display);
-		shellNEW.setMinimumSize(320, 200);
+		shellNEW.setMinimumSize(320, 50);
 		shellNEW.setLayout(new GridLayout(3, false));
 
 		GridData gridData = new GridData();
