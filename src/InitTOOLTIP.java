@@ -15,7 +15,7 @@ public class InitTOOLTIP {
 	}
 	public static void runDefault(){
 		shellTOOL = new Shell(InitGUI.display);
-		shellTOOL.setMinimumSize(320, 200);
+		shellTOOL.setMinimumSize(100, 50);
 		shellTOOL.setLayout(new GridLayout(3, false));
 
 		GridData gridData = new GridData();
