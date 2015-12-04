@@ -29,7 +29,7 @@ public class ConnectIRC extends PircBot{
 		 gameconfigs = Thisfile;
 		 
 		 //currently placeholder
-		 ct= new CurrencyThread("DBhost", "DBuser", "DBPass");
+		 ct= new CurrencyThread("localhost", "spiral6", "spectrum");
 	
 	}
 	
