@@ -130,7 +130,7 @@ public class InitJSON extends SelectionAdapter {
 			newtext.setText("DEFAULT");
 			texts.add(newtext);
 			Text newarg = new Text(shellJSON,SWT.BORDER);
-			newarg.setText("DEFAULTNUMBER");
+			newarg.setText("0");
 			argumentMAX.add(newarg);
 			@SuppressWarnings("rawtypes")
 			Map wellds = new TreeMap();
