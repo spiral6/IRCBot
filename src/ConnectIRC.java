@@ -27,7 +27,10 @@ public class ConnectIRC extends PircBot{
 		 channel = ch;
 		 this.host = host;
 		 gameconfigs = Thisfile;
-		 ct= new CurrencyThread();
+		 
+		 //currently placeholder
+		 ct= new CurrencyThread("DBhost", "DBuser", "DBPass");
+	
 	}
 	
 	/*public static void message(String s){
