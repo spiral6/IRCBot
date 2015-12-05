@@ -131,7 +131,7 @@ public class InitGUI extends SelectionAdapter {
 
 		Label oAuthLabel = new Label(shell, SWT.NONE);
 		oAuthLabel.setText("oAuth Password:");
-		oAuthText = new Text(shell, SWT.BORDER);
+		oAuthText = new Text(shell, SWT.PASSWORD | SWT.BORDER);
 		oAuthText.setText(jsonObject.get("Authkey").toString());
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
@@ -188,6 +188,22 @@ public class InitGUI extends SelectionAdapter {
 		gridData.grabExcessHorizontalSpace = true;
 		button.setLayoutData(gridData);
 		buttonJSON.setLayoutData(gridData);
+		
+		Button testsomething = new Button(shell, SWT.VERTICAL);
+		testsomething.setText("lololololol");
+		testsomething.addSelectionListener(new SelectionAdapter() {
+	        @Override
+	        public void widgetSelected(SelectionEvent e) {
+	        	testsomething.dispose();
+	        }
+	    });
+		
+		
+		
+		
+		
+		
+		
 		shell.pack();
 		shell.open();
 
