@@ -24,7 +24,7 @@ import org.json.simple.parser.ParseException;
 public class InitGUI extends SelectionAdapter {
 
 	static final Display display = new Display();
-	static File json, gui;
+	static File json, gui, icon;
 	static Text resXText, resYText, hostText, userText, channelText, oAuthText;
 	static Shell shell;
 	static JSONObject jsonObject;
@@ -77,7 +77,7 @@ public class InitGUI extends SelectionAdapter {
 
 		shell = new Shell(display);
 
-		File icon = null;
+		icon = null;
 		icon = new File("CSGOBotIcon.ico");
 		if (!icon.exists()) {
 			icon = new File("src/CSGOBotIcon.ico");
