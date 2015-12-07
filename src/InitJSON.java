@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,10 +42,6 @@ public class InitJSON extends SelectionAdapter {
 
 	public void runDefault(File JSONGameID) throws IOException, ParseException {
 		f = JSONGameID;
-		FileReader fr = new FileReader(f);
-
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(fr);
 
 		shellJSON = new Shell(InitGUI.display);
 		shellJSON.setText(f.getName());
@@ -81,45 +78,11 @@ public class InitJSON extends SelectionAdapter {
 	    gd.horizontalAlignment = GridData.CENTER;
 	    l3.setLayoutData(gd);
 		
-		thearray = (JSONArray) obj;
-		commands = new ArrayList<Text>();
-		keys = new ArrayList<Text>();
-		argumentMAX = new ArrayList<Text>();
-		for (int i = 0; i < thearray.size(); i++) {
-			derp = ((JSONObject) thearray.get(i)).toString();
-			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
-			derp = derp.replaceAll("\"", "");
-			derp = derp.replaceAll(" ", ":");
-			derp = derp.replaceAll(":", " ");
-			
-			String[] tempderp= new String[3];
-			tempderp=derp.split("\\s+");
-			
-			Text tmp = new Text(jsonLayout, SWT.BORDER);
-			//tmp.setLayoutData(gridData);
-			tmp.setText(tempderp[0]);
-			commands.add(tmp);
-
-			Text tmp1 = new Text(jsonLayout, SWT.BORDER);
-			//tmp1.setLayoutData(gridData);
-			tmp1.setText(tempderp[1]);
-			keys.add(tmp1);
-
-			Text tmp2 = new Text(jsonLayout, SWT.BORDER);
-			//tmp2.setLayoutData(gridData);
-			tmp2.setText(tempderp[2]);
-			argumentMAX.add(tmp2);
-			
-			Button badass = new Button(jsonLayout, SWT.NONE);
-			badass.setText("-");
-			badass.addSelectionListener(this);
-			minuses.add(badass);
-		}
+		
 		
 		GridData buttonGrid = new GridData();
 		buttonGrid.horizontalAlignment = SWT.FILL;
 		buttonGrid.grabExcessHorizontalSpace = true;
-
 		
 		submit = new Button(buttonLayout, SWT.NONE);
 		submit.setText("Submit");
@@ -145,16 +108,22 @@ public class InitJSON extends SelectionAdapter {
 	        }
 	    });
 		
+		readLogic();
+		
 		c.pack();
-		jsonLayout.pack();
-		buttonLayout.pack();
-		shellJSON.pack();
+		jsonLayout.pack(true);
+		buttonLayout.pack(true);
+		shellJSON.pack(true);
 		shellJSON.open();
+		
+		
 		while (!shellJSON.isDisposed()) {
 			if (!InitGUI.display.readAndDispatch()) {
 				InitGUI.display.sleep();
 			}
 		}
+		
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -208,9 +177,15 @@ public class InitJSON extends SelectionAdapter {
 				jsonwriter.write(thearray.toJSONString());
 				jsonwriter.flush();
 				jsonwriter.close();
+				
+				readLogic();
+
+				jsonLayout.pack();
+				c.pack();
 				shellJSON.pack();
-				shellJSON.close();
-				this.runDefault(f);
+				
+				//shellJSON.close();
+				//this.runDefault(f);
 			}
 			catch(Exception k){
 				k.printStackTrace();
@@ -226,10 +201,14 @@ public class InitJSON extends SelectionAdapter {
 		}
 	}
 	public void submitLogic(){
+		System.out.println(commands.size());
 		for (int i = 0; i < commands.size(); i++) {
 			if(commands.get(i).getText().equals("")&&keys.get(i).getText().equals("")&&argumentMAX.get(i).getText().equals("")){
+				commands.get(i).dispose();
 				commands.remove(i);
+				keys.get(i).dispose();
 				keys.remove(i);
+				argumentMAX.get(i).dispose();
 				argumentMAX.remove(i);
 				thearray.remove(i);
 				i--;
@@ -244,14 +223,106 @@ public class InitJSON extends SelectionAdapter {
 		}
 	}
 	public void removeRow(int i){
-		commands.get(i).dispose();
-		commands.remove(i);
-		keys.get(i).dispose();
-		keys.remove(i);
-		argumentMAX.get(i).dispose();
-		argumentMAX.remove(i);
-		minuses.get(i).dispose();
-		minuses.remove(i);
+		commands.get(i).setText("");
+		commands.get(i).setVisible(false);
+		//commands.remove(i);
+		keys.get(i).setText("");
+		keys.get(i).setVisible(false);
+		//keys.remove(i);
+		argumentMAX.get(i).setText("");
+		argumentMAX.get(i).setVisible(false);
+		//argumentMAX.remove(i);
+		minuses.get(i).setVisible(false);
+		//minuses.remove(i);
 
 	}
+	public void readLogic() throws IOException, ParseException{
+
+		FileReader fr = new FileReader(f);
+
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(fr);
+		
+		thearray = (JSONArray) obj;
+		commands = new ArrayList<Text>(1000);
+		keys = new ArrayList<Text>(1000);
+		argumentMAX = new ArrayList<Text>(1000);
+		for (int i = 0; i < thearray.size(); i++) {
+			derp = ((JSONObject) thearray.get(i)).toString();
+			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
+			derp = derp.replaceAll("\"", "");
+			derp = derp.replaceAll(" ", ":");
+			derp = derp.replaceAll(":", " ");
+			
+			String[] tempderp= new String[3];
+			tempderp=derp.split("\\s+");
+			
+			Text tmp = new Text(jsonLayout, SWT.BORDER);
+			//tmp.setLayoutData(gridData);
+			tmp.setText(tempderp[0]);
+			try{
+				if(!(commands.get(i)==null)){
+					commands.set(i,tmp);
+				}
+				else{
+					System.out.println("Added element " + i);
+					commands.add(tmp);
+				}
+			}
+			catch(IndexOutOfBoundsException ie){
+				//ie.printStackTrace();
+				System.out.println("Doesn't exist.");
+				commands.add(tmp);
+			}
+
+			Text tmp1 = new Text(jsonLayout, SWT.BORDER);
+			//tmp1.setLayoutData(gridData);
+			tmp1.setText(tempderp[1]);
+			try{
+				//keys.set(i,tmp1);
+				if(!(keys.size()==0)){
+					keys.set(i,tmp1);
+				}
+				else{
+					keys.add(tmp1);
+				}
+			}
+			catch(IndexOutOfBoundsException ie){
+				keys.add(tmp);
+			}
+
+			Text tmp2 = new Text(jsonLayout, SWT.BORDER);
+			//tmp2.setLayoutData(gridData);
+			tmp2.setText(tempderp[2]);
+			try{
+				//argumentMAX.set(i,tmp2);
+				if(!(argumentMAX.size()==0)){
+					argumentMAX.set(i,tmp2);
+				}
+				else{
+					argumentMAX.add(tmp2);
+				}
+			}
+			catch(IndexOutOfBoundsException ie){
+				argumentMAX.add(tmp2);
+			}
+			
+			Button badass = new Button(jsonLayout, SWT.NONE);
+			badass.setText("-");
+			badass.addSelectionListener(this);
+			try{
+				//minuses.set(i,badass);
+				if(!(minuses.size()==0)){
+					minuses.set(i,badass);
+				}
+				else{
+					minuses.add(badass);
+				}
+			}
+			catch(IndexOutOfBoundsException ie){
+				minuses.add(badass);
+			}
+		}
+	}
+	
 }

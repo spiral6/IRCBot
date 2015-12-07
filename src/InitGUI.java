@@ -32,6 +32,10 @@ public class InitGUI extends SelectionAdapter {
 	static Combo gameDropDown;
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+		
+		/*Below lies the folder finding 
+		 * and default config implementation */
+		
 		File folder = null;
 		folder = new File("../config");
 		if (!folder.exists()) {
@@ -45,13 +49,13 @@ public class InitGUI extends SelectionAdapter {
 		FileReader fr = null;
 		gui = null;
 		if(listOfFiles!=null){
-		for (File b : listOfFiles) {
-			System.out.println(b.getName());
-			if (b.getName().equals("GUI.json")) {
-				fr = new FileReader(b);
-				gui = b;
+			for (File b : listOfFiles) {
+				System.out.println(b.getName());
+				if (b.getName().equals("GUI.json")) {
+					fr = new FileReader(b);
+					gui = b;
+				}
 			}
-		}
 		}
 		if(gui==null){
 			File newgui = new File("../config/GUI.json");
@@ -75,6 +79,11 @@ public class InitGUI extends SelectionAdapter {
 		Object obj = parser.parse(fr);
 		jsonObject = (JSONObject) obj;
 
+		
+		/*Below lies the shell initialization 
+		 * with icon setting and string setting */
+		
+		
 		shell = new Shell(display);
 
 		icon = null;
@@ -198,12 +207,6 @@ public class InitGUI extends SelectionAdapter {
 	        }
 	    });
 		
-		
-		
-		
-		
-		
-		
 		shell.pack();
 		shell.open();
 
@@ -214,6 +217,9 @@ public class InitGUI extends SelectionAdapter {
 		}
 
 	}
+	
+	/*Below lies the button listener implementation.
+	 *When done, it saves the config to the .json file. */
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void widgetSelected(SelectionEvent e) {
@@ -223,7 +229,7 @@ public class InitGUI extends SelectionAdapter {
 			new InitNEWGAME().runDefault();
 			shell.close();
 			try{
-			new InitGUI().main(null);
+				new InitGUI().main(null);
 			}
 			catch (Exception ee){
 				ee.printStackTrace();
