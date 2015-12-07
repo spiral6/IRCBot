@@ -154,9 +154,6 @@ public class InitJSON extends SelectionAdapter {
 				k.printStackTrace();
 			}
 		}
-		/*if(e.getSource() == cancel){
-			shellJSON.close();
-		}*/
 		else if(minuses.contains(e.getSource()))
 		{
 			removeRow(minuses.indexOf(e.getSource()));

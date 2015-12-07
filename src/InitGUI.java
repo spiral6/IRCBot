@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -17,6 +19,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,11 +28,12 @@ public class InitGUI extends SelectionAdapter {
 
 	static final Display display = new Display();
 	static File json, gui;
-	static Text resXText, resYText, hostText, userText, channelText, oAuthText;
+	static Text resXText, resYText, hostText, userText, channelText, oAuthText,DBHostText,DBUserText,DBPassText;
 	static Shell shell;
 	static JSONObject jsonObject;
 	static ArrayList<File> fileSelect;
 	static Combo gameDropDown;
+	static GridData gridData;
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		File folder = null;
@@ -45,13 +49,13 @@ public class InitGUI extends SelectionAdapter {
 		FileReader fr = null;
 		gui = null;
 		if(listOfFiles!=null){
-		for (File b : listOfFiles) {
-			System.out.println(b.getName());
-			if (b.getName().equals("GUI.json")) {
-				fr = new FileReader(b);
-				gui = b;
+			for (File b : listOfFiles) {
+				System.out.println(b.getName());
+				if (b.getName().equals("GUI.json")) {
+					fr = new FileReader(b);
+					gui = b;
+				}
 			}
-		}
 		}
 		if(gui==null){
 			File newgui = new File("../config/GUI.json");
@@ -93,7 +97,7 @@ public class InitGUI extends SelectionAdapter {
 		resXText.setText(jsonObject.get("resolutionX").toString());
 		resYText = new Text(shell, SWT.BORDER);
 		resYText.setText(jsonObject.get("resolutionY").toString());
-		GridData gridData = new GridData();
+		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		resXText.setLayoutData(gridData);
@@ -157,30 +161,102 @@ public class InitGUI extends SelectionAdapter {
 		gameDropDown.add("+");
 		gameDropDown.setLayoutData(gridData);
 
+		Button CurrencyBox = new Button(shell, SWT.CHECK); 
+		CurrencyBox.setText("Enable In-Chat-Currency");
+		gridData= new GridData();
+		gridData.horizontalSpan = 3;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		CurrencyBox.setLayoutData(gridData);
+
+
+		Label DBHostLabel = new Label(shell, SWT.NONE);
+		DBHostLabel.setText("DBHost:");
+		DBHostText = new Text(shell, SWT.BORDER);
+		DBHostText.setText(jsonObject.get("Host").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		DBHostText.setLayoutData(gridData);
+
+		Label DBUserLabel = new Label(shell, SWT.NONE);
+		DBUserLabel.setText("DBUser:");
+		DBUserText = new Text(shell, SWT.BORDER);
+		DBUserText.setText(jsonObject.get("Host").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		DBUserText.setLayoutData(gridData);
+
+		Label DBPassLabel = new Label(shell,SWT.NONE);
+		DBPassLabel.setText("DBPass:");
+		DBPassText = new Text(shell,SWT.PASSWORD| SWT.BORDER);
+		DBPassText.setText(jsonObject.get("Host").toString());
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		DBPassText.setLayoutData(gridData);
+		DBHostText.setVisible(false);
+		DBHostLabel.setVisible(false);
+		DBUserText.setVisible(false);
+		DBUserLabel.setVisible(false);
+		DBPassText.setVisible(false);
+		DBPassLabel.setVisible(false);
+
+		CurrencyBox.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					if(CurrencyBox.getSelection()){
+						DBHostText.setVisible(true);
+						DBHostLabel.setVisible(true);
+						DBUserText.setVisible(true);
+						DBUserLabel.setVisible(true);
+						DBPassText.setVisible(true);
+						DBPassLabel.setVisible(true);
+					}
+					else{
+						DBHostText.setVisible(false);
+						DBHostLabel.setVisible(false);
+						DBUserText.setVisible(false);
+						DBUserLabel.setVisible(false);
+						DBPassText.setVisible(false);
+						DBPassLabel.setVisible(false);
+					}
+				} 
+				catch (Exception e1) {
+					e1.printStackTrace();
+				} 
+			}
+		});
+
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Submit");
 		button.addSelectionListener(new InitGUI());
 
 		Button buttonJSON = new Button(shell, SWT.NONE);
 		buttonJSON.setText("Game Config");
-		
+
 		buttonJSON.addSelectionListener(new SelectionAdapter() {
-	        @Override
-	        public void widgetSelected(SelectionEvent e) {
-		      	  try {
-		      		  	for(File temp: fileSelect){
-			if(((String)temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())){
-		      		json = temp;
-		      			}
-		      		  }
-		      		  
-		      		new InitJSON().runDefault(json);
-		      	  } 
-		      	  catch (Exception e1) {
-		      		e1.printStackTrace();
-		      	  } 
-	        }
-	    });
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					for(File temp: fileSelect){
+						if(((String)temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())){
+							json = temp;
+						}
+					}
+
+					new InitJSON().runDefault(json);
+				} 
+				catch (Exception e1) {
+					e1.printStackTrace();
+				} 
+			}
+		});
 
 		gridData = new GridData();
 		gridData.horizontalSpan = 3;
@@ -205,42 +281,42 @@ public class InitGUI extends SelectionAdapter {
 			new InitNEWGAME().runDefault();
 			shell.close();
 			try{
-			new InitGUI().main(null);
+				new InitGUI().main(null);
 			}
 			catch (Exception ee){
 				ee.printStackTrace();
 			}
 		}
 		else{
-		jsonObject.put("resolutionX", resXText.getText());
-		jsonObject.put("resolutionY", resYText.getText());
-		jsonObject.put("Host", hostText.getText());
-		jsonObject.put("User", userText.getText());
-		jsonObject.put("Channel", channelText.getText());
-		jsonObject.put("Authkey", oAuthText.getText());
-		try {
-			for (File temp : fileSelect) {
-				if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
-					json = temp;
+			jsonObject.put("resolutionX", resXText.getText());
+			jsonObject.put("resolutionY", resYText.getText());
+			jsonObject.put("Host", hostText.getText());
+			jsonObject.put("User", userText.getText());
+			jsonObject.put("Channel", channelText.getText());
+			jsonObject.put("Authkey", oAuthText.getText());
+			try {
+				for (File temp : fileSelect) {
+					if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
+						json = temp;
+					}
 				}
+
+				FileWriter GUIwriter = new FileWriter(gui);
+				GUIwriter.write(jsonObject.toJSONString());
+				GUIwriter.flush();
+				GUIwriter.close();
+				if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
+					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
+							userText.getText(), channelText.getText(), oAuthText.getText(), json);
+					kek.main(null);
+					shell.close();
+				}
+				else{
+					InitTOOLTIP.runDefault();
+				}
+			} catch (Exception w) {
+				w.printStackTrace();
 			}
-			
-			FileWriter GUIwriter = new FileWriter(gui);
-			GUIwriter.write(jsonObject.toJSONString());
-			GUIwriter.flush();
-			GUIwriter.close();
-			if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
-			final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
-					userText.getText(), channelText.getText(), oAuthText.getText(), json);
-			kek.main(null);
-			shell.close();
-			}
-			else{
-				InitTOOLTIP.runDefault();
-			}
-		} catch (Exception w) {
-			w.printStackTrace();
-		}
 		}
 	}
 
