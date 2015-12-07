@@ -217,6 +217,8 @@ public class InitGUI extends SelectionAdapter {
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void widgetSelected(SelectionEvent e) {
+		
+		
 		if(gameDropDown.getText().toString().equals("+")){
 			new InitNEWGAME().runDefault();
 			shell.close();
@@ -227,38 +229,48 @@ public class InitGUI extends SelectionAdapter {
 				ee.printStackTrace();
 			}
 		}
+		
+		
 		else{
-		jsonObject.put("resolutionX", resXText.getText());
-		jsonObject.put("resolutionY", resYText.getText());
-		jsonObject.put("Host", hostText.getText());
-		jsonObject.put("User", userText.getText());
-		jsonObject.put("Channel", channelText.getText());
-		jsonObject.put("Authkey", oAuthText.getText());
-		try {
-			for (File temp : fileSelect) {
-				if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
-					json = temp;
+			
+			jsonObject.put("resolutionX", resXText.getText());
+			jsonObject.put("resolutionY", resYText.getText());
+			jsonObject.put("Host", hostText.getText());
+			jsonObject.put("User", userText.getText());
+			jsonObject.put("Channel", channelText.getText());
+			jsonObject.put("Authkey", oAuthText.getText());
+			
+			try {
+				for (File temp : fileSelect) {
+					if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
+						json = temp;
+					}
 				}
-			}
 
-			FileWriter GUIwriter = new FileWriter(gui);
-			GUIwriter.write(jsonObject.toJSONString());
-			GUIwriter.flush();
-			GUIwriter.close();
-			if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
-				
-				final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(), json);
-				shell.close();
-				kek.main(null);
-				
+				FileWriter GUIwriter = new FileWriter(gui);
+				GUIwriter.write(jsonObject.toJSONString());
+				GUIwriter.flush();
+				GUIwriter.close();
+				if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
+
+					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(), json);
+					shell.close();
+					shell.dispose();
+					kek.main(null);
+
+				}
+				else{
+					InitTOOLTIP.runDefault();
+				}
+			} 
+			
+			catch (Exception w) {
+				w.printStackTrace();
 			}
-			else{
-				InitTOOLTIP.runDefault();
-			}
-		} catch (Exception w) {
-			w.printStackTrace();
+			
 		}
-		}
+		
+		
 	}
 
 }
