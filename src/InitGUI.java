@@ -27,7 +27,7 @@ import org.json.simple.parser.ParseException;
 public class InitGUI extends SelectionAdapter {
 
 	static final Display display = new Display();
-	static File json, gui;
+	static File json, gui, icon;
 	static Text resXText, resYText, hostText, userText, channelText, oAuthText,DBHostText,DBUserText,DBPassText;
 	static Shell shell;
 	static JSONObject jsonObject;
@@ -36,6 +36,10 @@ public class InitGUI extends SelectionAdapter {
 	static GridData gridData;
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+		
+		/*Below lies the folder finding 
+		 * and default config implementation */
+		
 		File folder = null;
 		folder = new File("../config");
 		if (!folder.exists()) {
@@ -79,9 +83,14 @@ public class InitGUI extends SelectionAdapter {
 		Object obj = parser.parse(fr);
 		jsonObject = (JSONObject) obj;
 
+		
+		/*Below lies the shell initialization 
+		 * with icon setting and string setting */
+		
+		
 		shell = new Shell(display);
 
-		File icon = null;
+		icon = null;
 		icon = new File("CSGOBotIcon.ico");
 		if (!icon.exists()) {
 			icon = new File("src/CSGOBotIcon.ico");
@@ -135,7 +144,7 @@ public class InitGUI extends SelectionAdapter {
 
 		Label oAuthLabel = new Label(shell, SWT.NONE);
 		oAuthLabel.setText("oAuth Password:");
-		oAuthText = new Text(shell, SWT.BORDER);
+		oAuthText = new Text(shell, SWT.PASSWORD | SWT.BORDER);
 		oAuthText.setText(jsonObject.get("Authkey").toString());
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
@@ -264,6 +273,16 @@ public class InitGUI extends SelectionAdapter {
 		gridData.grabExcessHorizontalSpace = true;
 		button.setLayoutData(gridData);
 		buttonJSON.setLayoutData(gridData);
+		
+		Button testsomething = new Button(shell, SWT.VERTICAL);
+		testsomething.setText("lololololol");
+		testsomething.addSelectionListener(new SelectionAdapter() {
+	        @Override
+	        public void widgetSelected(SelectionEvent e) {
+	        	testsomething.dispose();
+	        }
+	    });
+		
 		shell.pack();
 		shell.open();
 
@@ -274,9 +293,13 @@ public class InitGUI extends SelectionAdapter {
 		}
 
 	}
+	
+	/*Below lies the button listener implementation.
+	 *When done, it saves the config to the .json file. */
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void widgetSelected(SelectionEvent e) {
+		
 		if(gameDropDown.getText().toString().equals("+")){
 			new InitNEWGAME().runDefault();
 			shell.close();
@@ -287,13 +310,17 @@ public class InitGUI extends SelectionAdapter {
 				ee.printStackTrace();
 			}
 		}
+		
+		
 		else{
+
 			jsonObject.put("resolutionX", resXText.getText());
 			jsonObject.put("resolutionY", resYText.getText());
 			jsonObject.put("Host", hostText.getText());
 			jsonObject.put("User", userText.getText());
 			jsonObject.put("Channel", channelText.getText());
 			jsonObject.put("Authkey", oAuthText.getText());
+
 			try {
 				for (File temp : fileSelect) {
 					if (((String) temp.getName().split("\\.")[0]).equals(gameDropDown.getText().toString())) {
@@ -306,18 +333,24 @@ public class InitGUI extends SelectionAdapter {
 				GUIwriter.flush();
 				GUIwriter.close();
 				if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
-					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
-							userText.getText(), channelText.getText(), oAuthText.getText(), json);
-					kek.main(null);
+
+					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(), json);
 					shell.close();
+					shell.dispose();
+					kek.main(null);
+
 				}
 				else{
 					InitTOOLTIP.runDefault();
 				}
+
 			} catch (Exception w) {
 				w.printStackTrace();
 			}
+
 		}
+		
+		
 	}
 
 }
