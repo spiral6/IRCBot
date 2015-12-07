@@ -240,16 +240,17 @@ public class InitGUI extends SelectionAdapter {
 					json = temp;
 				}
 			}
-			
+
 			FileWriter GUIwriter = new FileWriter(gui);
 			GUIwriter.write(jsonObject.toJSONString());
 			GUIwriter.flush();
 			GUIwriter.close();
 			if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
-			final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(),
-					userText.getText(), channelText.getText(), oAuthText.getText(), json);
-			kek.main(null);
-			shell.close();
+				
+				final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(), json);
+				shell.close();
+				kek.main(null);
+				
 			}
 			else{
 				InitTOOLTIP.runDefault();
