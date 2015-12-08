@@ -4,6 +4,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.jibble.pircbot.*;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ public class CurrencyThread extends Thread{
 	String DBhost, DBuser, DBpass;
 	
 	static Display d = null;
+	static Text textBox;
 	static Label output;
 	static Shell consoleShell;
 	
@@ -111,7 +113,18 @@ public class CurrencyThread extends Thread{
 			}
 		}*/
 		while(true){
-
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 	}
 	

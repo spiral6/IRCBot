@@ -280,6 +280,7 @@ public class InitGUI extends SelectionAdapter {
 	        @Override
 	        public void widgetSelected(SelectionEvent e) {
 	        	testsomething.dispose();
+	        	shell.pack();
 	        }
 	    });
 		
