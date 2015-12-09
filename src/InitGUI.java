@@ -351,7 +351,7 @@ public class InitGUI extends SelectionAdapter {
 				GUIwriter.close();
 				if(!(resXText.getText().equals("")||resYText.getText().equals("")||hostText.getText().equals("")||userText.getText().equals("")||channelText.getText().equals(""))){
 
-					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(), json);
+					final ConnectIRC kek = new ConnectIRC(resXText.getText(), resYText.getText(), hostText.getText(), userText.getText(), channelText.getText(), oAuthText.getText(),DBUserText.getText(),DBHostText.getText(),DBPassText.getText() , json);
 					shell.close();
 					shell.dispose();
 					kek.main(null);
