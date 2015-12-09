@@ -71,6 +71,8 @@ public class InitGUI extends SelectionAdapter {
 			newjsonObject.putIfAbsent("User","Username");
 			newjsonObject.putIfAbsent("Channel","#Username");
 			newjsonObject.putIfAbsent("Authkey","Found in README");
+			newjsonObject.putIfAbsent("DBUser","Database Username");
+			newjsonObject.putIfAbsent("DBHost","Database Host");
 			FileWriter newGUIwriter = new FileWriter(newgui);
 			newGUIwriter.write(newjsonObject.toJSONString());
 			newGUIwriter.flush();
@@ -182,7 +184,7 @@ public class InitGUI extends SelectionAdapter {
 		Label DBHostLabel = new Label(shell, SWT.NONE);
 		DBHostLabel.setText("DBHost:");
 		DBHostText = new Text(shell, SWT.BORDER);
-		DBHostText.setText(jsonObject.get("Host").toString());
+		DBHostText.setText(jsonObject.get("DBHost").toString());
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		gridData.horizontalAlignment = SWT.FILL;
@@ -192,7 +194,7 @@ public class InitGUI extends SelectionAdapter {
 		Label DBUserLabel = new Label(shell, SWT.NONE);
 		DBUserLabel.setText("DBUser:");
 		DBUserText = new Text(shell, SWT.BORDER);
-		DBUserText.setText(jsonObject.get("Host").toString());
+		DBUserText.setText(jsonObject.get("DBUser").toString());
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		gridData.horizontalAlignment = SWT.FILL;
@@ -202,7 +204,7 @@ public class InitGUI extends SelectionAdapter {
 		Label DBPassLabel = new Label(shell,SWT.NONE);
 		DBPassLabel.setText("DBPass:");
 		DBPassText = new Text(shell,SWT.PASSWORD| SWT.BORDER);
-		DBPassText.setText(jsonObject.get("Host").toString());
+		DBPassText.setText("");
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		gridData.horizontalAlignment = SWT.FILL;
@@ -295,9 +297,23 @@ public class InitGUI extends SelectionAdapter {
 
 	}
 	
+	
+	public void loadCurrencyLayout(){
+		/*pack only if checked, dispose if not checked, reload if checked again, etc.*/
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	/*Below lies the button listener implementation.
 	 *When done, it saves the config to the .json file. */
 
+	
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void widgetSelected(SelectionEvent e) {
 		

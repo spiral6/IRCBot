@@ -46,6 +46,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/bin</locationURI>
 		</link>
 		<link>
+			<name>config</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/config</locationURI>
+		</link>
+		<link>
 			<name>lib</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/lib</locationURI>
