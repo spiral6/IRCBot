@@ -19,7 +19,7 @@ public class ConnectIRC extends PircBot{
 		this.setName(user);
 	}
 	@SuppressWarnings("static-access")
-	public ConnectIRC(String x, String y, String host, String username, String ch, String pass, File Thisfile){
+	public ConnectIRC(String x, String y, String host, String username, String ch, String pass,String DBUser,String DBHost,String DBPass,File Thisfile){
 		 xRes = Integer.parseInt(x);
 		 yRes = Integer.parseInt(y);
 		 oAuth = pass;
@@ -29,7 +29,7 @@ public class ConnectIRC extends PircBot{
 		 gameconfigs = Thisfile;
 		 
 		 //currently placeholder
-		 ct= new CurrencyThread("localhost", "spiral6", "spectrum");
+		 ct= new CurrencyThread(DBHost, DBUser, DBPass);
 	
 	}
 	

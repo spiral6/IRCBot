@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,23 +6,15 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.TextLayout;
-import org.eclipse.swt.graphics.TextStyle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Composite;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,21 +23,37 @@ import java.util.ArrayList;
 
 public class InitJSON extends SelectionAdapter {
 	static File f = null;
-	static Button submit, add_one, refresh, cancel;
-	ArrayList<Text> commands, keys, argumentMAX;
+	static Button submitButton;
+	static Button add_one;
+	static Button refresh;
+	static Button cancel;
+	ArrayList<Text> labels, texts, argumentMAX;
 	ArrayList<Button> minuses = new ArrayList<Button>();
 	JSONArray thearray;
 	Shell shellJSON;
 	String derp;
-	Composite jsonLayout, buttonLayout, c;
+	Object obj;
+	GridData gridData;
+	Composite c,jsonLayout,buttonLayout;
+	public static void main(String[] args) throws IOException, ParseException {
+
+	}
 
 	public void runDefault(File JSONGameID) throws IOException, ParseException {
+
 		f = JSONGameID;
+		FileReader fr = new FileReader(f);
+
+		JSONParser parser = new JSONParser();
+		obj = parser.parse(fr);
 
 		shellJSON = new Shell(InitGUI.display);
-		shellJSON.setText(f.getName());
-		shellJSON.setImage(new Image(InitGUI.display, InitGUI.icon.getPath()));
-		//shellJSON.setMinimumSize(320, 400);
+		shellJSON.setMinimumSize(320, 400);
+		shellJSON.setLayout(new GridLayout(4, false));
+
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
 		
 		c = new Composite(shellJSON, SWT.NONE);
 		c.setLayout(new GridLayout(1,false));
@@ -56,8 +63,6 @@ public class InitJSON extends SelectionAdapter {
 		buttonLayout.setLayout(new GridLayout(3, false));
 
 		GridData gridData = new GridData();
-		//gridData.horizontalAlignment = SWT.FILL;
-		//gridData.grabExcessHorizontalSpace = true;
 		gridData.minimumWidth = 500;
 		
 		final Label l1 = new Label(jsonLayout, SWT.NONE);
@@ -77,249 +82,158 @@ public class InitJSON extends SelectionAdapter {
 	    gd = new GridData();
 	    gd.horizontalAlignment = GridData.CENTER;
 	    l3.setLayoutData(gd);
+	    
+		readLogic();
 		
-		
-		
-		GridData buttonGrid = new GridData();
-		buttonGrid.horizontalAlignment = SWT.FILL;
-		buttonGrid.grabExcessHorizontalSpace = true;
-		
-		submit = new Button(buttonLayout, SWT.NONE);
-		submit.setText("Submit");
-		submit.addSelectionListener(this);
-		submit.setLayoutData(buttonGrid);
+		submitButton = new Button(buttonLayout, SWT.NONE);
+		submitButton.setText("Submit");
+
+		submitButton.addSelectionListener(this);
 
 		add_one = new Button(buttonLayout, SWT.NONE);
 		add_one.setText("+");
 		add_one.addSelectionListener(this);
-		add_one.setLayoutData(buttonGrid);
-
+		
 		refresh = new Button(buttonLayout, SWT.NONE);
 		refresh.setText("Refresh");
 		refresh.addSelectionListener(this);
-		refresh.setLayoutData(buttonGrid);
-		
-		Button testsomething = new Button(buttonLayout, SWT.NONE);
-		testsomething.setText("lololololol");
-		testsomething.addSelectionListener(new SelectionAdapter() {
-	        @Override
-	        public void widgetSelected(SelectionEvent e) {
-	        	testsomething.dispose();
-	        }
-	    });
-		
-		readLogic();
-		
-		c.pack();
-		jsonLayout.pack(true);
-		buttonLayout.pack(true);
-		shellJSON.pack(true);
+
+		packLogic();
 		shellJSON.open();
-		
 		
 		while (!shellJSON.isDisposed()) {
 			if (!InitGUI.display.readAndDispatch()) {
 				InitGUI.display.sleep();
 			}
 		}
-		
-		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		if (e.getSource() == submit) {
+		if (e.getSource() == submitButton) {
 			try {
 				submitLogic();
-				FileWriter jsonwriter = new FileWriter(f);
-				jsonwriter.write(thearray.toJSONString());
-				jsonwriter.flush();
-				jsonwriter.close();
-				shellJSON.close();
-			}
-			catch (Exception e1) {
+				}
+				catch (Exception e1) {
 				e1.printStackTrace();
-			}
-
-
-		} 
+				}
+				
+				
+			} 
 		else if (e.getSource() == add_one) {
 			Text newlabel = new Text(jsonLayout,SWT.BORDER);
 			newlabel.setText("DEFAULT");
-			commands.add(newlabel);
+			labels.add(newlabel);
 			Text newtext = new Text(jsonLayout,SWT.BORDER);
 			newtext.setText("DEFAULT");
-			keys.add(newtext);
+			texts.add(newtext);
 			Text newarg = new Text(jsonLayout,SWT.BORDER);
 			newarg.setText("0");
 			argumentMAX.add(newarg);
-			Button badass = new Button(jsonLayout, SWT.NONE);
-			badass.setText("-");
-			badass.addSelectionListener(this);
-			minuses.add(badass);
-			
+			Button newminus = new Button(jsonLayout,SWT.NONE);
+			newminus.setText("-");
+			minuses.add(newminus);
 			@SuppressWarnings("rawtypes")
 			Map wellds = new TreeMap();
 			wellds.put(newlabel.getText(), newtext.getText()+" "+newarg.getText());
 			JSONObject blah = new JSONObject(wellds);
 			thearray.add(blah);
-			
-			
-			jsonLayout.pack();
-			c.pack();
-			shellJSON.pack();
+			packLogic();
 		}
 		else if(e.getSource() == refresh){
 			try{
 				submitLogic();
-				FileWriter jsonwriter = new FileWriter(f);
-				jsonwriter.write(thearray.toJSONString());
-				jsonwriter.flush();
-				jsonwriter.close();
-				
-				readLogic();
-
-				jsonLayout.pack();
-				c.pack();
-				shellJSON.pack();
-				
-				//shellJSON.close();
-				//this.runDefault(f);
+				this.runDefault(f);
 			}
 			catch(Exception k){
 				k.printStackTrace();
 			}
 		}
+
 		else if(minuses.contains(e.getSource()))
 		{
 			removeRow(minuses.indexOf(e.getSource()));
-
+			
 		}
 	}
 	public void submitLogic(){
-		System.out.println(commands.size());
-		for (int i = 0; i < commands.size(); i++) {
-			if(commands.get(i).getText().equals("")&&keys.get(i).getText().equals("")&&argumentMAX.get(i).getText().equals("")){
-				commands.get(i).dispose();
-				commands.remove(i);
-				keys.get(i).dispose();
-				keys.remove(i);
-				argumentMAX.get(i).dispose();
-				argumentMAX.remove(i);
-				thearray.remove(i);
-				i--;
+			for (int i = 0; i < labels.size(); i++) {
+					if(labels.get(i).getText().equals("")&&texts.get(i).getText().equals("")&&argumentMAX.get(i).getText().equals("")){
+						labels.remove(i);
+						texts.remove(i);
+						argumentMAX.remove(i);
+						thearray.remove(i);
+						i--;
+					}
+					else if (!(labels.get(i).getText().equals(derp.split("\\s+")[0]))|| !(texts.get(i).getText().equals(derp.split("\\s+")[1]))||!(argumentMAX.get(i).getText().equals(derp.split("\\s+")[2]))) {
+						@SuppressWarnings("rawtypes")
+						Map wellds = new TreeMap();
+						wellds.put(labels.get(i).getText(), texts.get(i).getText()+" "+argumentMAX.get(i).getText());
+						JSONObject blah = new JSONObject(wellds);
+						thearray.set(i, blah);
+					}
 			}
-			else if (!(commands.get(i).getText().equals(derp.split("\\s+")[0]))|| !(keys.get(i).getText().equals(derp.split("\\s+")[1]))||!(argumentMAX.get(i).getText().equals(derp.split("\\s+")[2]))) {
-				@SuppressWarnings("rawtypes")
-				Map wellds = new TreeMap();
-				wellds.put(commands.get(i).getText(), keys.get(i).getText()+" "+argumentMAX.get(i).getText());
-				JSONObject blah = new JSONObject(wellds);
-				thearray.set(i, blah);
+			try{
+			FileWriter jsonwriter = new FileWriter(f);
+			jsonwriter.write(thearray.toJSONString());
+			jsonwriter.flush();
+			jsonwriter.close();
+			shellJSON.close();
 			}
-		}
+			catch(IOException lmao){
+				lmao.printStackTrace();
+			}
 	}
 	public void removeRow(int i){
-		commands.get(i).setText("");
-		commands.get(i).setVisible(false);
-		//commands.remove(i);
-		keys.get(i).setText("");
-		keys.get(i).setVisible(false);
-		//keys.remove(i);
-		argumentMAX.get(i).setText("");
-		argumentMAX.get(i).setVisible(false);
-		//argumentMAX.remove(i);
-		minuses.get(i).setVisible(false);
-		//minuses.remove(i);
-
+		labels.get(i).dispose();
+		labels.remove(i);
+		texts.get(i).dispose();
+		texts.remove(i);
+		argumentMAX.get(i).dispose();
+		argumentMAX.remove(i);
+		minuses.get(i).dispose();
+		minuses.remove(i);
+	
 	}
-	public void readLogic() throws IOException, ParseException{
-
-		FileReader fr = new FileReader(f);
-
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(fr);
-		
+	public void readLogic(){
 		thearray = (JSONArray) obj;
-		commands = new ArrayList<Text>(1000);
-		keys = new ArrayList<Text>(1000);
-		argumentMAX = new ArrayList<Text>(1000);
+		labels = new ArrayList<Text>();
+		texts = new ArrayList<Text>();
+		argumentMAX = new ArrayList<Text>();
 		for (int i = 0; i < thearray.size(); i++) {
 			derp = ((JSONObject) thearray.get(i)).toString();
 			derp = derp.replaceAll("(\\{)(.{1,})(\\})", "$2");
 			derp = derp.replaceAll("\"", "");
 			derp = derp.replaceAll(" ", ":");
 			derp = derp.replaceAll(":", " ");
-			
+			Text tmp = new Text(jsonLayout, SWT.BORDER);
 			String[] tempderp= new String[3];
 			tempderp=derp.split("\\s+");
-			
-			Text tmp = new Text(jsonLayout, SWT.BORDER);
-			//tmp.setLayoutData(gridData);
+			tmp.setLayoutData(gridData);
 			tmp.setText(tempderp[0]);
-			try{
-				if(!(commands.get(i)==null)){
-					commands.set(i,tmp);
-				}
-				else{
-					System.out.println("Added element " + i);
-					commands.add(tmp);
-				}
-			}
-			catch(IndexOutOfBoundsException ie){
-				ie.printStackTrace();
-				System.out.println("Doesn't exist.");
-				commands.add(tmp);
-			}
+			labels.add(tmp);
 
 			Text tmp1 = new Text(jsonLayout, SWT.BORDER);
-			//tmp1.setLayoutData(gridData);
-			tmp1.setText(tempderp[1]);
-			try{
-				//keys.set(i,tmp1);
-				if(!(keys.size()==0)){
-					keys.set(i,tmp1);
-				}
-				else{
-					keys.add(tmp1);
-				}
-			}
-			catch(IndexOutOfBoundsException ie){
-				keys.add(tmp);
-			}
 
-			Text tmp2 = new Text(jsonLayout, SWT.BORDER);
-			//tmp2.setLayoutData(gridData);
-			tmp2.setText(tempderp[2]);
-			try{
-				//argumentMAX.set(i,tmp2);
-				if(!(argumentMAX.size()==0)){
-					argumentMAX.set(i,tmp2);
-				}
-				else{
-					argumentMAX.add(tmp2);
-				}
-			}
-			catch(IndexOutOfBoundsException ie){
-				argumentMAX.add(tmp2);
-			}
+			tmp1.setLayoutData(gridData);
+			tmp1.setText(tempderp[1]);
+			texts.add(tmp1);
 			
+			Text tmp2 = new Text(jsonLayout, SWT.BORDER);
+			tmp2.setLayoutData(gridData);
+			tmp2.setText(tempderp[2]);
+			argumentMAX.add(tmp2);
 			Button badass = new Button(jsonLayout, SWT.NONE);
 			badass.setText("-");
 			badass.addSelectionListener(this);
-			try{
-				//minuses.set(i,badass);
-				if(!(minuses.size()==0)){
-					minuses.set(i,badass);
-				}
-				else{
-					minuses.add(badass);
-				}
-			}
-			catch(IndexOutOfBoundsException ie){
-				minuses.add(badass);
-			}
 		}
 	}
-	
+	public void packLogic()
+	{
+		jsonLayout.pack();
+		buttonLayout.pack();
+		c.pack();
+		shellJSON.pack();
+	}
 }
