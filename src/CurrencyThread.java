@@ -1,16 +1,15 @@
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.jibble.pircbot.*;
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 public class CurrencyThread extends Thread{
 	static ConnectIRC botbot;
@@ -20,7 +19,7 @@ public class CurrencyThread extends Thread{
 	
 	static Display d = null;
 	static Text textBox;
-	static Label output;
+	static Text output;
 	static Shell consoleShell;
 	
 	
@@ -45,7 +44,9 @@ public class CurrencyThread extends Thread{
 		consoleShell.setText("CurrencyThread");
 		consoleShell.setImage(new Image(InitGUI.display, InitGUI.icon.getPath()));
 		
-		output = new Label(consoleShell, SWT.BORDER);
+		output = new Text(consoleShell, SWT.MULTI | SWT.BORDER | SWT.READ_ONLY);
+		output.setBackground(d.getSystemColor(SWT.COLOR_BLACK));
+		output.setForeground(d.getSystemColor(SWT.COLOR_WHITE));
 		
 		consoleShell.pack();
 		consoleShell.open();
@@ -133,7 +134,7 @@ public class CurrencyThread extends Thread{
 			output.setText(s);
 		}
 		else{
-			output.setText(output.getText() + "\n" + s);
+			output.append("\n" + s);
 			consoleShell.pack();
 		}
 	}
