@@ -18,6 +18,7 @@ public class PlayVideo extends Application {
 		launch();
 	}
 
+	
 	@Override public void start(Stage stage) {
 		stage.setTitle("DOO DOOO DO DOOO");
 		stage.getIcons().add(new Image("http://a3.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTIwNjA4NjMzNzAzNzI4NjUy.jpg"));

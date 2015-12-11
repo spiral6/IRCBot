@@ -161,7 +161,7 @@ public class InitGUI extends SelectionAdapter {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 
-		gameDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER);
+		gameDropDown = new Combo(shell, SWT.DROP_DOWN | SWT.BORDER | SWT.READ_ONLY);
 		fileSelect = new ArrayList<File>(listOfFiles.length - 1);
 		for (File d : listOfFiles) {
 			if (!(d.equals(gui))) {

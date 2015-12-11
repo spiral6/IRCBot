@@ -46,11 +46,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/bin</locationURI>
 		</link>
 		<link>
-			<name>config</name>
-			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/config</locationURI>
-		</link>
-		<link>
 			<name>lib</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/lib</locationURI>
@@ -59,6 +54,16 @@
 			<name>src</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/src</locationURI>
+		</link>
+		<link>
+			<name>config/GUI.json</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/config/GUI.json</locationURI>
+		</link>
+		<link>
+			<name>config/stuff.json</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/IRCBot/config/stuff.json</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
