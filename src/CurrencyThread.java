@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -21,6 +22,7 @@ public class CurrencyThread extends Thread{
 	static Text textBox;
 	static Text output;
 	static Shell consoleShell;
+	static Composite consoleOutput, input;
 	
 	
 	public static void main(String[] args) {
@@ -43,6 +45,8 @@ public class CurrencyThread extends Thread{
 		consoleShell.setLayout(new GridLayout(1, false));
 		consoleShell.setText("CurrencyThread");
 		consoleShell.setImage(new Image(InitGUI.display, InitGUI.icon.getPath()));
+		
+		
 		
 		output = new Text(consoleShell, SWT.MULTI | SWT.BORDER | SWT.READ_ONLY);
 		output.setBackground(d.getSystemColor(SWT.COLOR_BLACK));
