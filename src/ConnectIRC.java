@@ -33,9 +33,9 @@ public class ConnectIRC extends PircBot{
 	
 	}
 	
-	/*public static void message(String s){
-		sendMessage(channel, s);
-	}*/
+	public void message(String s){
+		this.sendMessage(channel, s);
+	}
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message){
 			String[] arr = message.split("\\s+");

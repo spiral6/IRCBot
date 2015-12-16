@@ -5,9 +5,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -21,8 +23,9 @@ public class CurrencyThread extends Thread{
 	static Display d = null;
 	static Text textBox;
 	static Text output;
+	static Text input;
+	static Button submit;
 	static Shell consoleShell;
-	static Composite consoleOutput, input;
 	
 	
 	public static void main(String[] args) {
@@ -46,11 +49,26 @@ public class CurrencyThread extends Thread{
 		consoleShell.setText("CurrencyThread");
 		consoleShell.setImage(new Image(InitGUI.display, InitGUI.icon.getPath()));
 		
-		
-		
 		output = new Text(consoleShell, SWT.MULTI | SWT.BORDER | SWT.READ_ONLY);
 		output.setBackground(d.getSystemColor(SWT.COLOR_BLACK));
 		output.setForeground(d.getSystemColor(SWT.COLOR_WHITE));
+		
+		input = new Text(consoleShell, SWT.BORDER | SWT.CENTER);
+		
+		submit = new Button(consoleShell, SWT.CENTER);
+		submit.setText("Submit");
+		submit.addSelectionListener(new SelectionAdapter(){
+			
+			public void widgetSelected(SelectionEvent e){
+				if (e.getSource() == submit) {
+					String msg = input.getText();
+					botbot.message(msg);
+					input.setText("");
+					printConsole("Sent message: " + msg);
+				}
+			}
+			
+		});
 		
 		consoleShell.pack();
 		consoleShell.open();
@@ -58,7 +76,7 @@ public class CurrencyThread extends Thread{
 		
 		try{
 			botbot=bot;
-
+			botbot.message("CurrencyThread initialized.");
 			Class.forName("com.mysql.jdbc.Driver");
 			printConsole("Attempting connection to database...");
 			conn = DriverManager.getConnection("jdbc:mysql://" + DBhost, DBuser, DBpass);
